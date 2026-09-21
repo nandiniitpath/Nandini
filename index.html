@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NANDINI — Writer • Data • AI • Cybersecurity</title>
+    <meta name="description" content="Portfolio of Nandini — Writer, data & documentation specialist, and technology enthusiast exploring AI and cybersecurity.">
+    <meta name="theme-color" content="#08090C">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ==================== LOADING SCREEN ==================== -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader-content">
+            <div class="loader-init">INITIALIZING SYSTEM</div>
+            <div class="loader-count" id="loaderCount">00</div>
+            <div class="loader-status" id="loaderStatus">LOADING MODULES...</div>
+            <div class="loader-progress"><div class="loader-progress-bar" id="loaderProgressBar"></div></div>
+        </div>
+        <div class="loader-system-text">
+            <span>SECURE CONNECTION</span>
+            <span class="loader-dot">●</span>
+        </div>
+    </div>
+
+    <!-- ==================== PARTICLE CANVAS ==================== -->
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+
+    <!-- ==================== AMBIENT BACKGROUND ==================== -->
+    <div class="ambient-bg">
+        <div class="ambient-orb ambient-orb-1"></div>
+        <div class="ambient-orb ambient-orb-2"></div>
+        <div class="ambient-orb ambient-orb-3"></div>
+    </div>
+
+    <!-- ==================== GRAIN OVERLAY ==================== -->
+    <div class="grain-overlay"></div>
+
+    <!-- ==================== BUTTERFLY ==================== -->
+    <div id="butterfly" class="butterfly" aria-hidden="true">
+        <svg class="butterfly-svg" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="bfW1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7c3aed"/>
+                    <stop offset="35%" stop-color="#8b5cf6"/>
+                    <stop offset="70%" stop-color="#a78bfa"/>
+                    <stop offset="100%" stop-color="#ddd6fe"/>
+                </linearGradient>
+                <linearGradient id="bfW2" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#5b21b6"/>
+                    <stop offset="50%" stop-color="#7c3aed"/>
+                    <stop offset="100%" stop-color="#818cf8"/>
+                </linearGradient>
+                <radialGradient id="bfShine" cx="30%" cy="30%" r="65%">
+                    <stop offset="0%" stop-color="rgba(221,214,254,0.4)"/>
+                    <stop offset="100%" stop-color="rgba(221,214,254,0)"/>
+                </radialGradient>
+                <filter id="bfGlow" x="-40%" y="-40%" width="180%" height="180%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+                    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                </filter>
+            </defs>
+            <g class="wing wing-l" filter="url(#bfGlow)">
+                <path d="M60,50 C55,28 38,8 18,14 C4,19 2,35 14,44 C26,52 50,52 60,50Z" fill="url(#bfW1)" opacity="0.82"/>
+                <path d="M60,50 C54,56 35,70 22,63 C13,58 16,47 36,48 C49,49 58,50 60,50Z" fill="url(#bfW2)" opacity="0.7"/>
+                <path d="M60,50 C55,28 38,8 18,14 C4,19 2,35 14,44 C26,52 50,52 60,50Z" fill="url(#bfShine)"/>
+                <path d="M57,47 C50,32 36,18 22,20" stroke="rgba(221,214,254,0.2)" stroke-width="0.4" fill="none"/>
+                <path d="M58,48 C48,40 32,34 19,37" stroke="rgba(196,181,253,0.12)" stroke-width="0.3" fill="none"/>
+                <circle cx="28" cy="25" r="2.5" fill="rgba(196,181,253,0.15)"/>
+                <circle cx="22" cy="40" r="1.5" fill="rgba(221,214,254,0.12)"/>
+            </g>
+            <g class="wing wing-r" filter="url(#bfGlow)">
+                <path d="M60,50 C65,28 82,8 102,14 C116,19 118,35 106,44 C94,52 70,52 60,50Z" fill="url(#bfW1)" opacity="0.82"/>
+                <path d="M60,50 C66,56 85,70 98,63 C107,58 104,47 84,48 C71,49 62,50 60,50Z" fill="url(#bfW2)" opacity="0.7"/>
+                <path d="M60,50 C65,28 82,8 102,14 C116,19 118,35 106,44 C94,52 70,52 60,50Z" fill="url(#bfShine)"/>
+                <path d="M63,47 C70,32 84,18 98,20" stroke="rgba(221,214,254,0.2)" stroke-width="0.4" fill="none"/>
+                <path d="M62,48 C72,40 88,34 101,37" stroke="rgba(196,181,253,0.12)" stroke-width="0.3" fill="none"/>
+                <circle cx="92" cy="25" r="2.5" fill="rgba(196,181,253,0.15)"/>
+                <circle cx="98" cy="40" r="1.5" fill="rgba(221,214,254,0.12)"/>
+            </g>
+            <ellipse cx="60" cy="50" rx="2.2" ry="11" fill="#4c1d95"/>
+            <ellipse cx="60" cy="50" rx="1.5" ry="9" fill="#5b21b6"/>
+            <ellipse cx="60" cy="40" rx="2" ry="3" fill="#6d28d9"/>
+            <path d="M59,37 C56,28 49,22 45,20" stroke="#8b5cf6" stroke-width="0.6" fill="none" stroke-linecap="round"/>
+            <path d="M61,37 C64,28 71,22 75,20" stroke="#8b5cf6" stroke-width="0.6" fill="none" stroke-linecap="round"/>
+            <circle cx="45" cy="20" r="1" fill="#c4b5fd"/>
+            <circle cx="75" cy="20" r="1" fill="#c4b5fd"/>
+        </svg>
+    </div>
+
+    <!-- ==================== SHOOTING STARS ==================== -->
+    <div id="shootingStars" class="shooting-stars-container" aria-hidden="true"></div>
+
+    <!-- ==================== SCROLL PROGRESS ==================== -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ==================== CUSTOM CURSOR ==================== -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="custom-cursor-ring" id="customCursorRing"></div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <a href="#hero" class="nav-logo">NANDINI.</a>
+        <div class="nav-links" id="navLinks">
+            <a href="#hero" class="nav-link active">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#expertise" class="nav-link">Expertise</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#certifications" class="nav-link">Certifications</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        <a href="#projects" class="nav-cta">View My Work</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ==================== MOBILE MENU OVERLAY ==================== -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-links">
+            <a href="#hero" class="mobile-link">Home</a>
+            <a href="#about" class="mobile-link">About</a>
+            <a href="#expertise" class="mobile-link">Expertise</a>
+            <a href="#skills" class="mobile-link">Skills</a>
+            <a href="#projects" class="mobile-link">Projects</a>
+            <a href="#certifications" class="mobile-link">Certifications</a>
+            <a href="#contact" class="mobile-link">Contact</a>
+        </div>
+    </div>
+
+    <main>
+        <!-- ==================== HERO SECTION ==================== -->
+        <section class="hero section" id="hero">
+            <div class="hero-bg">
+                <img src="assets/hero-bg.jpg" alt="" class="hero-bg-img" aria-hidden="true">
+                <div class="hero-glow"></div>
+                <div class="hero-glow-secondary"></div>
+            </div>
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-eyebrow reveal">
+                        <span class="eyebrow-slash">//</span> SYSTEM PROFILE
+                    </div>
+                    <h1 class="hero-title reveal delay-1">
+                        <span class="hero-title-line">HELLO, I'M</span>
+                        <span class="hero-title-name">NANDINI.</span>
+                    </h1>
+                    <p class="hero-subtitle reveal delay-2">
+                        Writer, data &amp; documentation specialist, and technology enthusiast exploring AI and cybersecurity.
+                    </p>
+                    <div class="hero-capabilities reveal delay-3">
+                        <div class="capability">
+                            <span class="capability-label">WRITING</span>
+                            <span class="capability-value">Creative &amp; Content</span>
+                        </div>
+                        <div class="capability">
+                            <span class="capability-label">DATA</span>
+                            <span class="capability-value">Excel &amp; Documentation</span>
+                        </div>
+                        <div class="capability">
+                            <span class="capability-label">TECH</span>
+                            <span class="capability-value">AI &amp; Cybersecurity</span>
+                        </div>
+                    </div>
+                    <div class="hero-buttons reveal delay-4">
+                        <a href="#projects" class="btn btn-primary magnetic">VIEW MY WORK</a>
+                        <a href="#contact" class="btn btn-secondary magnetic">CONTACT ME</a>
+                    </div>
+                </div>
+                <div class="hero-portrait-wrapper reveal-right delay-2">
+                    <div class="hero-portrait-container" data-cursor="VIEW">
+                        <div class="portrait-glow"></div>
+                        <img src="assets/portrait.jpg" alt="Nandini — Professional Portrait" class="hero-portrait">
+                        <div class="portrait-frame"></div>
+                    </div>
+                    <div class="hero-status">
+                        <span class="status-dot"></span>
+                        <span class="status-text">OPEN TO OPPORTUNITIES</span>
+                    </div>
+                    <div class="hero-year">2026</div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span class="scroll-text">SCROLL TO EXPLORE</span>
+                <div class="scroll-arrow">
+                    <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
+                        <path d="M8 0v20M1 14l7 7 7-7" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== ABOUT SECTION ==================== -->
+        <section class="about-section section has-bg-image" id="about">
+            <div class="section-bg-image" aria-hidden="true">
+                <img src="assets/workspace.jpg" alt="" class="section-bg-img" loading="lazy">
+            </div>
+            <div class="section-header">
+                <span class="section-eyebrow reveal">// 01 — INTRODUCTION</span>
+                <h2 class="section-title reveal delay-1">ABOUT ME</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-left reveal delay-2">
+                    <blockquote class="about-statement">
+                        "CURIOUS BY NATURE.<br>
+                        PRECISE BY PRACTICE."
+                    </blockquote>
+                </div>
+                <div class="about-right">
+                    <p class="about-text reveal delay-2">
+                        I am a self-driven student with a deep interest in writing, storytelling, communication, artificial intelligence, cybersecurity, and information technology.
+                    </p>
+                    <p class="about-text reveal delay-3">
+                        I have developed my skills through independent learning, certifications, practical work, and continuous exploration. I believe in building expertise through consistent effort and genuine curiosity.
+                    </p>
+                    <p class="about-text reveal delay-4">
+                        My journey blends creative expression with technical understanding — from crafting narratives and organizing data, to exploring the frontiers of AI and cybersecurity.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== EXPERTISE SECTION ==================== -->
+        <section class="expertise-section section" id="expertise">
+            <div class="section-header">
+                <span class="section-eyebrow reveal">// 02 — CAPABILITIES</span>
+                <h2 class="section-title reveal delay-1">WHAT I WORK WITH</h2>
+            </div>
+            <div class="expertise-blocks">
+                <div class="expertise-block reveal">
+                    <div class="expertise-number">01</div>
+                    <div class="expertise-info">
+                        <h3 class="expertise-title">WRITING &amp; STORYTELLING</h3>
+                        <ul class="expertise-list">
+                            <li>Creative writing</li>
+                            <li>Content writing</li>
+                            <li>Article &amp; blog writing</li>
+                            <li>Storytelling</li>
+                            <li>Narrative development</li>
+                            <li>Editing &amp; proofreading</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="expertise-block reveal delay-1">
+                    <div class="expertise-number">02</div>
+                    <div class="expertise-info">
+                        <h3 class="expertise-title">DATA &amp; DOCUMENTATION</h3>
+                        <ul class="expertise-list">
+                            <li>Excel</li>
+                            <li>Data entry</li>
+                            <li>Data organization</li>
+                            <li>Documentation</li>
+                            <li>Professional documents</li>
+                            <li>Research</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="expertise-block reveal delay-2">
+                    <div class="expertise-number">03</div>
+                    <div class="expertise-info">
+                        <h3 class="expertise-title">AI &amp; TECHNOLOGY</h3>
+                        <ul class="expertise-list">
+                            <li>Artificial Intelligence</li>
+                            <li>AI productivity tools</li>
+                            <li>Generative AI</li>
+                            <li>Technology exploration</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="expertise-block reveal delay-3">
+                    <div class="expertise-number">04</div>
+                    <div class="expertise-info">
+                        <h3 class="expertise-title">CYBERSECURITY</h3>
+                        <ul class="expertise-list">
+                            <li>Cybersecurity fundamentals</li>
+                            <li>Information security awareness</li>
+                            <li>Threat &amp; vulnerability awareness</li>
+                            <li>Security incident response</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SKILLS SECTION ==================== -->
+        <section class="skills-section section" id="skills">
+            <div class="section-header">
+                <span class="section-eyebrow reveal">// 03 — TOOLKIT</span>
+                <h2 class="section-title reveal delay-1">SKILLS</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skill-group reveal">
+                    <h4 class="skill-group-label">WRITING</h4>
+                    <div class="skill-pills">
+                        <span class="skill-pill">Creative Writing</span>
+                        <span class="skill-pill">Content Writing</span>
+                        <span class="skill-pill">Article &amp; Blog Writing</span>
+                        <span class="skill-pill">Storytelling</span>
+                        <span class="skill-pill">Editing</span>
+                        <span class="skill-pill">Proofreading</span>
+                        <span class="skill-pill">Research</span>
+                    </div>
+                </div>
+                <div class="skill-group reveal delay-1">
+                    <h4 class="skill-group-label">DATA</h4>
+                    <div class="skill-pills">
+                        <span class="skill-pill">Microsoft Excel</span>
+                        <span class="skill-pill">Data Entry</span>
+                        <span class="skill-pill">Data Cleaning</span>
+                        <span class="skill-pill">VLOOKUP / XLOOKUP</span>
+                        <span class="skill-pill">Pivot Tables</span>
+                        <span class="skill-pill">Charts &amp; Dashboards</span>
+                    </div>
+                </div>
+                <div class="skill-group reveal delay-2">
+                    <h4 class="skill-group-label">DOCUMENTATION</h4>
+                    <div class="skill-pills">
+                        <span class="skill-pill">Microsoft Word</span>
+                        <span class="skill-pill">Professional Formatting</span>
+                        <span class="skill-pill">Reports</span>
+                        <span class="skill-pill">Tables</span>
+                        <span class="skill-pill">Layouts</span>
+                    </div>
+                </div>
+                <div class="skill-group reveal delay-3">
+                    <h4 class="skill-group-label">PRESENTATION</h4>
+                    <div class="skill-pills">
+                        <span class="skill-pill">Microsoft PowerPoint</span>
+                        <span class="skill-pill">Presentation Design</span>
+                        <span class="skill-pill">Slide Layouts</span>
+                        <span class="skill-pill">Visual Hierarchy</span>
+                    </div>
+                </div>
+                <div class="skill-group reveal delay-4">
+                    <h4 class="skill-group-label">TECH</h4>
+                    <div class="skill-pills">
+                        <span class="skill-pill">AI Productivity Tools</span>
+                        <span class="skill-pill">Generative AI</span>
+                        <span class="skill-pill">Cybersecurity Fundamentals</span>
+                        <span class="skill-pill">Information Security Awareness</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PROJECTS SECTION ==================== -->
+        <section class="projects-section section" id="projects">
+            <div class="section-header">
+                <span class="section-eyebrow reveal">// 04 — PORTFOLIO</span>
+                <h2 class="section-title reveal delay-1">SELECTED WORK</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card reveal">
+                    <div class="project-image">
+                        <img src="assets/project-data.jpg" alt="Futuristic data visualization with holographic spreadsheets" class="project-img" loading="lazy">
+                        <div class="project-img-overlay"></div>
+                    </div>
+                    <div class="project-number">01</div>
+                    <h3 class="project-title">DATA MANAGEMENT &amp; EXCEL</h3>
+                    <p class="project-description">
+                        Cleaning and organizing datasets, applying formulas, lookup functions, sorting/filtering, pivot tables and dashboards.
+                    </p>
+                    <div class="project-tools">
+                        <span class="project-tool">Excel</span>
+                        <span class="project-tool">Data Cleaning</span>
+                        <span class="project-tool">Pivot Tables</span>
+                        <span class="project-tool">VLOOKUP</span>
+                    </div>
+                    <a href="#" class="project-link" data-cursor="OPEN →">View Project →</a>
+                </div>
+                <div class="project-card reveal delay-1">
+                    <div class="project-image">
+                        <img src="assets/project-docs.jpg" alt="Premium document and presentation design workspace" class="project-img" loading="lazy">
+                        <div class="project-img-overlay"></div>
+                    </div>
+                    <div class="project-number">02</div>
+                    <h3 class="project-title">DOCUMENT &amp; PRESENTATION DESIGN</h3>
+                    <p class="project-description">
+                        Turning unstructured information into polished documents and professional presentation decks.
+                    </p>
+                    <div class="project-tools">
+                        <span class="project-tool">Word</span>
+                        <span class="project-tool">PowerPoint</span>
+                        <span class="project-tool">Formatting</span>
+                        <span class="project-tool">Layouts</span>
+                    </div>
+                    <a href="#" class="project-link" data-cursor="OPEN →">View Project →</a>
+                </div>
+                <div class="project-card reveal delay-2">
+                    <div class="project-image">
+                        <img src="assets/project-writing.jpg" alt="Cinematic notebook with handwritten pages and fountain pen" class="project-img" loading="lazy">
+                        <div class="project-img-overlay"></div>
+                    </div>
+                    <div class="project-number">03</div>
+                    <h3 class="project-title">CREATIVE WRITING</h3>
+                    <p class="project-description">
+                        Articles, stories, narrative concepts and experimental writing.
+                    </p>
+                    <div class="project-tools">
+                        <span class="project-tool">Storytelling</span>
+                        <span class="project-tool">Content Writing</span>
+                        <span class="project-tool">Editing</span>
+                    </div>
+                    <a href="#" class="project-link" data-cursor="OPEN →">View Project →</a>
+                </div>
+                <div class="project-card reveal delay-3">
+                    <div class="project-image">
+                        <img src="assets/project-ai.jpg" alt="Abstract AI neural network with cybersecurity shield elements" class="project-img" loading="lazy">
+                        <div class="project-img-overlay"></div>
+                    </div>
+                    <div class="project-number">04</div>
+                    <h3 class="project-title">AI &amp; CYBERSECURITY LEARNING</h3>
+                    <p class="project-description">
+                        Selected explorations, notes, experiments and learning projects related to AI and cybersecurity.
+                    </p>
+                    <div class="project-tools">
+                        <span class="project-tool">AI Tools</span>
+                        <span class="project-tool">Generative AI</span>
+                        <span class="project-tool">Cybersecurity</span>
+                    </div>
+                    <a href="#" class="project-link" data-cursor="OPEN →">View Project →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== JOURNEY / TIMELINE SECTION ==================== -->
+        <section class="timeline-section section has-bg-image" id="journey">
+            <div class="section-bg-image" aria-hidden="true">
+                <img src="assets/journey-bg.jpg" alt="" class="section-bg-img" loading="lazy">
+            </div>
+            <div class="section-header">
+                <span class="section-eyebrow reveal">// 05 — EXPERIENCE</span>
+                <h2 class="section-title reveal delay-1">MY JOURNEY</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2026</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Completed Class XII, Humanities</h3>
+                        <p class="timeline-place">U.S.P.C. Jain Public School, CBSE</p>
+                        <p class="timeline-desc">Completed senior secondary education with a focus on Humanities. CGPA: 8.3</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal delay-1">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2026</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Data Entry Volunteer</h3>
+                        <p class="timeline-place">School Annual Function &amp; Library</p>
+                        <p class="timeline-desc">
+                            Processed 100+ event sign-up entries with zero recorded errors. 
+                            Worked at approximately 80 WPM. 
+                            Organized library catalog records with systematic accuracy.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CERTIFICATIONS SECTION ==================== -->
+        <section class="certifications-section section" id="certifications">
+            <div class="section-header">
+                <span class="section-eyebrow reveal">// 06 — CREDENTIALS</span>
+                <h2 class="section-title reveal delay-1">CERTIFICATIONS</h2>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-card reveal" data-cert="career-essentials">
+                    <div class="cert-issuer">Microsoft + LinkedIn Learning</div>
+                    <h3 class="cert-title">Career Essentials in Cybersecurity</h3>
+                    <button class="cert-view-btn" data-cert-name="Career Essentials in Cybersecurity" data-cert-issuer="Microsoft + LinkedIn Learning">View Certificate</button>
+                </div>
+                <div class="cert-card reveal delay-1" data-cert="cyber-terminology">
+                    <div class="cert-issuer">LinkedIn Learning</div>
+                    <h3 class="cert-title">Cybersecurity Awareness: Cybersecurity Terminology</h3>
+                    <button class="cert-view-btn" data-cert-name="Cybersecurity Awareness: Cybersecurity Terminology" data-cert-issuer="LinkedIn Learning">View Certificate</button>
+                </div>
+                <div class="cert-card reveal delay-2" data-cert="threat-landscape">
+                    <div class="cert-issuer">LinkedIn Learning</div>
+                    <h3 class="cert-title">The Cybersecurity Threat Landscape</h3>
+                    <button class="cert-view-btn" data-cert-name="The Cybersecurity Threat Landscape" data-cert-issuer="LinkedIn Learning">View Certificate</button>
+                </div>
+                <div class="cert-card reveal delay-3" data-cert="security-copilot">
+                    <div class="cert-issuer">LinkedIn Learning</div>
+                    <h3 class="cert-title">Microsoft Security Copilot</h3>
+                    <button class="cert-view-btn" data-cert-name="Microsoft Security Copilot" data-cert-issuer="LinkedIn Learning">View Certificate</button>
+                </div>
+                <div class="cert-card reveal delay-4" data-cert="gemini-gmail">
+                    <div class="cert-issuer">LinkedIn Learning</div>
+                    <h3 class="cert-title">Gemini in Gmail</h3>
+                    <button class="cert-view-btn" data-cert-name="Gemini in Gmail" data-cert-issuer="LinkedIn Learning">View Certificate</button>
+                </div>
+                <div class="cert-card reveal delay-5" data-cert="gen-ai">
+                    <div class="cert-issuer">Google</div>
+                    <h3 class="cert-title">Introduction to Generative AI</h3>
+                    <button class="cert-view-btn" data-cert-name="Introduction to Generative AI" data-cert-issuer="Google">View Certificate</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CERTIFICATION MODAL ==================== -->
+        <div class="cert-modal" id="certModal">
+            <div class="cert-modal-overlay"></div>
+            <div class="cert-modal-content">
+                <button class="cert-modal-close" id="certModalClose">&times;</button>
+                <div class="cert-modal-badge">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="22" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+                        <path d="M16 24l5 5 11-11" stroke="#f0f0f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="cert-modal-issuer" id="certModalIssuer"></div>
+                <h3 class="cert-modal-title" id="certModalTitle"></h3>
+                <div class="cert-modal-holder">
+                    <span class="cert-modal-label">AWARDED TO</span>
+                    <span class="cert-modal-name">Nandini Verma</span>
+                </div>
+                <div class="cert-modal-footer">
+                    <span class="cert-modal-verified">✓ VERIFIED CREDENTIAL</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== EDUCATION SECTION ==================== -->
+        <section class="education-section section" id="education">
+            <div class="section-header">
+                <span class="section-eyebrow reveal">// 07 — ACADEMICS</span>
+                <h2 class="section-title reveal delay-1">EDUCATION</h2>
+            </div>
+            <div class="education-content reveal delay-2">
+                <h3 class="education-school">U.S.P.C. Jain Public School</h3>
+                <div class="education-details">
+                    <span class="education-board">CBSE</span>
+                    <span class="education-divider">•</span>
+                    <span class="education-class">Class XII — Humanities</span>
+                    <span class="education-divider">•</span>
+                    <span class="education-year">Completed 2026</span>
+                </div>
+                <div class="education-cgpa">
+                    <span class="cgpa-label">CGPA</span>
+                    <span class="cgpa-value">8.3</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== LANGUAGES SECTION ==================== -->
+        <section class="languages-section section" id="languages">
+            <div class="section-header">
+                <span class="section-eyebrow reveal">// 08 — COMMUNICATION</span>
+                <h2 class="section-title reveal delay-1">LANGUAGES</h2>
+            </div>
+            <div class="languages-grid">
+                <div class="language-item reveal">
+                    <h4 class="language-name">English</h4>
+                    <span class="language-level">Fluent</span>
+                </div>
+                <div class="language-item reveal delay-1">
+                    <h4 class="language-name">Hindi</h4>
+                    <span class="language-level">Native / Fluent</span>
+                </div>
+                <div class="language-item reveal delay-2">
+                    <h4 class="language-name">Punjabi</h4>
+                    <span class="language-level">Conversational</span>
+                </div>
+                <div class="language-item reveal delay-3">
+                    <h4 class="language-name">German</h4>
+                    <span class="language-level">A1 — Currently Learning</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== BRAND STATEMENT SECTION ==================== -->
+        <section class="brand-section section" id="brand">
+            <canvas id="brandStarCanvas" class="brand-star-canvas" aria-hidden="true"></canvas>
+            <div class="brand-edge-glow brand-edge-top"></div>
+            <div class="brand-edge-glow brand-edge-bottom"></div>
+            <div class="brand-edge-glow brand-edge-left"></div>
+            <div class="brand-edge-glow brand-edge-right"></div>
+            <div class="brand-glow-center"></div>
+            <div class="brand-glow-secondary"></div>
+            <div class="brand-content-centered">
+                <h2 class="brand-statement">
+                    <span class="brand-line">"STILL LEARNING.</span>
+                    <span class="brand-line">STILL BUILDING.</span>
+                    <span class="brand-line">STILL EXPLORING."</span>
+                </h2>
+                <div class="brand-words">
+                    <span>Writing.</span>
+                    <span>Technology.</span>
+                    <span>AI.</span>
+                    <span>Cybersecurity.</span>
+                    <span>Ideas.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CONTACT SECTION ==================== -->
+        <section class="contact-section section has-bg-image" id="contact">
+            <div class="section-bg-image" aria-hidden="true">
+                <img src="assets/contact-bg.jpg" alt="" class="section-bg-img" loading="lazy">
+            </div>
+            <div class="section-header">
+                <span class="section-eyebrow reveal">// 09 — GET IN TOUCH</span>
+                <h2 class="section-title contact-title reveal delay-1">LET'S CONNECT.</h2>
+            </div>
+            <p class="contact-subtitle reveal delay-2">Have an opportunity, project, idea, or simply want to talk?</p>
+            <div class="contact-grid">
+                <div class="contact-info reveal delay-2">
+                    <div class="contact-item">
+                        <span class="contact-label">EMAIL</span>
+                        <a href="mailto:nandini.itpath@gmail.com" class="contact-value">nandini.itpath@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">LINKEDIN</span>
+                        <a href="https://linkedin.com/in/nandini-itpath" target="_blank" rel="noopener" class="contact-value">linkedin.com/in/nandini-itpath</a>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">PHONE</span>
+                        <a href="tel:+919877263708" class="contact-value">+91-9877263708</a>
+                    </div>
+                </div>
+                <form class="contact-form reveal delay-3" id="contactForm">
+                    <div class="form-group">
+                        <label for="contactName" class="form-label">NAME</label>
+                        <input type="text" id="contactName" name="name" class="form-input" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail" class="form-label">EMAIL</label>
+                        <input type="email" id="contactEmail" name="email" class="form-input" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage" class="form-label">MESSAGE</label>
+                        <textarea id="contactMessage" name="message" class="form-input form-textarea" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary form-submit magnetic">SEND MESSAGE</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-logo">NANDINI.</span>
+                <span class="footer-tagline">Writer • Data • AI • Cybersecurity</span>
+            </div>
+            <div class="footer-right">
+                <div class="footer-links">
+                    <a href="https://linkedin.com/in/nandini-itpath" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+                    <a href="mailto:nandini.itpath@gmail.com" class="footer-link">Email</a>
+                    <a href="#hero" class="footer-link footer-top">Back to Top ↑</a>
+                </div>
+                <span class="footer-year">© 2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <div class="toast" id="toast">
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
