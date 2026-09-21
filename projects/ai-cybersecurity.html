@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI &amp; Cybersecurity Learning | Nandini</title>
+    <meta name="description" content="AI-assisted development, web experimentation, cybersecurity learning and practical technical exploration by Nandini.">
+    <meta name="theme-color" content="#060810">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../project.css">
+</head>
+<body>
+    <!-- ==================== PARTICLE CANVAS ==================== -->
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+
+    <!-- ==================== AMBIENT BACKGROUND ==================== -->
+    <div class="ambient-bg">
+        <div class="ambient-orb ambient-orb-1"></div>
+        <div class="ambient-orb ambient-orb-2"></div>
+        <div class="ambient-orb ambient-orb-3"></div>
+    </div>
+
+    <!-- ==================== GRAIN OVERLAY ==================== -->
+    <div class="grain-overlay"></div>
+
+    <!-- ==================== SCROLL PROGRESS ==================== -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ==================== CUSTOM CURSOR ==================== -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="custom-cursor-ring" id="customCursorRing"></div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <a href="../index.html" class="nav-logo">NANDINI.</a>
+        <div class="nav-links" id="navLinks">
+            <a href="../index.html#hero" class="nav-link">Home</a>
+            <a href="../index.html#about" class="nav-link">About</a>
+            <a href="../index.html#expertise" class="nav-link">Expertise</a>
+            <a href="../index.html#skills" class="nav-link">Skills</a>
+            <a href="../index.html#projects" class="nav-link active">Projects</a>
+            <a href="../index.html#certifications" class="nav-link">Certifications</a>
+            <a href="../index.html#contact" class="nav-link">Contact</a>
+        </div>
+        <a href="../index.html#projects" class="nav-cta">View My Work</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ==================== MOBILE MENU OVERLAY ==================== -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-links">
+            <a href="../index.html#hero" class="mobile-link">Home</a>
+            <a href="../index.html#about" class="mobile-link">About</a>
+            <a href="../index.html#expertise" class="mobile-link">Expertise</a>
+            <a href="../index.html#skills" class="mobile-link">Skills</a>
+            <a href="../index.html#projects" class="mobile-link">Projects</a>
+            <a href="../index.html#certifications" class="mobile-link">Certifications</a>
+            <a href="../index.html#contact" class="mobile-link">Contact</a>
+        </div>
+    </div>
+
+    <main class="project-page-wrap">
+        <!-- ==================== TOP NAVIGATION ==================== -->
+        <div class="project-top-nav">
+            <a href="../index.html#projects" class="back-link">
+                <span class="back-link-arrow">←</span> BACK TO PROJECTS
+            </a>
+        </div>
+
+        <!-- ==================== 01. HERO (LEFT ALIGNED) ==================== -->
+        <section class="project-hero">
+            <div class="project-hero-meta-top reveal">
+                <span class="project-hero-badge">04</span>
+                <span class="project-hero-label">PROJECT / CASE STUDY</span>
+            </div>
+            <h1 class="project-hero-title reveal delay-1">
+                AI &amp; CYBERSECURITY<br>LEARNING
+            </h1>
+            <p class="project-hero-desc reveal delay-2">
+                AI-assisted development, web experimentation, cybersecurity learning and practical technical exploration.
+            </p>
+            <div class="project-hero-tags reveal delay-3">
+                <span class="project-hero-tag">AI Tools</span>
+                <span class="project-hero-tag">Generative AI</span>
+                <span class="project-hero-tag">Cybersecurity</span>
+            </div>
+
+            <!-- Metadata Row -->
+            <div class="project-meta-row reveal delay-4">
+                <div class="project-meta-item">
+                    <span class="project-meta-label">ROLE</span>
+                    <span class="project-meta-val">AI-assisted development</span>
+                </div>
+                <div class="project-meta-item">
+                    <span class="project-meta-label">STACK</span>
+                    <span class="project-meta-val">HTML • CSS • JavaScript • GitHub Pages • Formspree</span>
+                </div>
+                <div class="project-meta-item">
+                    <span class="project-meta-label">YEAR</span>
+                    <span class="project-meta-val">2026</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 02. OVERVIEW (ASYMMETRIC 2-COL) ==================== -->
+        <section class="editorial-section reveal" id="overview">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 01 — OVERVIEW</span>
+                    <h2 class="editorial-heading">BUILDING THROUGH<br>EXPLORATION</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        This project represents my hands-on exploration of AI, cybersecurity and practical technology. Rather than keeping my learning limited to courses and certificates, I have been turning what I learn into small practical experiments and projects.
+                    </p>
+                    <p class="editorial-text">
+                        As part of this effort, this personal portfolio website itself became one of those core experiments. Building and refining a live, accessible web property provided a concrete technical environment where concepts in modern web architecture, digital identity, asset delivery, and interactive design could be explored in direct practice.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 03. BUILDING THIS PORTFOLIO ==================== -->
+        <section class="editorial-section reveal" id="building-portfolio">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-num">02</span>
+                    <span class="editorial-eyebrow">// 02 — CASE STUDY</span>
+                    <h2 class="editorial-heading">BUILDING THIS<br>PORTFOLIO</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        I built and deployed this portfolio as a practical web-development project, using AI as a development and problem-solving assistant throughout the process.
+                    </p>
+                    <div class="editorial-list">
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">01</span>
+                            <span>I planned the structure and content of the website.</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">02</span>
+                            <span>I chose the visual direction and overall user experience.</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">03</span>
+                            <span>I worked iteratively with AI to implement and troubleshoot parts of the website.</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">04</span>
+                            <span>I tested the website and fixed issues during development.</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">05</span>
+                            <span>I connected certificates and my CV as accessible PDF resources.</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">06</span>
+                            <span>I integrated a working contact form using Formspree.</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">07</span>
+                            <span>I deployed the finished website using GitHub Pages.</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">08</span>
+                            <span>I continued refining the site after deployment.</span>
+                        </div>
+                    </div>
+                    <p class="editorial-text">
+                        This workflow represents genuine <strong>AI-assisted development</strong>: AI served as an interactive coding, debugging, and implementation assistant, while I directed the creative vision, architectural decisions, testing parameters, and final quality control.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 04. AI-ASSISTED DEVELOPMENT ==================== -->
+        <section class="editorial-section reveal" id="how-i-used-ai">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 03 — METHODOLOGY</span>
+                    <h2 class="editorial-heading">AI-ASSISTED<br>DEVELOPMENT</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        AI was used as a development assistant rather than as a replacement for decision-making. By leveraging AI across the development lifecycle, technical challenges were explored, diagnosed, and resolved step by step.
+                    </p>
+                    <div class="highlight-editorial-card">
+                        <blockquote class="highlight-editorial-quote">
+                            "AI was used as a tool for learning, implementation and problem-solving. I remained responsible for the project's direction, decisions, testing and final result."
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Horizontal Grid Underneath -->
+            <div class="ai-method-grid reveal delay-2">
+                <div class="ai-method-card">
+                    <span class="ai-method-num">01</span>
+                    <h3 class="ai-method-title">Code exploration</h3>
+                </div>
+                <div class="ai-method-card">
+                    <span class="ai-method-num">02</span>
+                    <h3 class="ai-method-title">Debugging</h3>
+                </div>
+                <div class="ai-method-card">
+                    <span class="ai-method-num">03</span>
+                    <h3 class="ai-method-title">Implementation</h3>
+                </div>
+                <div class="ai-method-card">
+                    <span class="ai-method-num">04</span>
+                    <h3 class="ai-method-title">Problem solving</h3>
+                </div>
+                <div class="ai-method-card">
+                    <span class="ai-method-num">05</span>
+                    <h3 class="ai-method-title">Iteration</h3>
+                </div>
+                <div class="ai-method-card">
+                    <span class="ai-method-num">06</span>
+                    <h3 class="ai-method-title">Learning</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 05. WHAT I BUILT ==================== -->
+        <section class="editorial-section reveal" id="what-i-built">
+            <div class="editorial-left" style="margin-bottom: 24px;">
+                <span class="editorial-eyebrow">// 04 — DELIVERABLES</span>
+                <h2 class="editorial-heading">WHAT I BUILT</h2>
+            </div>
+            <div class="feature-editorial-grid">
+                <div class="feature-editorial-card">
+                    <span class="feature-card-num">01</span>
+                    <h3 class="feature-card-title">CUSTOM PORTFOLIO INTERFACE</h3>
+                    <p class="feature-card-desc">Bespoke editorial dark interface featuring custom typography, layered midnight gradients, and dark-sky visual atmosphere.</p>
+                </div>
+                <div class="feature-editorial-card">
+                    <span class="feature-card-num">02</span>
+                    <h3 class="feature-card-title">RESPONSIVE NAVIGATION</h3>
+                    <p class="feature-card-desc">Unified header with active scroll tracking, magnetic interaction buttons, and an animated mobile navigation drawer.</p>
+                </div>
+                <div class="feature-editorial-card">
+                    <span class="feature-card-num">03</span>
+                    <h3 class="feature-card-title">INTERACTIVE VISUAL EFFECTS</h3>
+                    <p class="feature-card-desc">HTML5 particle star canvas, dynamic custom cursor with context badges, and staggered scroll reveal animations.</p>
+                </div>
+                <div class="feature-editorial-card">
+                    <span class="feature-card-num">04</span>
+                    <h3 class="feature-card-title">CERTIFICATION &amp; PDF INTEGRATION</h3>
+                    <p class="feature-card-desc">Direct credential access connecting verified Microsoft, LinkedIn Learning, and Google certificates directly to authenticated PDFs in new tabs.</p>
+                </div>
+                <div class="feature-editorial-card">
+                    <span class="feature-card-num">05</span>
+                    <h3 class="feature-card-title">CV ACCESS</h3>
+                    <p class="feature-card-desc">Prominent hero action button providing immediate access to an authentic curriculum vitae PDF document with zero friction.</p>
+                </div>
+                <div class="feature-editorial-card">
+                    <span class="feature-card-num">06</span>
+                    <h3 class="feature-card-title">CONTACT FORM INTEGRATION</h3>
+                    <p class="feature-card-desc">Client-side validated contact form connected via asynchronous fetch to Formspree with real-time submission feedback.</p>
+                </div>
+                <div class="feature-editorial-card">
+                    <span class="feature-card-num">07</span>
+                    <h3 class="feature-card-title">GITHUB PAGES DEPLOYMENT</h3>
+                    <p class="feature-card-desc">Continuous deployment and version control managed through GitHub Pages, ensuring clean asset paths and fast static delivery.</p>
+                </div>
+                <div class="feature-editorial-card">
+                    <span class="feature-card-num">08</span>
+                    <h3 class="feature-card-title">RESPONSIVE DESIGN</h3>
+                    <p class="feature-card-desc">Fluid clamp-based typography and carefully tuned media queries ensuring a balanced layout across mobile, tablet, and desktop screens.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 06. TOOLS & TECHNOLOGIES ==================== -->
+        <section class="editorial-section reveal" id="tools-technologies">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 05 — STACK</span>
+                    <h2 class="editorial-heading">TOOLS &amp;<br>TECHNOLOGIES</h2>
+                </div>
+                <div class="editorial-right">
+                    <div class="tech-editorial-wrap">
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>HTML</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>CSS</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>JavaScript</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Git</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>GitHub</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>GitHub Pages</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Formspree</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>AI-assisted development</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 07. WHAT I LEARNED ==================== -->
+        <section class="editorial-section reveal" id="what-i-learned">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 06 — LEARNING</span>
+                    <h2 class="editorial-heading">WHAT I<br>LEARNED</h2>
+                </div>
+                <div class="editorial-right">
+                    <div class="editorial-list">
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">01</span>
+                            <span>HTML/CSS/JavaScript development</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">02</span>
+                            <span>Git and GitHub workflow</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">03</span>
+                            <span>GitHub Pages deployment</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">04</span>
+                            <span>File paths and asset management</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">05</span>
+                            <span>Form integration</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">06</span>
+                            <span>Debugging</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">07</span>
+                            <span>Responsive design</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">08</span>
+                            <span>AI-assisted technical problem solving</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 08. CYBERSECURITY CONNECTION ==================== -->
+        <section class="editorial-section reveal" id="cybersecurity-connection">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 07 — CONNECTION</span>
+                    <h2 class="editorial-heading">CYBERSECURITY<br>CONNECTION</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        Although this portfolio is primarily a web-development project, it connects to my cybersecurity learning by giving me practical exposure to how web applications, forms, external services, files and deployment work together.
+                    </p>
+                    <div class="security-editorial-note">
+                        <div class="security-editorial-header">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                            <span>Foundational Technical Exposure</span>
+                        </div>
+                        <p class="editorial-text" style="margin-bottom:0;">
+                            Understanding how websites are structured, how client-side form submissions interact with external endpoints like Formspree, and how static assets are hosted and accessed on GitHub Pages provides a solid technical foundation for deeper security explorations. This project is a web-development learning project with cybersecurity relevance, not a cybersecurity product.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 09. DEVELOPMENT PROCESS ==================== -->
+        <section class="editorial-section reveal" id="development-process">
+            <div class="editorial-left" style="margin-bottom: 24px;">
+                <span class="editorial-eyebrow">// 08 — PROCESS</span>
+                <h2 class="editorial-heading">DEVELOPMENT PROCESS</h2>
+            </div>
+            <div class="process-editorial-grid">
+                <div class="process-editorial-card">
+                    <span class="process-card-step">01 — PLAN</span>
+                    <h3 class="process-card-title">PLAN</h3>
+                    <p class="process-card-desc">Defined the structure, purpose and visual direction.</p>
+                </div>
+                <div class="process-editorial-card">
+                    <span class="process-card-step">02 — BUILD</span>
+                    <h3 class="process-card-title">BUILD</h3>
+                    <p class="process-card-desc">Implemented the website structure and interface.</p>
+                </div>
+                <div class="process-editorial-card">
+                    <span class="process-card-step">03 — EXPERIMENT</span>
+                    <h3 class="process-card-title">EXPERIMENT</h3>
+                    <p class="process-card-desc">Used AI to explore implementations and solve development problems.</p>
+                </div>
+                <div class="process-editorial-card">
+                    <span class="process-card-step">04 — TEST</span>
+                    <h3 class="process-card-title">TEST</h3>
+                    <p class="process-card-desc">Tested interactions, forms, links and responsive behavior.</p>
+                </div>
+                <div class="process-editorial-card">
+                    <span class="process-card-step">05 — DEPLOY</span>
+                    <h3 class="process-card-title">DEPLOY</h3>
+                    <p class="process-card-desc">Published through GitHub Pages.</p>
+                </div>
+                <div class="process-editorial-card">
+                    <span class="process-card-step">06 — REFINE</span>
+                    <h3 class="process-card-title">REFINE</h3>
+                    <p class="process-card-desc">Continued improving the website after deployment.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 10. FINAL ACTION PANEL ==================== -->
+        <section class="final-action-section reveal">
+            <div class="final-action-panel">
+                <div class="final-action-left">
+                    <span class="final-action-eyebrow">// NEXT STEPS</span>
+                    <h2 class="final-action-title">CONTINUE EXPLORING</h2>
+                </div>
+                <div class="final-action-buttons">
+                    <a href="https://nandiniitpath.github.io/Nandini/" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic">VIEW LIVE PORTFOLIO →</a>
+                    <a href="https://github.com/nandiniitpath/Nandini" target="_blank" rel="noopener noreferrer" class="btn btn-secondary magnetic">VIEW SOURCE ON GITHUB →</a>
+                </div>
+            </div>
+            <div class="final-bottom-nav">
+                <a href="../index.html#projects" class="back-link">
+                    <span class="back-link-arrow">←</span> BACK TO PROJECTS
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-logo">NANDINI.</span>
+                <span class="footer-tagline">Writer • Data • AI • Cybersecurity</span>
+            </div>
+            <div class="footer-right">
+                <div class="footer-links">
+                    <a href="https://linkedin.com/in/nandini-itpath" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+                    <a href="mailto:nandini.itpath@gmail.com" class="footer-link">Email</a>
+                    <a href="../index.html#projects" class="footer-link">Projects</a>
+                </div>
+                <span class="footer-year">© 2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <div class="toast" id="toast">
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
