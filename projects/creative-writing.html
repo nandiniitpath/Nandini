@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Writing | Nandini</title>
+    <meta name="description" content="Articles, stories, narrative concepts and experimental writing by Nandini.">
+    <meta name="theme-color" content="#060810">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../project.css">
+</head>
+<body>
+    <!-- ==================== PARTICLE CANVAS ==================== -->
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+
+    <!-- ==================== AMBIENT BACKGROUND ==================== -->
+    <div class="ambient-bg">
+        <div class="ambient-orb ambient-orb-1"></div>
+        <div class="ambient-orb ambient-orb-2"></div>
+        <div class="ambient-orb ambient-orb-3"></div>
+    </div>
+
+    <!-- ==================== GRAIN OVERLAY ==================== -->
+    <div class="grain-overlay"></div>
+
+    <!-- ==================== SCROLL PROGRESS ==================== -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ==================== CUSTOM CURSOR ==================== -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="custom-cursor-ring" id="customCursorRing"></div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <a href="../index.html" class="nav-logo">NANDINI.</a>
+        <div class="nav-links" id="navLinks">
+            <a href="../index.html#hero" class="nav-link">Home</a>
+            <a href="../index.html#about" class="nav-link">About</a>
+            <a href="../index.html#expertise" class="nav-link">Expertise</a>
+            <a href="../index.html#skills" class="nav-link">Skills</a>
+            <a href="../index.html#projects" class="nav-link active">Projects</a>
+            <a href="../index.html#certifications" class="nav-link">Certifications</a>
+            <a href="../index.html#contact" class="nav-link">Contact</a>
+        </div>
+        <a href="../index.html#projects" class="nav-cta">View My Work</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ==================== MOBILE MENU OVERLAY ==================== -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-links">
+            <a href="../index.html#hero" class="mobile-link">Home</a>
+            <a href="../index.html#about" class="mobile-link">About</a>
+            <a href="../index.html#expertise" class="mobile-link">Expertise</a>
+            <a href="../index.html#skills" class="mobile-link">Skills</a>
+            <a href="../index.html#projects" class="mobile-link">Projects</a>
+            <a href="../index.html#certifications" class="mobile-link">Certifications</a>
+            <a href="../index.html#contact" class="mobile-link">Contact</a>
+        </div>
+    </div>
+
+    <main class="project-page-wrap">
+        <!-- ==================== TOP NAVIGATION ==================== -->
+        <div class="project-top-nav">
+            <a href="../index.html#projects" class="back-link">
+                <span class="back-link-arrow">←</span> BACK TO PROJECTS
+            </a>
+        </div>
+
+        <!-- ==================== HERO SECTION ==================== -->
+        <section class="project-hero">
+            <div class="project-hero-meta-top reveal">
+                <span class="project-hero-badge">03</span>
+                <span class="project-hero-label">PROJECT / WRITING ARCHIVE</span>
+            </div>
+            <h1 class="project-hero-title reveal delay-1">
+                CREATIVE WRITING
+            </h1>
+            <p class="story-subtitle reveal delay-2" style="margin-bottom: 16px;">
+                WORDS, STORIES &amp; IDEAS
+            </p>
+            <p class="project-hero-desc reveal delay-2">
+                I explore writing across different forms, from narrative fiction and storytelling to articles, concepts and experimental pieces. My focus is on atmosphere, character, structure and the way language can shape an experience.
+            </p>
+            <div class="project-hero-tags reveal delay-3">
+                <span class="project-hero-tag">Storytelling</span>
+                <span class="project-hero-tag">Content Writing</span>
+                <span class="project-hero-tag">Editing</span>
+            </div>
+
+            <!-- Metadata Row -->
+            <div class="project-meta-row reveal delay-4">
+                <div class="project-meta-item">
+                    <span class="project-meta-label">DISCIPLINE</span>
+                    <span class="project-meta-val">Fiction • Narrative • Articles</span>
+                </div>
+                <div class="project-meta-item">
+                    <span class="project-meta-label">FOCUS</span>
+                    <span class="project-meta-val">Atmosphere, Character, Structure &amp; Voice</span>
+                </div>
+                <div class="project-meta-item">
+                    <span class="project-meta-label">TIMELINE</span>
+                    <span class="project-meta-val">Ongoing Archive</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 01. SELECTED WORK ==================== -->
+        <section class="editorial-section reveal" id="selected-work">
+            <div class="editorial-left" style="margin-bottom: 12px;">
+                <span class="editorial-eyebrow">// 01 — SELECTED WORK</span>
+                <h2 class="editorial-heading">SELECTED WORK</h2>
+                <p class="editorial-text" style="margin-top: 6px; color: var(--text-secondary);">
+                    Writing pieces exploring story, character, ideas and voice.
+                </p>
+            </div>
+
+            <div class="writing-archive-grid">
+                <!-- 01 — SHORT FICTION (ACTIVE) -->
+                <article class="writing-card active reveal delay-1">
+                    <div class="writing-card-header">
+                        <span class="writing-card-category">01 — SHORT FICTION</span>
+                        <span class="writing-card-badge" style="color: #4ade80; border-color: rgba(74, 222, 128, 0.2); background: rgba(74, 222, 128, 0.05);">READ NOW</span>
+                    </div>
+                    <h3 class="writing-card-title">AM I FORGETTING SOMETHING?</h3>
+                    <div class="writing-card-type">SHORT FICTION / ATMOSPHERIC PROSE</div>
+                    <p class="writing-card-desc">
+                        A first-person exploration of disorientation, panic and the instinctive struggle for survival, told through the experience of drowning.
+                    </p>
+                    <div class="writing-card-actions">
+                        <a href="writing/am-i-forgetting-something.html" class="btn btn-primary magnetic">READ PIECE →</a>
+                        <a href="../assets/writing/AM_I_FORGETTING_SOMETHING_WATERMARKED.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary magnetic">VIEW PDF ↗</a>
+                    </div>
+                </article>
+
+                <!-- 02 — CHARACTER STUDY (COMING SOON) -->
+                <article class="writing-card coming-soon reveal delay-2">
+                    <div class="writing-card-header">
+                        <span class="writing-card-category">02 — CHARACTER STUDY</span>
+                        <span class="writing-card-badge">COMING SOON</span>
+                    </div>
+                    <h3 class="writing-card-title" style="color: var(--text-secondary);">CHARACTER STUDY</h3>
+                    <div class="writing-card-type" style="color: var(--text-muted);">CHARACTER STUDY / EMOTIVE PROSE</div>
+                    <p class="writing-card-desc">
+                        A shorter, emotionally focused exploration of character, personality and inner conflict.
+                    </p>
+                </article>
+
+                <!-- 03 — ARTICLE / ESSAY (COMING SOON) -->
+                <article class="writing-card coming-soon reveal delay-3">
+                    <div class="writing-card-header">
+                        <span class="writing-card-category">03 — ARTICLE / ESSAY</span>
+                        <span class="writing-card-badge">COMING SOON</span>
+                    </div>
+                    <h3 class="writing-card-title" style="color: var(--text-secondary);">ARTICLE / ESSAY</h3>
+                    <div class="writing-card-type" style="color: var(--text-muted);">LONG-FORM NONFICTION</div>
+                    <p class="writing-card-desc">
+                        Long-form writing exploring ideas, technology, creativity, society or other subjects.
+                    </p>
+                </article>
+
+                <!-- 04 — EXPERIMENTAL WRITING (COMING SOON) -->
+                <article class="writing-card coming-soon reveal delay-4">
+                    <div class="writing-card-header">
+                        <span class="writing-card-category">04 — EXPERIMENTAL WRITING</span>
+                        <span class="writing-card-badge">COMING SOON</span>
+                    </div>
+                    <h3 class="writing-card-title" style="color: var(--text-secondary);">EXPERIMENTAL WRITING</h3>
+                    <div class="writing-card-type" style="color: var(--text-muted);">FORM &amp; PERSPECTIVE EXPERIMENTS</div>
+                    <p class="writing-card-desc">
+                        Writing that experiments with structure, voice, perspective or form.
+                    </p>
+                </article>
+
+                <!-- 05 — EDITING SHOWCASE (COMING SOON) -->
+                <article class="writing-card coming-soon reveal delay-5">
+                    <div class="writing-card-header">
+                        <span class="writing-card-category">05 — EDITING SHOWCASE</span>
+                        <span class="writing-card-badge">COMING SOON</span>
+                    </div>
+                    <h3 class="writing-card-title" style="color: var(--text-secondary);">EDITING SHOWCASE</h3>
+                    <div class="writing-card-type" style="color: var(--text-muted);">MANUSCRIPT REVISION &amp; RATIONALE</div>
+                    <p class="writing-card-desc">
+                        An original draft, revised version and explanation of the editing decisions behind the changes.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- ==================== 02. WRITING PROCESS ==================== -->
+        <section class="editorial-section reveal" id="process">
+            <div class="editorial-left" style="margin-bottom: 24px;">
+                <span class="editorial-eyebrow">// 02 — PROCESS</span>
+                <h2 class="editorial-heading">FROM IDEA TO PAGE</h2>
+            </div>
+            <div class="process-editorial-grid">
+                <div class="process-editorial-card">
+                    <span class="process-card-step">01 — IDEA</span>
+                    <h3 class="process-card-title">IDEA</h3>
+                    <p class="process-card-desc">Finding the central thought, image, question or story.</p>
+                </div>
+                <div class="process-editorial-card">
+                    <span class="process-card-step">02 — RESEARCH</span>
+                    <h3 class="process-card-title">RESEARCH</h3>
+                    <p class="process-card-desc">Gathering context and exploring the subject where necessary.</p>
+                </div>
+                <div class="process-editorial-card">
+                    <span class="process-card-step">03 — DRAFT</span>
+                    <h3 class="process-card-title">DRAFT</h3>
+                    <p class="process-card-desc">Writing freely and establishing the voice, structure and direction.</p>
+                </div>
+                <div class="process-editorial-card">
+                    <span class="process-card-step">04 — EDIT</span>
+                    <h3 class="process-card-title">EDIT</h3>
+                    <p class="process-card-desc">Removing unnecessary material, improving clarity and strengthening the writing.</p>
+                </div>
+                <div class="process-editorial-card">
+                    <span class="process-card-step">05 — REFINE</span>
+                    <h3 class="process-card-title">REFINE</h3>
+                    <p class="process-card-desc">Polishing language, rhythm, structure and presentation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 03. WRITING TOOLKIT ==================== -->
+        <section class="editorial-section reveal" id="toolkit">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 03 — TOOLKIT</span>
+                    <h2 class="editorial-heading">WRITING<br>TOOLKIT</h2>
+                </div>
+                <div class="editorial-right">
+                    <div class="tech-editorial-wrap">
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Storytelling</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Creative Writing</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Content Writing</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Article Writing</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Research</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Editing</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Proofreading</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Narrative Development</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 04. CURRENTLY EXPLORING ==================== -->
+        <section class="editorial-section reveal" id="exploring">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 04 — CURRENTLY EXPLORING</span>
+                    <h2 class="editorial-heading">CURRENTLY<br>EXPLORING</h2>
+                </div>
+                <div class="editorial-right">
+                    <div class="tech-editorial-wrap">
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Narrative Structure</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Character Development</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Atmospheric Writing</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Creative Nonfiction</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Digital Storytelling</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Writing &amp; Technology</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== WRITING × TECHNOLOGY ==================== -->
+        <section class="editorial-section reveal" id="writing-technology">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// PERSPECTIVE</span>
+                    <h2 class="editorial-heading">WRITING ×<br>TECHNOLOGY</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        Writing and technology increasingly overlap in the way ideas are developed, researched, edited and presented. I am interested in exploring that intersection while keeping the human voice and creative decision-making at the center.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FINAL ACTION PANEL ==================== -->
+        <section class="final-action-section reveal">
+            <div class="final-action-panel">
+                <div class="final-action-left">
+                    <span class="final-action-eyebrow">// ARCHIVE NAVIGATION</span>
+                    <h2 class="final-action-title">EXPLORE THE WORK</h2>
+                </div>
+                <div class="final-action-buttons">
+                    <a href="writing/am-i-forgetting-something.html" class="btn btn-primary magnetic">READ FIRST PIECE →</a>
+                    <a href="../index.html#projects" class="btn btn-secondary magnetic">ALL PROJECTS →</a>
+                </div>
+            </div>
+            <div class="final-bottom-nav">
+                <a href="../index.html#projects" class="back-link">
+                    <span class="back-link-arrow">←</span> BACK TO PROJECTS
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-logo">NANDINI.</span>
+                <span class="footer-tagline">Writer • Data • AI • Cybersecurity</span>
+            </div>
+            <div class="footer-right">
+                <div class="footer-links">
+                    <a href="https://linkedin.com/in/nandini-itpath" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+                    <a href="mailto:nandini.itpath@gmail.com" class="footer-link">Email</a>
+                    <a href="../index.html#projects" class="footer-link">Projects</a>
+                </div>
+                <span class="footer-year">© 2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <div class="toast" id="toast">
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
