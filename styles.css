@@ -234,8 +234,9 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:700;letter-spacing
 .cert-card:hover{border-color:rgba(139,92,246,0.18);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.3),0 0 20px rgba(139,92,246,0.04)}.cert-card:hover::before{opacity:1}
 .cert-issuer{font-family:var(--font-mono);font-size:var(--fs-eyebrow);letter-spacing:.2em;color:var(--accent-violet);text-transform:uppercase;margin-bottom:14px;opacity:.7}
 .cert-title{font-family:var(--font-body);font-size:clamp(1rem,1.2vw,1.15rem);font-weight:600;color:var(--text-primary);text-transform:none;letter-spacing:0;line-height:1.4;margin-bottom:20px;flex-grow:1}
-.cert-view-btn{background:none;border:none;font-family:var(--font-body);font-size:.78rem;font-weight:500;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.12em;align-self:flex-start;padding:0;position:relative;transition:color var(--t-fast)}
+.cert-view-btn{background:none;border:none;font-family:var(--font-body);font-size:.78rem;font-weight:500;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.12em;align-self:flex-start;padding:0;position:relative;transition:color var(--t-fast);text-decoration:none;cursor:pointer}
 .cert-view-btn::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:linear-gradient(90deg,var(--accent-violet),var(--accent-blue));transition:width var(--t-base)}.cert-view-btn:hover{color:var(--accent-violet)}.cert-view-btn:hover::after{width:100%}
+.cert-unavailable{opacity:.4;cursor:not-allowed}.cert-unavailable:hover{color:var(--text-secondary)}.cert-unavailable:hover::after{width:0}
 
 /* Cert Modal */
 .cert-modal{position:fixed;inset:0;z-index:2000;display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:opacity var(--t-base),visibility var(--t-base)}

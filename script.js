@@ -401,7 +401,7 @@
     if (!modal || !titleEl || !issuerEl) return;
     function open(n, i) { titleEl.textContent = n; issuerEl.textContent = i; modal.classList.add('active'); document.body.classList.add('no-scroll'); }
     function close() { modal.classList.remove('active'); document.body.classList.remove('no-scroll'); }
-    btns.forEach(b => b.addEventListener('click', () => open(b.dataset.certName || 'Certificate', b.dataset.certIssuer || '')));
+    btns.forEach(b => { if (b.tagName === 'BUTTON') b.addEventListener('click', () => open(b.dataset.certName || 'Certificate', b.dataset.certIssuer || '')); });
     closeBtn && closeBtn.addEventListener('click', close);
     overlay && overlay.addEventListener('click', close);
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('active')) close(); });
@@ -420,8 +420,24 @@
       const chk = (f, ok) => { f.classList.toggle('error', !ok); if (!ok) valid = false; };
       chk(n, n.value.trim() !== ''); chk(em, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())); chk(m, m.value.trim() !== '');
       if (!valid) return;
-      if (toast && msg) { msg.textContent = 'MESSAGE SENT ✓'; toast.classList.add('active'); setTimeout(() => toast.classList.remove('active'), 3200); }
-      form.reset();
+      const submitBtn = qs('.form-submit', form);
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'SENDING...'; }
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(r => {
+        if (r.ok) {
+          if (toast && msg) { msg.textContent = 'MESSAGE SENT ✓'; toast.classList.add('active'); setTimeout(() => toast.classList.remove('active'), 3200); }
+          form.reset();
+        } else {
+          if (toast && msg) { msg.textContent = 'FAILED TO SEND — TRY AGAIN'; toast.classList.add('active'); setTimeout(() => toast.classList.remove('active'), 3200); }
+        }
+      }).catch(() => {
+        if (toast && msg) { msg.textContent = 'NETWORK ERROR — TRY AGAIN'; toast.classList.add('active'); setTimeout(() => toast.classList.remove('active'), 3200); }
+      }).finally(() => {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'SEND MESSAGE'; }
+      });
     });
     qsa('.form-input', form).forEach(i => i.addEventListener('input', () => i.classList.remove('error')));
   }
