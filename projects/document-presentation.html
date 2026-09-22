@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document &amp; Presentation Design | Nandini</title>
+    <meta name="description" content="Turning unstructured information into polished documents and professional presentation decks by Nandini.">
+    <meta name="theme-color" content="#060810">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../project.css">
+</head>
+<body>
+    <!-- ==================== PARTICLE CANVAS ==================== -->
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+
+    <!-- ==================== AMBIENT BACKGROUND ==================== -->
+    <div class="ambient-bg">
+        <div class="ambient-orb ambient-orb-1"></div>
+        <div class="ambient-orb ambient-orb-2"></div>
+        <div class="ambient-orb ambient-orb-3"></div>
+    </div>
+
+    <!-- ==================== GRAIN OVERLAY ==================== -->
+    <div class="grain-overlay"></div>
+
+    <!-- ==================== SCROLL PROGRESS ==================== -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ==================== CUSTOM CURSOR ==================== -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="custom-cursor-ring" id="customCursorRing"></div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <a href="../index.html" class="nav-logo">NANDINI.</a>
+        <div class="nav-links" id="navLinks">
+            <a href="../index.html#hero" class="nav-link">Home</a>
+            <a href="../index.html#about" class="nav-link">About</a>
+            <a href="../index.html#expertise" class="nav-link">Expertise</a>
+            <a href="../index.html#skills" class="nav-link">Skills</a>
+            <a href="../index.html#projects" class="nav-link active">Projects</a>
+            <a href="../index.html#certifications" class="nav-link">Certifications</a>
+            <a href="../index.html#contact" class="nav-link">Contact</a>
+        </div>
+        <a href="../index.html#projects" class="nav-cta">View My Work</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ==================== MOBILE MENU OVERLAY ==================== -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-links">
+            <a href="../index.html#hero" class="mobile-link">Home</a>
+            <a href="../index.html#about" class="mobile-link">About</a>
+            <a href="../index.html#expertise" class="mobile-link">Expertise</a>
+            <a href="../index.html#skills" class="mobile-link">Skills</a>
+            <a href="../index.html#projects" class="mobile-link">Projects</a>
+            <a href="../index.html#certifications" class="mobile-link">Certifications</a>
+            <a href="../index.html#contact" class="mobile-link">Contact</a>
+        </div>
+    </div>
+
+    <main class="project-page-wrap">
+        <!-- ==================== TOP NAVIGATION ==================== -->
+        <div class="project-top-nav">
+            <a href="../index.html#projects" class="back-link">
+                <span class="back-link-arrow">←</span> BACK TO PROJECTS
+            </a>
+        </div>
+
+        <!-- ==================== HERO SECTION ==================== -->
+        <section class="project-hero">
+            <div class="project-hero-meta-top reveal">
+                <span class="project-hero-badge">02</span>
+                <span class="project-hero-label">PROJECT / DOCUMENT DESIGN</span>
+            </div>
+            <h1 class="project-hero-title reveal delay-1">
+                DOCUMENT &amp; PRESENTATION DESIGN
+            </h1>
+            <p class="story-subtitle reveal delay-2" style="margin-bottom: 16px;">
+                DOCUMENTS, LAYOUTS &amp; VISUAL HIERARCHY
+            </p>
+            <p class="project-hero-desc reveal delay-2">
+                I work with structured documents and presentations, focusing on clear organization, consistent formatting, readable layouts and visual hierarchy.
+            </p>
+            <div class="project-hero-tags reveal delay-3">
+                <span class="project-hero-tag">Microsoft Word</span>
+                <span class="project-hero-tag">Microsoft PowerPoint</span>
+                <span class="project-hero-tag">Formatting</span>
+                <span class="project-hero-tag">Layouts</span>
+            </div>
+
+            <!-- Metadata Row -->
+            <div class="project-meta-row reveal delay-4">
+                <div class="project-meta-item">
+                    <span class="project-meta-label">DISCIPLINE</span>
+                    <span class="project-meta-val">Document Design &amp; Presentation</span>
+                </div>
+                <div class="project-meta-item">
+                    <span class="project-meta-label">TOOLS</span>
+                    <span class="project-meta-val">Microsoft Word • PowerPoint</span>
+                </div>
+                <div class="project-meta-item">
+                    <span class="project-meta-label">FOCUS</span>
+                    <span class="project-meta-val">Layout, Hierarchy &amp; Formatting</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 01. DOCUMENT DESIGN ==================== -->
+        <section class="editorial-section reveal" id="document-design">
+            <div class="editorial-left" style="margin-bottom: 8px;">
+                <span class="editorial-eyebrow">// 01 — DOCUMENT DESIGN</span>
+                <h2 class="editorial-heading">DOCUMENT DESIGN</h2>
+                <p class="editorial-text" style="margin-top: 6px; color: var(--text-secondary);">
+                    Turning information into clear, structured and polished documents.
+                </p>
+            </div>
+
+            <div class="doc-showcase-grid reveal delay-1">
+                <!-- Visual Document Preview -->
+                <div class="doc-preview-container">
+                    <img src="../assets/cv-preview.png" alt="Preview of Nandini's CV document designed in Microsoft Word" class="doc-preview-img" loading="lazy">
+                </div>
+
+                <!-- Document Details -->
+                <div class="doc-info-col">
+                    <div class="writing-card-header" style="margin-bottom: -4px;">
+                        <span class="writing-card-category">01 — RESUME / CV DESIGN</span>
+                        <span class="writing-card-badge" style="color: #4ade80; border-color: rgba(74, 222, 128, 0.2); background: rgba(74, 222, 128, 0.05);">AUTHENTIC ARTIFACT</span>
+                    </div>
+                    <h3 class="writing-card-title">NANDINI — RESUME / CV</h3>
+                    <div class="writing-card-type">DOCUMENT DESIGN / MICROSOFT WORD</div>
+                    <p class="editorial-text">
+                        A one-page CV designed in Microsoft Word with an emphasis on information hierarchy, readability, spacing, layout and consistent formatting.
+                    </p>
+                    <div>
+                        <span class="editorial-eyebrow" style="font-size: var(--fs-micro);">APPLIED TECHNIQUES &amp; TOOLS</span>
+                        <div class="doc-tools-list">
+                            <span class="doc-tool-pill">Microsoft Word</span>
+                            <span class="doc-tool-pill">Layout</span>
+                            <span class="doc-tool-pill">Typography</span>
+                            <span class="doc-tool-pill">Formatting</span>
+                            <span class="doc-tool-pill">Tables</span>
+                            <span class="doc-tool-pill">Visual Hierarchy</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 8px;">
+                        <a href="../assets/Nandini_REsume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic">VIEW CV PDF ↗</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 02. PRESENTATION DESIGN ==================== -->
+        <section class="editorial-section reveal" id="presentation-design">
+            <div class="editorial-left" style="margin-bottom: 24px;">
+                <span class="editorial-eyebrow">// 02 — PRESENTATION DESIGN</span>
+                <h2 class="editorial-heading">PRESENTATION DESIGN</h2>
+                <p class="editorial-text" style="margin-top: 6px; color: var(--text-secondary);">
+                    Designing structured presentation decks with clear layouts, visual hierarchy and readable information.
+                </p>
+            </div>
+
+            <div class="writing-archive-grid">
+                <article class="writing-card coming-soon reveal delay-1">
+                    <div class="writing-card-header">
+                        <span class="writing-card-category">01 — PRESENTATION DECK</span>
+                        <span class="writing-card-badge">COMING SOON</span>
+                    </div>
+                    <h3 class="writing-card-title" style="color: var(--text-secondary);">STRUCTURED PRESENTATION DECK</h3>
+                    <div class="writing-card-type" style="color: var(--text-muted);">SLIDE DESIGN / MICROSOFT POWERPOINT</div>
+                    <p class="writing-card-desc">
+                        A structured slide deck demonstrating visual pacing, key takeaway callouts, and clean layout hierarchy. Real presentation slides will be added here.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- ==================== 03. DESIGN APPROACH ==================== -->
+        <section class="editorial-section reveal" id="approach">
+            <div class="editorial-left" style="margin-bottom: 24px;">
+                <span class="editorial-eyebrow">// 03 — APPROACH</span>
+                <h2 class="editorial-heading">DESIGN APPROACH</h2>
+            </div>
+            <div class="process-editorial-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+                <div class="process-editorial-card">
+                    <span class="process-card-step">01 — STRUCTURE</span>
+                    <h3 class="process-card-title">STRUCTURE</h3>
+                    <p class="process-card-desc">Organizing information into a clear hierarchy.</p>
+                </div>
+                <div class="process-editorial-card">
+                    <span class="process-card-step">02 — FORMAT</span>
+                    <h3 class="process-card-title">FORMAT</h3>
+                    <p class="process-card-desc">Applying consistent typography, spacing, tables and layouts.</p>
+                </div>
+                <div class="process-editorial-card">
+                    <span class="process-card-step">03 — HIERARCHY</span>
+                    <h3 class="process-card-title">HIERARCHY</h3>
+                    <p class="process-card-desc">Making important information easy to find and understand.</p>
+                </div>
+                <div class="process-editorial-card">
+                    <span class="process-card-step">04 — REFINE</span>
+                    <h3 class="process-card-title">REFINE</h3>
+                    <p class="process-card-desc">Checking alignment, consistency, readability and overall presentation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 04. TOOLS & SKILLS ==================== -->
+        <section class="editorial-section reveal" id="toolkit">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 04 — TOOLKIT</span>
+                    <h2 class="editorial-heading">TOOLS &amp;<br>SKILLS</h2>
+                </div>
+                <div class="editorial-right">
+                    <div class="tech-editorial-wrap">
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Microsoft Word</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Microsoft PowerPoint</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Document Formatting</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Tables &amp; Layouts</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Presentation Design</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Visual Hierarchy</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Proofreading</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FINAL ACTION PANEL ==================== -->
+        <section class="final-action-section reveal">
+            <div class="final-action-panel">
+                <div class="final-action-left">
+                    <span class="final-action-eyebrow">// DOCUMENTATION</span>
+                    <h2 class="final-action-title">VIEW THE ORIGINAL ARTIFACT</h2>
+                </div>
+                <div class="final-action-buttons">
+                    <a href="../assets/Nandini_REsume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic">VIEW CV PDF ↗</a>
+                    <a href="../index.html#projects" class="btn btn-secondary magnetic">ALL PROJECTS →</a>
+                </div>
+            </div>
+            <div class="final-bottom-nav">
+                <a href="../index.html#projects" class="back-link">
+                    <span class="back-link-arrow">←</span> BACK TO PROJECTS
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-logo">NANDINI.</span>
+                <span class="footer-tagline">Writer • Data • AI • Cybersecurity</span>
+            </div>
+            <div class="footer-right">
+                <div class="footer-links">
+                    <a href="https://linkedin.com/in/nandini-itpath" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+                    <a href="mailto:nandini.itpath@gmail.com" class="footer-link">Email</a>
+                    <a href="../index.html#projects" class="footer-link">Projects</a>
+                </div>
+                <span class="footer-year">© 2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <div class="toast" id="toast">
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
