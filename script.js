@@ -26,6 +26,7 @@
     initTimelineIllumination();
     initBrandReveal();
     initCertModal();
+    initRecruiterMode();
     initContactForm();
     initMagneticButtons();
     initImageReveal();
@@ -405,6 +406,158 @@
     closeBtn && closeBtn.addEventListener('click', close);
     overlay && overlay.addEventListener('click', close);
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('active')) close(); });
+  }
+
+  /* ================================================================
+     13b. RECRUITER MODE MODAL & CONSTELLATION
+     ================================================================ */
+  function initRecruiterMode() {
+    const modal = qs('#recruiterModal');
+    const openBtn = qs('#openRecruiterMode');
+    const closeBtn = qs('#closeRecruiterBtn');
+    const overlay = qs('#recruiterOverlay');
+    const stage = qs('#constellationStage', modal);
+    const svg = qs('#constellationSvg', modal);
+
+    if (!modal || !openBtn) return;
+
+    function updateConstellationLines() {
+      if (!stage || !svg || window.innerWidth <= 600) return;
+
+      const stageRect = stage.getBoundingClientRect();
+      if (stageRect.width === 0 || stageRect.height === 0) return;
+
+      const getCenter = (selector) => {
+        const el = qs(selector, stage);
+        if (!el) return null;
+        const r = el.getBoundingClientRect();
+        return {
+          x: (r.left + r.width / 2) - stageRect.left,
+          y: (r.top + r.height / 2) - stageRect.top
+        };
+      };
+
+      const w = getCenter('[data-node="writing"]');
+      const d = getCenter('[data-node="data"]');
+      const a = getCenter('[data-node="ai"]');
+      const c = getCenter('[data-node="cybersecurity"]');
+      const center = getCenter('.constellation-center-point') || {
+        x: stageRect.width / 2,
+        y: stageRect.height / 2
+      };
+
+      const setLine = (id, p1, p2) => {
+        const l = qs('#' + id, svg);
+        if (l && p1 && p2) {
+          l.setAttribute('x1', p1.x.toFixed(1));
+          l.setAttribute('y1', p1.y.toFixed(1));
+          l.setAttribute('x2', p2.x.toFixed(1));
+          l.setAttribute('y2', p2.y.toFixed(1));
+        }
+      };
+
+      setLine('line-w-center', w, center);
+      setLine('line-d-center', d, center);
+      setLine('line-a-center', a, center);
+      setLine('line-c-center', c, center);
+
+      setLine('line-w-d', w, d);
+      setLine('line-w-a', w, a);
+      setLine('line-d-c', d, c);
+      setLine('line-a-c', a, c);
+    }
+
+    function open() {
+      modal.classList.add('active');
+      document.body.classList.add('no-scroll');
+      requestAnimationFrame(() => {
+        updateConstellationLines();
+        setTimeout(updateConstellationLines, 120);
+      });
+    }
+
+    function close() {
+      modal.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+    }
+
+    openBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      open();
+    });
+
+    closeBtn && closeBtn.addEventListener('click', close);
+    overlay && overlay.addEventListener('click', close);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        close();
+      }
+    });
+
+    // Close on navigation to in-page anchors
+    qsa('[data-close-recruiter="true"]', modal).forEach((link) => {
+      link.addEventListener('click', () => {
+        close();
+      });
+    });
+
+    // Constellation interactive nodes
+    const nodes = qsa('.constellation-node', modal);
+    nodes.forEach((node) => {
+      const nodeKey = node.dataset.node;
+
+      node.addEventListener('mouseenter', () => {
+        nodes.forEach((other) => {
+          if (other !== node) other.classList.add('dimmed');
+        });
+        // Brighten connecting lines
+        if (svg) {
+          const classTarget = 'line-to-' + (nodeKey === 'writing' ? 'w' : nodeKey === 'data' ? 'd' : nodeKey === 'ai' ? 'a' : 'c');
+          qsa('.' + classTarget, svg).forEach((l) => l.classList.add('active-line'));
+        }
+      });
+
+      node.addEventListener('mouseleave', () => {
+        nodes.forEach((other) => other.classList.remove('dimmed'));
+        if (svg) {
+          qsa('.constellation-line', svg).forEach((l) => l.classList.remove('active-line'));
+        }
+      });
+
+      // Clicking anywhere on a node card navigates to its primary target if not clicking a sub-link
+      node.addEventListener('click', (e) => {
+        if (e.target.closest('.constellation-sub-link') || e.target.closest('a')) {
+          return;
+        }
+        const link = qs('a.constellation-node-link-hint', node);
+        if (link) {
+          if (link.dataset.closeRecruiter === 'true') {
+            close();
+            const target = qs(link.getAttribute('href'));
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth' });
+            }
+          } else {
+            window.location.href = link.href;
+          }
+        }
+      });
+
+      // Keyboard accessibility (Enter/Space on focused node)
+      node.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          node.click();
+        }
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      if (modal.classList.contains('active')) {
+        updateConstellationLines();
+      }
+    });
   }
 
   /* ================================================================

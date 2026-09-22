@@ -170,8 +170,9 @@
                     </div>
                     <div class="hero-buttons reveal delay-4">
                         <a href="#projects" class="btn btn-primary magnetic">VIEW MY WORK</a>
-                        <a href="assets/Nandini_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary magnetic">DOWNLOAD CV</a>
+                        <a href="assets/Nandini_REsume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary magnetic">DOWNLOAD CV</a>
                         <a href="#contact" class="btn btn-secondary magnetic">CONTACT ME</a>
+                        <button type="button" class="btn btn-recruiter magnetic" id="openRecruiterMode" aria-label="Open Recruiter Mode">RECRUITER MODE ↗</button>
                     </div>
                 </div>
                 <div class="hero-portrait-wrapper reveal-right delay-2">
@@ -668,6 +669,235 @@
             </div>
         </div>
     </footer>
+
+    <!-- ==================== RECRUITER MODE MODAL ==================== -->
+    <div class="recruiter-modal" id="recruiterModal" role="dialog" aria-modal="true" aria-labelledby="recruiterModalTitle">
+        <div class="recruiter-overlay" id="recruiterOverlay"></div>
+        <div class="recruiter-panel">
+            <div class="recruiter-header">
+                <div class="recruiter-header-left">
+                    <div class="recruiter-badge">
+                        <span class="recruiter-badge-dot"></span>
+                        RECRUITER MODE
+                    </div>
+                    <div class="recruiter-subtitle" id="recruiterModalTitle">A QUICK OVERVIEW OF WHAT I BUILD</div>
+                </div>
+                <button type="button" class="recruiter-close-btn" id="closeRecruiterBtn" aria-label="Close Recruiter Mode">
+                    <span>ESC TO CLOSE</span>
+                    <span style="font-size: 1.1rem; line-height: 1;">&times;</span>
+                </button>
+            </div>
+            <div class="recruiter-grid">
+                <!-- Column 1: Who I Am -->
+                <div class="recruiter-col-left">
+                    <div class="recruiter-profile-intro">
+                        <span class="recruiter-eyebrow">// WHO I AM</span>
+                        <h2 class="recruiter-name">HI, I'M<br>NANDINI</h2>
+                        <p class="recruiter-intro-text">
+                            I work across writing, data, documentation, AI and cybersecurity learning.
+                        </p>
+                        <div class="recruiter-grounded-box">
+                            <div class="recruiter-grounded-main">Everything here is something I built, studied, or created.</div>
+                            <div class="recruiter-tagline-sub">EXPLORE THE WORK &rarr; SEE THE EVIDENCE</div>
+                        </div>
+                    </div>
+
+                    <!-- PROOF OF WORK BLOCK -->
+                    <div class="recruiter-proof-box">
+                        <div class="proof-box-title">// PROOF OF WORK</div>
+                        <ul class="proof-list">
+                            <li><span class="proof-check">&#10003;</span> Live portfolio</li>
+                            <li><span class="proof-check">&#10003;</span> Real project artifacts</li>
+                            <li><span class="proof-check">&#10003;</span> Linked certificates</li>
+                            <li><span class="proof-check">&#10003;</span> Original writing</li>
+                            <li><span class="proof-check">&#10003;</span> Working contact form</li>
+                        </ul>
+                    </div>
+
+                    <!-- FEATURED WRITING MINI-CARD -->
+                    <div class="recruiter-featured-writing">
+                        <div class="featured-writing-thumb">
+                            <img src="assets/project-writing.jpg" alt="Featured Writing Night Sky" loading="lazy">
+                        </div>
+                        <div class="featured-writing-info">
+                            <span class="featured-writing-eyebrow">FEATURED WRITING</span>
+                            <h4 class="featured-writing-title">AM I FORGETTING SOMETHING?</h4>
+                            <p class="featured-writing-desc">A short fiction piece exploring memory, distance and what stays with us.</p>
+                            <a href="projects/writing/am-i-forgetting-something.html" class="featured-writing-link">READ PIECE &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: What I Work With (Constellation) -->
+                <div class="recruiter-col-center">
+                    <div class="constellation-header">
+                        <h3 class="constellation-title">WHAT I WORK WITH</h3>
+                        <p class="constellation-desc">Interactive constellation &mdash; select an area to explore</p>
+                    </div>
+
+                    <div class="constellation-stage" id="constellationStage">
+                        <!-- SVG Constellation lines layer -->
+                        <svg class="constellation-svg" id="constellationSvg" aria-hidden="true">
+                            <line id="line-w-center" class="constellation-line line-to-w"></line>
+                            <line id="line-d-center" class="constellation-line line-to-d"></line>
+                            <line id="line-a-center" class="constellation-line line-to-a"></line>
+                            <line id="line-c-center" class="constellation-line line-to-c"></line>
+                            <line id="line-w-d" class="constellation-line line-to-w line-to-d"></line>
+                            <line id="line-w-a" class="constellation-line line-to-w line-to-a"></line>
+                            <line id="line-d-c" class="constellation-line line-to-d line-to-c"></line>
+                            <line id="line-a-c" class="constellation-line line-to-a line-to-c"></line>
+                        </svg>
+
+                        <!-- Central Radiant Star Core -->
+                        <div class="constellation-center-point" aria-hidden="true">
+                            <div class="constellation-star-flare"></div>
+                            <div class="constellation-star-core"></div>
+                        </div>
+
+                        <div class="constellation-grid" id="constellationGrid">
+                            <!-- Top Node: Writing -->
+                            <div class="constellation-node node-top" data-node="writing" role="button" tabindex="0" aria-label="Explore Writing Project">
+                                <div class="constellation-node-badge">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+                                    </svg>
+                                </div>
+                                <div class="constellation-node-name">WRITING</div>
+                                <div class="constellation-node-skills">
+                                    <span class="constellation-pill">Creative Writing</span>
+                                    <span class="constellation-pill">Content Writing</span>
+                                    <span class="constellation-pill">Editing</span>
+                                </div>
+                                <div class="constellation-sub-piece">
+                                    <span class="constellation-sub-title">SHORT FICTION: AM I FORGETTING SOMETHING?</span>
+                                    <a href="projects/writing/am-i-forgetting-something.html" class="constellation-sub-link">READ PIECE &rarr;</a>
+                                </div>
+                                <a href="projects/creative-writing.html" class="constellation-node-link-hint">Explore Project &rarr;</a>
+                            </div>
+
+                            <!-- Left Node: Data -->
+                            <div class="constellation-node node-left" data-node="data" role="button" tabindex="0" aria-label="Explore Data Project">
+                                <div class="constellation-node-badge">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <line x1="18" y1="20" x2="18" y2="10"/>
+                                        <line x1="12" y1="20" x2="12" y2="4"/>
+                                        <line x1="6" y1="20" x2="6" y2="14"/>
+                                    </svg>
+                                </div>
+                                <div class="constellation-node-name">DATA</div>
+                                <div class="constellation-node-skills">
+                                    <span class="constellation-pill">Excel</span>
+                                    <span class="constellation-pill">Data Cleaning</span>
+                                    <span class="constellation-pill">Pivot Tables</span>
+                                    <span class="constellation-pill">Dashboards</span>
+                                </div>
+                                <a href="#projects" class="constellation-node-link-hint" data-close-recruiter="true">Explore Project &rarr;</a>
+                            </div>
+
+                            <!-- Right Node: AI -->
+                            <div class="constellation-node node-right" data-node="ai" role="button" tabindex="0" aria-label="Explore AI Project">
+                                <div class="constellation-node-badge">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                    </svg>
+                                </div>
+                                <div class="constellation-node-name">AI</div>
+                                <div class="constellation-node-skills">
+                                    <span class="constellation-pill">Generative AI</span>
+                                    <span class="constellation-pill">AI Productivity</span>
+                                    <span class="constellation-pill">AI-Assisted Dev</span>
+                                    <span class="constellation-pill">AI Prompting</span>
+                                </div>
+                                <a href="projects/ai-cybersecurity.html" class="constellation-node-link-hint">Explore Project &rarr;</a>
+                            </div>
+
+                            <!-- Bottom Node: Cybersecurity -->
+                            <div class="constellation-node node-bottom" data-node="cybersecurity" role="button" tabindex="0" aria-label="Explore Cybersecurity Project">
+                                <div class="constellation-node-badge">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                    </svg>
+                                </div>
+                                <div class="constellation-node-name">CYBERSECURITY</div>
+                                <div class="constellation-node-skills">
+                                    <span class="constellation-pill">Cybersecurity Fundamentals</span>
+                                    <span class="constellation-pill">Information Security</span>
+                                    <span class="constellation-pill">Security Learning</span>
+                                </div>
+                                <a href="projects/ai-cybersecurity.html" class="constellation-node-link-hint">Explore Project &rarr;</a>
+                            </div>
+                        </div>
+
+                        <!-- Hint at the bottom -->
+                        <div class="constellation-explore-hint">
+                            <span>CLICK A NODE TO EXPLORE</span>
+                            <svg width="12" height="18" viewBox="0 0 14 20" fill="none" aria-hidden="true">
+                                <rect x="1" y="1" width="12" height="18" rx="6" stroke="currentColor" stroke-width="1.2"/>
+                                <line x1="7" y1="4" x2="7" y2="8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 3: At A Glance & Quick Links -->
+                <div class="recruiter-col-right">
+                    <div class="glance-card">
+                        <div class="glance-title">// AT A GLANCE</div>
+                        <div class="glance-grid">
+                            <a href="#projects" class="glance-item glance-link" data-close-recruiter="true" aria-label="Jump to Projects">
+                                <span class="glance-num">04</span>
+                                <span class="glance-label">PROJECTS</span>
+                            </a>
+                            <a href="#certifications" class="glance-item glance-link" data-close-recruiter="true" aria-label="Jump to Certifications">
+                                <span class="glance-num">06</span>
+                                <span class="glance-label">CERTIFICATIONS</span>
+                            </a>
+                            <a href="projects/creative-writing.html" class="glance-item glance-link" aria-label="Explore Writing Piece">
+                                <span class="glance-num">01</span>
+                                <span class="glance-label">WRITING PIECE</span>
+                            </a>
+                            <a href="#hero" class="glance-item glance-link" data-close-recruiter="true" aria-label="Return to Live Portfolio">
+                                <span class="glance-num">01</span>
+                                <span class="glance-label">LIVE PORTFOLIO</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="quick-links-wrap">
+                        <div class="quick-links-title">// QUICK LINKS</div>
+                        <a href="#projects" class="recruiter-link-btn" data-close-recruiter="true">
+                            <span class="recruiter-link-btn-content">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                                <span>VIEW PROJECTS</span>
+                            </span>
+                            <span class="recruiter-link-btn-arrow">&rarr;</span>
+                        </a>
+                        <a href="assets/Nandini_REsume.pdf" target="_blank" rel="noopener noreferrer" class="recruiter-link-btn">
+                            <span class="recruiter-link-btn-content">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                                <span>VIEW CV</span>
+                            </span>
+                            <span class="recruiter-link-btn-arrow">&rarr;</span>
+                        </a>
+                        <a href="#certifications" class="recruiter-link-btn" data-close-recruiter="true">
+                            <span class="recruiter-link-btn-content">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                                <span>VIEW CERTIFICATIONS</span>
+                            </span>
+                            <span class="recruiter-link-btn-arrow">&rarr;</span>
+                        </a>
+                        <a href="#contact" class="recruiter-link-btn" data-close-recruiter="true">
+                            <span class="recruiter-link-btn-content">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                <span>CONTACT ME</span>
+                            </span>
+                            <span class="recruiter-link-btn-arrow">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ==================== TOAST NOTIFICATION ==================== -->
     <div class="toast" id="toast">

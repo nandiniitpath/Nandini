@@ -442,3 +442,736 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:700;letter-spacing
   .project-image{aspect-ratio:3/2}
   .project-card .project-number{margin-top:-24px}
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   RECRUITER MODE — Fast Briefing Overlay & Constellation
+   ══════════════════════════════════════════════════════════════════ */
+.btn-recruiter {
+  background: rgba(139, 92, 246, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(139, 92, 246, 0.45);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.15), inset 0 0 12px rgba(139, 92, 246, 0.08);
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-recruiter:hover {
+  background: rgba(139, 92, 246, 0.25);
+  border-color: rgba(167, 139, 250, 0.8);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.4), inset 0 0 20px rgba(139, 92, 246, 0.15);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+.recruiter-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--t-base), visibility var(--t-base);
+  padding: clamp(16px, 3vh, 32px);
+}
+.recruiter-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+.recruiter-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 6, 12, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.recruiter-panel {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(135deg, rgba(11, 16, 26, 0.98) 0%, rgba(14, 20, 32, 0.98) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.28);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 1200px;
+  max-height: min(92vh, 880px);
+  overflow-y: auto;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.7), 0 0 60px rgba(139, 92, 246, 0.12);
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.96) translateY(18px);
+  transition: transform var(--t-base);
+}
+.recruiter-modal.active .recruiter-panel {
+  transform: scale(1) translateY(0);
+}
+
+.recruiter-header {
+  padding: 20px clamp(20px, 3.5vw, 36px);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.recruiter-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+.recruiter-badge {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.25em;
+  color: var(--accent-violet);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.recruiter-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+  animation: pulseDot 2s infinite;
+}
+.recruiter-subtitle {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.recruiter-close-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.15em;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all var(--t-fast);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.recruiter-close-btn:hover {
+  color: #ffffff;
+  border-color: rgba(139, 92, 246, 0.5);
+  background: rgba(139, 92, 246, 0.1);
+  transform: translateY(-1px);
+}
+
+.recruiter-grid {
+  display: grid;
+  grid-template-columns: 300px 1.35fr 280px;
+  gap: 22px;
+  padding: clamp(18px, 3vw, 32px);
+  align-items: start;
+}
+
+/* Left Column */
+.recruiter-col-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+.recruiter-profile-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.recruiter-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.25em;
+  color: var(--accent-violet);
+  text-transform: uppercase;
+}
+.recruiter-name {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ffffff 40%, #c4b5fd 80%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.recruiter-intro-text {
+  font-size: var(--fs-small);
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+.recruiter-grounded-box {
+  background: rgba(139, 92, 246, 0.05);
+  border-left: 2px solid var(--accent-violet);
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-size: var(--fs-micro);
+  color: var(--accent-lavender);
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+.recruiter-grounded-main {
+  font-weight: 500;
+}
+.recruiter-tagline-sub {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+/* Proof of Work Block */
+.recruiter-proof-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.proof-box-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.2em;
+  color: var(--accent-violet);
+  text-transform: uppercase;
+}
+.proof-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.proof-list li {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.3;
+}
+.proof-check {
+  color: #4ade80;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+/* Featured Writing Card */
+.recruiter-featured-writing {
+  background: rgba(11, 16, 26, 0.65);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  transition: all var(--t-base);
+}
+.recruiter-featured-writing:hover {
+  border-color: rgba(139, 92, 246, 0.45);
+  background: rgba(16, 24, 40, 0.8);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 16px rgba(139, 92, 246, 0.12);
+  transform: translateY(-2px);
+}
+.featured-writing-thumb {
+  width: 68px;
+  height: 68px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.featured-writing-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.featured-writing-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: left;
+}
+.featured-writing-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--accent-violet);
+  text-transform: uppercase;
+}
+.featured-writing-title {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+.featured-writing-desc {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.featured-writing-link {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-lavender);
+  text-decoration: none;
+  margin-top: 2px;
+  font-weight: 600;
+  transition: color var(--t-fast);
+}
+.featured-writing-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* Center Column — Constellation */
+.recruiter-col-center {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: center;
+  align-items: center;
+}
+.constellation-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+.constellation-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.constellation-desc {
+  font-size: var(--fs-micro);
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Constellation Stage & SVG Overlay */
+.constellation-stage {
+  position: relative;
+  width: 100%;
+  max-width: 490px;
+  margin: 0 auto;
+  min-height: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+}
+.constellation-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+.constellation-line {
+  stroke: rgba(168, 85, 247, 0.22);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 3;
+  transition: stroke var(--t-base), stroke-width var(--t-base), filter var(--t-base);
+}
+.constellation-line.active-line {
+  stroke: rgba(216, 180, 254, 0.95);
+  stroke-width: 2;
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.9));
+}
+
+/* Center Glowing Star Core */
+.constellation-center-point {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.constellation-star-flare {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(192, 132, 252, 0.8) 0%, rgba(168, 85, 247, 0.3) 40%, transparent 70%);
+  animation: starFlarePulse 3s ease-in-out infinite alternate;
+}
+.constellation-star-core {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 12px 3px #c084fc, 0 0 24px 6px rgba(168, 85, 247, 0.5);
+}
+@keyframes starFlarePulse {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.25); opacity: 1; }
+}
+
+/* Diamond Constellation Grid */
+.constellation-grid {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 14px;
+  justify-items: center;
+  align-items: center;
+}
+.constellation-node.node-top {
+  grid-column: 1 / 3;
+  width: 100%;
+  max-width: 245px;
+}
+.constellation-node.node-left {
+  grid-column: 1;
+  width: 100%;
+  max-width: 205px;
+}
+.constellation-node.node-right {
+  grid-column: 2;
+  width: 100%;
+  max-width: 205px;
+}
+.constellation-node.node-bottom {
+  grid-column: 1 / 3;
+  width: 100%;
+  max-width: 260px;
+}
+
+.constellation-node {
+  background: rgba(11, 16, 26, 0.82);
+  border: 1px solid rgba(139, 92, 246, 0.24);
+  border-radius: 14px;
+  padding: 13px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 7px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--t-base);
+  position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.constellation-node:hover {
+  transform: translateY(-3px);
+  border-color: rgba(168, 85, 247, 0.65);
+  background: rgba(18, 26, 44, 0.94);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 28px rgba(168, 85, 247, 0.22);
+}
+.constellation-node.dimmed {
+  opacity: 0.45;
+  filter: blur(0.3px);
+}
+
+.constellation-node-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-violet);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
+  transition: all var(--t-base);
+  flex-shrink: 0;
+}
+.constellation-node:hover .constellation-node-badge {
+  background: rgba(168, 85, 247, 0.28);
+  border-color: rgba(216, 180, 254, 0.9);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+}
+
+.constellation-node-name {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+.constellation-node-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+.constellation-pill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 3px 7px;
+  border-radius: 100px;
+}
+.constellation-node:hover .constellation-pill {
+  color: var(--accent-lavender);
+  border-color: rgba(139, 92, 246, 0.3);
+  background: rgba(139, 92, 246, 0.1);
+}
+.constellation-node-link-hint {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--accent-violet);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.constellation-node:hover .constellation-node-link-hint {
+  color: #ffffff;
+}
+
+.constellation-sub-piece {
+  margin-top: 4px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: center;
+  width: 100%;
+}
+.constellation-sub-title {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+.constellation-sub-link {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  color: var(--accent-lavender);
+  letter-spacing: 0.08em;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.constellation-sub-link:hover {
+  color: #ffffff;
+}
+
+.constellation-explore-hint {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Right Column — At a Glance & Quick Links */
+.recruiter-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+.glance-card {
+  background: rgba(11, 16, 26, 0.65);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.glance-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.2em;
+  color: var(--accent-violet);
+  text-transform: uppercase;
+}
+.glance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.glance-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.glance-item.glance-link {
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--t-fast);
+}
+.glance-item.glance-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(168, 85, 247, 0.45);
+  background: rgba(139, 92, 246, 0.1);
+}
+.glance-item.glance-link:hover .glance-num {
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(192, 132, 252, 0.6);
+}
+.glance-item.glance-link:hover .glance-label {
+  color: var(--accent-lavender);
+}
+.glance-num {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  transition: all var(--t-fast);
+}
+.glance-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  transition: color var(--t-fast);
+}
+
+.quick-links-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.quick-links-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.2em;
+  color: var(--accent-violet);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.recruiter-link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all var(--t-fast);
+}
+.recruiter-link-btn-content {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.recruiter-link-btn-content svg {
+  color: var(--accent-violet);
+  transition: color var(--t-fast);
+}
+.recruiter-link-btn:hover {
+  background: rgba(139, 92, 246, 0.14);
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 0 0 16px rgba(139, 92, 246, 0.2);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+.recruiter-link-btn:hover .recruiter-link-btn-content svg {
+  color: #ffffff;
+}
+.recruiter-link-btn-arrow {
+  color: var(--accent-violet);
+  transition: transform var(--t-fast);
+}
+.recruiter-link-btn:hover .recruiter-link-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Responsive */
+@media (max-width: 1040px) {
+  .recruiter-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+@media (max-width: 600px) {
+  .constellation-stage {
+    min-height: auto;
+  }
+  .constellation-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .constellation-node.node-top,
+  .constellation-node.node-left,
+  .constellation-node.node-right,
+  .constellation-node.node-bottom {
+    grid-column: 1;
+    max-width: 100%;
+  }
+  .constellation-center-point {
+    display: none;
+  }
+  .constellation-svg {
+    display: none;
+  }
+  .recruiter-modal {
+    padding: 10px;
+  }
+  .recruiter-panel {
+    border-radius: 14px;
+    max-height: 95vh;
+  }
+}
+
