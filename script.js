@@ -922,167 +922,400 @@
     const el = qs('#butterfly');
     if (!el) return;
 
-    // Catmull-Rom safe clearance trajectory (avoids headings, text, face, cards)
-    // s: normalized scroll, x: viewport %, y: viewport %
-    const anchors = [
-      { s: -0.05, x: 86, y: 14 },
-      { s: 0.00,  x: 85, y: 16 }, // Hero upper right, far from portrait face
-      { s: 0.08,  x: 91, y: 34 }, // Far right peripheral drift
-      { s: 0.16,  x: 88, y: 62 }, // Lazy curve down
-      { s: 0.25,  x: 86, y: 24 }, // About section upper-right open margin
-      { s: 0.35,  x: 90, y: 52 }, // Expertise right margin
-      { s: 0.45,  x: 92, y: 38 }, // Skills right margin
-      { s: 0.55,  x: 89, y: 64 }, // Projects gutter, well clear of cards
-      { s: 0.65,  x: 86, y: 32 }, // Journey upper-right
-      { s: 0.74,  x: 90, y: 55 }, // Certifications right open column
-      { s: 0.81,  x: 78, y: 36 }, // Transition toward Brand Statement
-      { s: 0.85,  x: 51, y: 52 }, // Brand Statement empty space between image fade & text
-      { s: 0.89,  x: 82, y: 22 }, // Ascends into open space away from brand text
-      { s: 0.95,  x: 86, y: 26 }, // Contact section upper-right
-      { s: 1.00,  x: 88, y: 42 }, // Footer rest
-      { s: 1.05,  x: 88, y: 44 }
-    ];
+    const canvas = qs('#butterflyCanvas');
+    let ctx = null;
+    let canvasW = window.innerWidth;
+    let canvasH = window.innerHeight;
 
-    function catmullRom(p0, p1, p2, p3, t) {
-      const t2 = t * t;
-      const t3 = t2 * t;
-      return 0.5 * (
-        (2 * p1) +
-        (-p0 + p2) * t +
-        (2 * p0 - 5 * p1 + 4 * p2 - p3) * t2 +
-        (-p0 + 3 * p1 - 3 * p2 + p3) * t3
-      );
+    if (canvas) {
+      ctx = canvas.getContext('2d');
     }
 
-    function getSplinePos(pct) {
-      let i = 1;
-      while (i < anchors.length - 2 && anchors[i].s < pct) i++;
-      const p0 = anchors[i - 1];
-      const p1 = anchors[i];
-      const p2 = anchors[i + 1];
-      const p3 = anchors[i + 2] || p2;
-      const segmentLen = p2.s - p1.s;
-      const t = segmentLen > 0 ? Math.max(0, Math.min(1, (pct - p1.s) / segmentLen)) : 0;
-      return {
-        x: catmullRom(p0.x, p1.x, p2.x, p3.x, t),
-        y: catmullRom(p0.y, p1.y, p2.y, p3.y, t)
-      };
+    function resizeCanvas() {
+      if (!canvas || !ctx) return;
+      canvasW = window.innerWidth;
+      canvasH = window.innerHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = canvasW * dpr;
+      canvas.height = canvasH * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas, { passive: true });
+
+    // Respect prefers-reduced-motion
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.style.left = '78%';
+      el.style.top = '18%';
+      el.style.transform = 'none';
+      el.style.opacity = '0.7';
+      return;
+    }
+
+    // Autonomous Flight Simulation State
+    const isMobile = isTouch() || window.innerWidth < 768;
+
+    // Initial position in upper-right open viewport area
+    let posX = isMobile ? window.innerWidth * 0.72 : window.innerWidth * 0.76;
+    let posY = isMobile ? window.innerHeight * 0.18 : window.innerHeight * 0.22;
+
+    // Velocity & Acceleration
+    let vx = 0.8, vy = -0.6;
+    let ax = 0, ay = 0;
+
+    // Memory-based Wandering Noise with angular momentum
+    let wanderAngle = -Math.PI / 3;
+    let wanderAngularVelocity = 0;
+
+    // Speed & Probabilistic Behavior States (+30% overall speed calibration)
+    let currentSpeed = 1.7;
+    let targetSpeed = 1.7;
+    let flightState = 'cruise';
+    let stateTimer = 120;
+
+    // Heading, Aerodynamic Banking, Pitch & Wing Cadence
+    let currentHeading = -30; // degrees from upward-facing SVG
+    let currentBank = 0;
+    let currentPitch = 0;
+    let currentFlapDur = 2.2;
+    let currentGlow = 0;
+
+    // Glitter Trail Particle System
+    const particles = [];
+    const MAX_PARTICLES = 70;
+
+    function drawSparkle(context, x, y, size, rot, alpha) {
+      context.save();
+      context.translate(x, y);
+      context.rotate(rot);
+      context.fillStyle = `rgba(255, 255, 255, ${alpha.toFixed(3)})`;
+      context.shadowColor = `rgba(196, 181, 253, ${(alpha * 0.9).toFixed(3)})`;
+      context.shadowBlur = size * 3.2;
+
+      context.beginPath();
+      const rInner = size * 0.22;
+      for (let i = 0; i < 4; i++) {
+        const a = (i * Math.PI) / 2;
+        const aNext = a + Math.PI / 4;
+        context.lineTo(Math.cos(a) * size, Math.sin(a) * size);
+        context.lineTo(Math.cos(aNext) * rInner, Math.sin(aNext) * rInner);
+      }
+      context.closePath();
+      context.fill();
+      context.restore();
     }
 
     let mouseX = -1, mouseY = -1;
-    let curX = 0, curY = 0;
-    let prevX = 0, prevY = 0;
-    let curRotate = 0;
-    let curPitch = 0;
-    let curFlapDur = 1.2;
-
-    if (!isTouch()) {
+    if (!isMobile) {
       document.addEventListener('mousemove', e => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-      });
-    }
-
-    function getScrollPercent() {
-      const t = document.documentElement.scrollHeight - window.innerHeight;
-      return t > 0 ? Math.max(0, Math.min(1, window.scrollY / t)) : 0;
+      }, { passive: true });
     }
 
     const wingL = el.querySelector('.wing-l');
     const wingR = el.querySelector('.wing-r');
 
     function animate(timestamp) {
-      const pct = getScrollPercent();
-      const spline = getSplinePos(pct);
       const time = timestamp * 0.001;
 
-      // Brand statement section factor (~0.82 to 0.88)
-      const brandDistance = Math.abs(pct - 0.85);
-      const isBrandZone = brandDistance < 0.05;
-      const brandDamp = isBrandZone ? (0.45 + (brandDistance / 0.05) * 0.55) : 1.0;
-
-      // Toggle enhanced moonlight glow in Brand section
-      if (isBrandZone && !el.classList.contains('brand-glow')) {
-        el.classList.add('brand-glow');
-      } else if (!isBrandZone && el.classList.contains('brand-glow')) {
-        el.classList.remove('brand-glow');
-      }
-
-      // Harmonic organic flutter waves
-      const flutterX = (Math.sin(time * 0.65) * 14 + Math.sin(time * 1.4 + 1.2) * 7 + Math.sin(time * 2.8) * 3) * brandDamp;
-      const flutterY = (Math.cos(time * 0.52) * 10 + Math.cos(time * 1.25 + 0.8) * 5 + Math.sin(time * 1.9) * 2.5) * brandDamp;
-
-      let targetX = (spline.x / 100) * window.innerWidth + flutterX;
-      let targetY = (spline.y / 100) * window.innerHeight + flutterY;
-
-      // Subtle mouse reaction (desktop only) — gentle avoidance
-      if (!isTouch() && mouseX > 0) {
-        const dx = targetX - mouseX;
-        const dy = targetY - mouseY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 160 && dist > 1) {
-          const force = ((160 - dist) / 160) * 26;
-          targetX += (dx / dist) * force;
-          targetY += (dy / dist) * force;
+      // 1. Probabilistic Behavioral Events (irregular, non-periodic)
+      stateTimer--;
+      if (stateTimer <= 0) {
+        const roll = Math.random();
+        if (roll < 0.24) {
+          // Floating pause / gentle glide (almost hovering)
+          flightState = 'glide';
+          stateTimer = Math.floor(Math.random() * 80 + 50); // ~0.8s to 2.2s
+          targetSpeed = Math.random() * 0.45 + 0.45; // 0.45 - 0.90
+        } else if (roll < 0.46) {
+          // Gentle climb on an upward air current
+          flightState = 'climb';
+          stateTimer = Math.floor(Math.random() * 70 + 40);
+          targetSpeed = Math.random() * 0.65 + 1.6; // 1.6 - 2.25
+        } else if (roll < 0.66) {
+          // Sweeping graceful curve
+          flightState = 'turn';
+          stateTimer = Math.floor(Math.random() * 90 + 50);
+          targetSpeed = Math.random() * 0.5 + 1.35; // 1.35 - 1.85
+        } else {
+          // Natural cruising & wandering
+          flightState = 'cruise';
+          stateTimer = Math.floor(Math.random() * 140 + 80);
+          targetSpeed = Math.random() * 0.9 + 1.5; // 1.5 - 2.40
         }
       }
 
-      // Smooth lag / floating inertia (soft damping)
-      const smoothFactor = isBrandZone ? 0.026 : 0.036;
-      curX = lerp(curX, targetX, smoothFactor);
-      curY = lerp(curY, targetY, smoothFactor);
+      // 2. Smooth Wandering Randomness with Memory
+      wanderAngularVelocity += (Math.random() - 0.5) * 0.038;
+      wanderAngularVelocity *= 0.91; // damping ensures momentum & continuity
+      if (flightState === 'turn') {
+        wanderAngularVelocity += (Math.sin(time * 0.6) > 0 ? 0.022 : -0.022);
+      }
+      wanderAngle += wanderAngularVelocity;
 
-      // Velocity calculation
-      const vx = curX - prevX;
-      const vy = curY - prevY;
-      const speed = Math.sqrt(vx * vx + vy * vy);
+      // 3. Viewport Boundary Awareness (Organic inward curve, no walls or bounces)
+      const padLeft = Math.max(isMobile ? 50 : 85, window.innerWidth * 0.08);
+      const padRight = Math.max(isMobile ? 50 : 85, window.innerWidth * 0.08);
+      const padTop = Math.max(isMobile ? 80 : 125, window.innerHeight * 0.14);
+      const padBottom = Math.max(isMobile ? 60 : 100, window.innerHeight * 0.12);
 
-      // Depth & scale modulation (0.86 to 1.0)
-      const depth = 0.88 + 0.12 * Math.sin(pct * Math.PI * 3.2 + time * 0.15);
-      const blur = depth < 0.90 ? 0.5 : 0;
+      let edgeDistX = 0, edgeDistY = 0;
 
-      // Aerodynamic banking and pitch rotation
-      const targetBank = Math.max(-28, Math.min(28, vx * 4.2));
-      const targetPitch = Math.max(-16, Math.min(16, vy * 2.8));
-      curRotate = lerp(curRotate, targetBank, 0.06);
-      curPitch = lerp(curPitch, targetPitch, 0.06);
-
-      // Position butterfly element
-      el.style.left = `${curX - el.offsetWidth / 2}px`;
-      el.style.top  = `${curY - el.offsetHeight / 2}px`;
-      el.style.transform = `scale(${depth.toFixed(3)}) rotate(${curRotate.toFixed(1)}deg) rotateX(${curPitch.toFixed(1)}deg)`;
-      el.style.filter = blur ? `blur(${blur}px)` : '';
-      el.style.opacity = el.classList.contains('visible') ? ((depth * 0.78 + 0.22)).toFixed(2) : '0';
-
-      // Organic wing flap cadence: slow graceful glide modulated by speed
-      const targetFlap = isBrandZone ? 1.55 : Math.max(0.68, 1.45 - speed * 0.07);
-      curFlapDur = lerp(curFlapDur, targetFlap, 0.05);
-      if (wingL) wingL.style.animationDuration = `${curFlapDur.toFixed(2)}s`;
-      if (wingR) wingR.style.animationDuration = `${curFlapDur.toFixed(2)}s`;
-
-      // Extremely subtle luminous disturbance motes (rare, tiny points of light)
-      if (window._starFieldTrail && speed > 0.85 && Math.random() < 0.16) {
-        window._starFieldTrail.push({
-          x: curX + (Math.random() - 0.5) * 6,
-          y: curY + (Math.random() - 0.5) * 6,
-          r: Math.random() * 0.5 + 0.6,
-          life: 1.0,
-          decay: 0.038
-        });
-        if (window._starFieldTrail.length > 5) window._starFieldTrail.shift();
+      if (posX < padLeft) {
+        edgeDistX = (padLeft - posX) / padLeft;
+        if (vx < 0) vx *= 0.94;
+      } else if (posX > window.innerWidth - padRight) {
+        edgeDistX = (posX - (window.innerWidth - padRight)) / padRight;
+        if (vx > 0) vx *= 0.94;
       }
 
-      prevX = curX;
-      prevY = curY;
+      if (posY < padTop) {
+        edgeDistY = (padTop - posY) / padTop;
+        if (vy < 0) vy *= 0.94;
+      } else if (posY > window.innerHeight - padBottom) {
+        edgeDistY = (posY - (window.innerHeight - padBottom)) / padBottom;
+        if (vy > 0) vy *= 0.94;
+      }
+
+      const edgeFactor = Math.max(edgeDistX, edgeDistY);
+      if (edgeFactor > 0) {
+        // Gently steer wanderAngle toward viewport interior
+        const toCenterX = (window.innerWidth * 0.5) - posX;
+        const toCenterY = (window.innerHeight * (isMobile ? 0.38 : 0.46)) - posY;
+        const toCenterAngle = Math.atan2(toCenterY, toCenterX);
+
+        let aDiff = (toCenterAngle - wanderAngle) % (Math.PI * 2);
+        if (aDiff > Math.PI) aDiff -= Math.PI * 2;
+        if (aDiff < -Math.PI) aDiff += Math.PI * 2;
+
+        wanderAngle += aDiff * Math.min(0.20, Math.pow(edgeFactor, 1.3) * 0.15);
+
+        // Smooth inward steering acceleration
+        const pushForce = Math.pow(edgeFactor, 1.4) * 0.38;
+        const distToCenter = Math.hypot(toCenterX, toCenterY) || 1;
+        ax += (toCenterX / distToCenter) * pushForce;
+        ay += (toCenterY / distToCenter) * pushForce;
+      }
+
+      // 4. Cursor Evasion (Soft organic avoidance with momentum)
+      let targetGlow = 0;
+      if (!isMobile && mouseX > 0 && mouseY > 0) {
+        const dx = posX - mouseX;
+        const dy = posY - mouseY;
+        const dist = Math.hypot(dx, dy);
+        const avoidRadius = 160;
+
+        if (dist < avoidRadius && dist > 1) {
+          const norm = (avoidRadius - dist) / avoidRadius;
+          const force = Math.pow(norm, 1.6) * 0.36;
+          ax += (dx / dist) * force;
+          ay += (dy / dist) * force;
+          targetGlow = norm;
+        }
+      }
+
+      // 5. Speed & Steering Vector
+      currentSpeed += (targetSpeed - currentSpeed) * 0.028; // +17% acceleration responsiveness
+      let desiredVx = Math.cos(wanderAngle) * currentSpeed;
+      let desiredVy = Math.sin(wanderAngle) * currentSpeed;
+
+      // Natural vertical buoyancy & state biases
+      if (flightState === 'climb') {
+        desiredVy -= 0.28;
+      } else if (flightState === 'glide') {
+        desiredVy += 0.20; // slow drift downwards
+      } else {
+        // Balanced rhythmic fluttering lift against gravity
+        const lift = Math.sin(time * 2.0) * 0.08;
+        desiredVy += lift;
+      }
+
+      // Steering acceleration towards desired velocity
+      const steerRate = 0.046;
+      ax += (desiredVx - vx) * steerRate;
+      ay += (desiredVy - vy) * steerRate;
+
+      // 6. Physics Integration with Momentum & Damping
+      vx += ax;
+      vy += ay;
+      vx *= 0.982;
+      vy *= 0.982;
+
+      posX += vx;
+      posY += vy;
+
+      ax = 0;
+      ay = 0;
+
+      // Safety viewport margins keeping butterfly fully on-screen
+      const halfW = (el.offsetWidth || 82) / 2 + 10;
+      const halfH = (el.offsetHeight || 68) / 2 + 10;
+      posX = Math.max(halfW, Math.min(window.innerWidth - halfW, posX));
+      posY = Math.max(isMobile ? 55 : 85, Math.min(window.innerHeight - halfH, posY));
+
+      const speed = Math.hypot(vx, vy);
+
+      // 7. Body Orientation & Aerodynamic Banking
+      let turnRate = 0;
+      if (speed > 0.15) {
+        // SVG faces upwards by default (+90 deg offset from atan2)
+        const targetHeading = (Math.atan2(vy, vx) * 180 / Math.PI) + 90;
+        let diff = (targetHeading - currentHeading) % 360;
+        if (diff > 180) diff -= 360;
+        if (diff < -180) diff += 360;
+        turnRate = diff;
+        currentHeading += diff * 0.06;
+        // Normalize heading to [-180, 180] to prevent degree windup
+        currentHeading = ((currentHeading + 180) % 360 + 360) % 360 - 180;
+      }
+
+      // Roll bank during turns (dips wing into the curve)
+      const targetBank = Math.max(-20, Math.min(20, turnRate * 0.36));
+      currentBank = lerp(currentBank, targetBank, 0.065);
+
+      // Pitch angle based on vertical climb / descent
+      const targetPitch = Math.max(-14, Math.min(14, vy * 2.4));
+      currentPitch = lerp(currentPitch, targetPitch, 0.06);
+
+      // Desynchronized depth & breathing scale
+      const depth = 0.96 + Math.sin(time * 0.32) * 0.07;
+      const blur = depth < 0.90 ? ((0.90 - depth) * 3).toFixed(1) : 0;
+
+      // Glow & Aura
+      currentGlow = lerp(currentGlow, targetGlow, 0.05);
+      if (currentGlow > 0.12 && !el.classList.contains('butterfly-glow')) {
+        el.classList.add('butterfly-glow');
+      } else if (currentGlow <= 0.12 && el.classList.contains('butterfly-glow')) {
+        el.classList.remove('butterfly-glow');
+      }
+
+      // Check Brand Statement visibility for moonlight glow
+      const brandSec = qs('#brand-statement') || qs('.brand-section');
+      if (brandSec) {
+        const bRect = brandSec.getBoundingClientRect();
+        const inBrand = bRect.top < window.innerHeight && bRect.bottom > 0;
+        if (inBrand && !el.classList.contains('brand-glow')) el.classList.add('brand-glow');
+        else if (!inBrand && el.classList.contains('brand-glow')) el.classList.remove('brand-glow');
+      }
+
+      // Apply transform and positioning
+      el.style.left = `${posX - el.offsetWidth / 2}px`;
+      el.style.top  = `${posY - el.offsetHeight / 2}px`;
+      el.style.transform = `scale(${depth.toFixed(3)}) rotate(${currentHeading.toFixed(1)}deg) rotateY(${currentBank.toFixed(1)}deg) rotateX(${currentPitch.toFixed(1)}deg)`;
+
+      const baseShadow = (10 + (depth - 0.9) * 8 + currentGlow * 14).toFixed(1);
+      const glowAlpha = (0.42 + currentGlow * 0.38).toFixed(2);
+      el.style.filter = blur > 0
+        ? `blur(${blur}px) drop-shadow(0 0 ${baseShadow}px rgba(167,139,250,${glowAlpha}))`
+        : `drop-shadow(0 0 ${baseShadow}px rgba(167,139,250,${glowAlpha}))`;
+
+      const targetOpacity = (0.80 + (depth - 0.90) * 1.2).toFixed(2);
+      el.style.opacity = el.classList.contains('visible') ? targetOpacity : '0';
+
+      // 8. Wing Flap Cadence (Responds subtly to speed, slightly more active in normal flight)
+      // Calm gliding when slow; natural lively fluttering when cruising
+      const targetFlap = flightState === 'glide'
+        ? 3.0
+        : Math.max(1.35, 2.85 - speed * 0.65 - currentGlow * 0.30);
+      currentFlapDur = lerp(currentFlapDur, targetFlap, 0.045);
+      if (wingL) wingL.style.animationDuration = `${currentFlapDur.toFixed(2)}s`;
+      if (wingR) wingR.style.animationDuration = `${currentFlapDur.toFixed(2)}s`;
+
+      // 9. Glitter Particles (Inherits actual butterfly flight trajectory)
+      const isMoving = speed > 0.35;
+      const spawnChance = isMoving ? 0.95 : 0.28;
+      if (Math.random() < spawnChance && particles.length < MAX_PARTICLES) {
+        const count = isMoving && speed > 2.2 ? 2 : 1;
+        for (let k = 0; k < count; k++) {
+          const isSparkle = Math.random() < 0.26;
+          // Spawn slightly trailing the butterfly's actual motion vector
+          const dirX = speed > 0.05 ? vx / speed : 0;
+          const dirY = speed > 0.05 ? vy / speed : 0;
+          const spawnX = posX - dirX * 18 + (Math.random() - 0.5) * 16;
+          const spawnY = posY - dirY * 18 + (Math.random() - 0.5) * 14;
+
+          let baseSize;
+          if (isSparkle) {
+            baseSize = Math.random() * 3.0 + 3.5; // 3.5px to 6.5px diamond star
+          } else {
+            const sizeRoll = Math.random();
+            if (sizeRoll < 0.30) {
+              baseSize = Math.random() * 1.8 + 2.8; // 2.8px to 4.6px glowing orb
+            } else if (sizeRoll < 0.75) {
+              baseSize = Math.random() * 1.0 + 1.8; // 1.8px to 2.8px
+            } else {
+              baseSize = Math.random() * 0.8 + 1.0; // 1.0px to 1.8px fine shimmer
+            }
+          }
+
+          const palette = [
+            'rgba(245,243,255,', // Pale lilac / white
+            'rgba(196,181,253,', // Lavender
+            'rgba(167,139,250,', // Violet
+            'rgba(139,92,246,'   // Deep violet
+          ];
+          const color = palette[Math.floor(Math.random() * palette.length)];
+
+          particles.push({
+            x: spawnX,
+            y: spawnY,
+            vx: -dirX * speed * 0.12 + (Math.random() - 0.5) * 0.35,
+            vy: -dirY * speed * 0.08 + (Math.random() * 0.25 + 0.06), // subtle downward floating drift
+            baseSize: baseSize,
+            isSparkle: isSparkle,
+            rot: Math.random() * Math.PI,
+            rotSpeed: (Math.random() - 0.5) * 0.06,
+            color: color,
+            life: 1.0,
+            decay: Math.random() * 0.012 + 0.011 // ~50 to 90 frames lifespan
+          });
+        }
+      }
+
+      // Update and render glitter particles on butterfly canvas
+      if (ctx) {
+        ctx.clearRect(0, 0, canvasW, canvasH);
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.life -= p.decay;
+          if (p.isSparkle) p.rot += p.rotSpeed;
+
+          if (p.life <= 0) {
+            particles.splice(i, 1);
+            continue;
+          }
+
+          const alpha = Math.pow(p.life, 1.2);
+          const currentSize = p.baseSize * (0.35 + 0.65 * p.life);
+
+          if (p.isSparkle) {
+            drawSparkle(ctx, p.x, p.y, currentSize, p.rot, alpha);
+          } else {
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, currentSize, 0, Math.PI * 2);
+            ctx.fillStyle = `${p.color}${alpha.toFixed(3)})`;
+            ctx.shadowColor = `rgba(167, 139, 250, ${(alpha * 0.85).toFixed(3)})`;
+            ctx.shadowBlur = currentSize * 3.5;
+            ctx.fill();
+
+            // Inner bright core for larger orbs
+            if (currentSize > 2.2 && alpha > 0.4) {
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, currentSize * 0.45, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(255, 255, 255, ${(alpha * 0.9).toFixed(3)})`;
+              ctx.fill();
+            }
+            ctx.restore();
+          }
+        }
+      }
+
       requestAnimationFrame(animate);
     }
-
-    // Initialize initial coordinate
-    const initPos = getSplinePos(0);
-    curX = (initPos.x / 100) * window.innerWidth;
-    curY = (initPos.y / 100) * window.innerHeight;
-    prevX = curX;
-    prevY = curY;
 
     requestAnimationFrame(animate);
   }

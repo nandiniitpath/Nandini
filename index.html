@@ -56,56 +56,123 @@
     <!-- ==================== GRAIN OVERLAY ==================== -->
     <div class="grain-overlay"></div>
 
-    <!-- ==================== BUTTERFLY ==================== -->
-    <div id="butterfly" class="butterfly" aria-hidden="true">
-        <svg class="butterfly-svg" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="bfW1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#7c3aed"/>
-                    <stop offset="35%" stop-color="#8b5cf6"/>
-                    <stop offset="70%" stop-color="#a78bfa"/>
-                    <stop offset="100%" stop-color="#ddd6fe"/>
-                </linearGradient>
-                <linearGradient id="bfW2" x1="0%" y1="100%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#5b21b6"/>
-                    <stop offset="50%" stop-color="#7c3aed"/>
-                    <stop offset="100%" stop-color="#818cf8"/>
-                </linearGradient>
-                <radialGradient id="bfShine" cx="30%" cy="30%" r="65%">
-                    <stop offset="0%" stop-color="rgba(221,214,254,0.4)"/>
-                    <stop offset="100%" stop-color="rgba(221,214,254,0)"/>
-                </radialGradient>
-                <filter id="bfGlow" x="-40%" y="-40%" width="180%" height="180%">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
-                    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                </filter>
-            </defs>
-            <g class="wing wing-l" filter="url(#bfGlow)">
-                <path d="M60,50 C55,28 38,8 18,14 C4,19 2,35 14,44 C26,52 50,52 60,50Z" fill="url(#bfW1)" opacity="0.82"/>
-                <path d="M60,50 C54,56 35,70 22,63 C13,58 16,47 36,48 C49,49 58,50 60,50Z" fill="url(#bfW2)" opacity="0.7"/>
-                <path d="M60,50 C55,28 38,8 18,14 C4,19 2,35 14,44 C26,52 50,52 60,50Z" fill="url(#bfShine)"/>
-                <path d="M57,47 C50,32 36,18 22,20" stroke="rgba(221,214,254,0.2)" stroke-width="0.4" fill="none"/>
-                <path d="M58,48 C48,40 32,34 19,37" stroke="rgba(196,181,253,0.12)" stroke-width="0.3" fill="none"/>
-                <circle cx="28" cy="25" r="2.5" fill="rgba(196,181,253,0.15)"/>
-                <circle cx="22" cy="40" r="1.5" fill="rgba(221,214,254,0.12)"/>
-            </g>
-            <g class="wing wing-r" filter="url(#bfGlow)">
-                <path d="M60,50 C65,28 82,8 102,14 C116,19 118,35 106,44 C94,52 70,52 60,50Z" fill="url(#bfW1)" opacity="0.82"/>
-                <path d="M60,50 C66,56 85,70 98,63 C107,58 104,47 84,48 C71,49 62,50 60,50Z" fill="url(#bfW2)" opacity="0.7"/>
-                <path d="M60,50 C65,28 82,8 102,14 C116,19 118,35 106,44 C94,52 70,52 60,50Z" fill="url(#bfShine)"/>
-                <path d="M63,47 C70,32 84,18 98,20" stroke="rgba(221,214,254,0.2)" stroke-width="0.4" fill="none"/>
-                <path d="M62,48 C72,40 88,34 101,37" stroke="rgba(196,181,253,0.12)" stroke-width="0.3" fill="none"/>
-                <circle cx="92" cy="25" r="2.5" fill="rgba(196,181,253,0.15)"/>
-                <circle cx="98" cy="40" r="1.5" fill="rgba(221,214,254,0.12)"/>
-            </g>
-            <ellipse cx="60" cy="50" rx="2.2" ry="11" fill="#4c1d95"/>
-            <ellipse cx="60" cy="50" rx="1.5" ry="9" fill="#5b21b6"/>
-            <ellipse cx="60" cy="40" rx="2" ry="3" fill="#6d28d9"/>
-            <path d="M59,37 C56,28 49,22 45,20" stroke="#8b5cf6" stroke-width="0.6" fill="none" stroke-linecap="round"/>
-            <path d="M61,37 C64,28 71,22 75,20" stroke="#8b5cf6" stroke-width="0.6" fill="none" stroke-linecap="round"/>
-            <circle cx="45" cy="20" r="1" fill="#c4b5fd"/>
-            <circle cx="75" cy="20" r="1" fill="#c4b5fd"/>
-        </svg>
+    <!-- ==================== BUTTERFLY LAYER ==================== -->
+    <div class="butterfly-layer" id="butterflyLayer" aria-hidden="true">
+        <canvas id="butterflyCanvas" class="butterfly-canvas"></canvas>
+        <div id="butterfly" class="butterfly">
+            <svg class="butterfly-svg" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <!-- Forewing Gradient: Deep indigo to luminous violet and lilac -->
+                    <linearGradient id="bfFW" x1="60" y1="44" x2="16" y2="8" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#3b0764"/>
+                        <stop offset="20%" stop-color="#581c87"/>
+                        <stop offset="45%" stop-color="#7c3aed"/>
+                        <stop offset="75%" stop-color="#a78bfa"/>
+                        <stop offset="100%" stop-color="#ddd6fe"/>
+                    </linearGradient>
+                    <!-- Hindwing Gradient -->
+                    <linearGradient id="bfHW" x1="60" y1="48" x2="26" y2="82" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#2e1065"/>
+                        <stop offset="30%" stop-color="#4c1d95"/>
+                        <stop offset="65%" stop-color="#6d28d9"/>
+                        <stop offset="100%" stop-color="#9333ea"/>
+                    </linearGradient>
+                    <!-- Internal Wing Shimmer -->
+                    <radialGradient id="bfShim" cx="42%" cy="36%" r="58%">
+                        <stop offset="0%" stop-color="rgba(245, 243, 255, 0.45)"/>
+                        <stop offset="45%" stop-color="rgba(196, 181, 253, 0.22)"/>
+                        <stop offset="100%" stop-color="rgba(124, 58, 237, 0)"/>
+                    </radialGradient>
+                    <!-- Wing Glow Filter -->
+                    <filter id="bfGlow" x="-30%" y="-30%" width="160%" height="160%">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="blur"/>
+                        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                    </filter>
+                </defs>
+
+                <!-- Left Wing (Forewing + Hindwing + Veins + Dust) -->
+                <g class="wing wing-l" filter="url(#bfGlow)">
+                    <!-- Forewing Base -->
+                    <path d="M60 44 C56 28, 44 8, 18 10 C8 11, 4 22, 10 32 C14 38, 12 44, 18 50 C26 56, 42 50, 60 44 Z" fill="url(#bfFW)" opacity="0.9"/>
+                    <!-- Forewing Core Shimmer -->
+                    <path d="M58 44 C52 30, 40 14, 20 15 C12 16, 8 24, 14 32 C18 38, 20 44, 28 48 C38 52, 50 48, 58 44 Z" fill="url(#bfShim)"/>
+
+                    <!-- Hindwing Base -->
+                    <path d="M60 48 C52 56, 38 78, 24 82 C14 85, 12 68, 18 58 C22 50, 32 48, 44 48 C52 48, 58 48, 60 48 Z" fill="url(#bfHW)" opacity="0.85"/>
+                    <path d="M60 48 C52 56, 38 78, 24 82 C14 85, 12 68, 18 58 C22 50, 32 48, 44 48 C52 48, 58 48, 60 48 Z" fill="url(#bfShim)"/>
+
+                    <!-- Radiating Wing Veins (Forewing) -->
+                    <path d="M58 44 C46 32, 32 18, 19 12" stroke="rgba(245, 243, 255, 0.45)" stroke-width="0.6" stroke-linecap="round"/>
+                    <path d="M42 28 C32 20, 22 16, 15 17" stroke="rgba(221, 214, 254, 0.3)" stroke-width="0.45" stroke-linecap="round"/>
+                    <path d="M38 34 C26 28, 16 26, 9 28" stroke="rgba(221, 214, 254, 0.3)" stroke-width="0.45" stroke-linecap="round"/>
+                    <path d="M40 38 C30 38, 20 38, 13 40" stroke="rgba(221, 214, 254, 0.28)" stroke-width="0.45" stroke-linecap="round"/>
+                    <path d="M44 44 C34 46, 24 48, 18 50" stroke="rgba(221, 214, 254, 0.25)" stroke-width="0.45" stroke-linecap="round"/>
+
+                    <!-- Radiating Wing Veins (Hindwing) -->
+                    <path d="M58 50 C48 62, 36 74, 24 80" stroke="rgba(221, 214, 254, 0.35)" stroke-width="0.55" stroke-linecap="round"/>
+                    <path d="M52 54 C42 62, 28 68, 18 68" stroke="rgba(221, 214, 254, 0.25)" stroke-width="0.45" stroke-linecap="round"/>
+                    <path d="M48 50 C36 54, 26 56, 18 58" stroke="rgba(221, 214, 254, 0.22)" stroke-width="0.45" stroke-linecap="round"/>
+
+                    <!-- Starry Marginal Nodes / Dust -->
+                    <circle cx="17" cy="12" r="1.1" fill="#ffffff" opacity="0.95"/>
+                    <circle cx="11" cy="18" r="0.9" fill="#ede9fe" opacity="0.85"/>
+                    <circle cx="8" cy="26" r="0.8" fill="#ffffff" opacity="0.8"/>
+                    <circle cx="10" cy="33" r="0.9" fill="#ede9fe" opacity="0.85"/>
+                    <circle cx="14" cy="42" r="0.8" fill="#c4b5fd" opacity="0.8"/>
+                    <circle cx="18" cy="49" r="0.9" fill="#ffffff" opacity="0.85"/>
+                    <circle cx="19" cy="62" r="0.8" fill="#c4b5fd" opacity="0.75"/>
+                    <circle cx="21" cy="74" r="0.9" fill="#ede9fe" opacity="0.85"/>
+                    <circle cx="26" cy="80" r="0.7" fill="#ffffff" opacity="0.75"/>
+                </g>
+
+                <!-- Right Wing (Forewing + Hindwing + Veins + Dust) -->
+                <g class="wing wing-r" filter="url(#bfGlow)">
+                    <!-- Forewing Base -->
+                    <path d="M60 44 C64 28, 76 8, 102 10 C112 11, 116 22, 110 32 C106 38, 108 44, 102 50 C94 56, 78 50, 60 44 Z" fill="url(#bfFW)" opacity="0.9"/>
+                    <!-- Forewing Core Shimmer -->
+                    <path d="M62 44 C68 30, 80 14, 100 15 C108 16, 112 24, 106 32 C102 38, 100 44, 92 48 C82 52, 70 48, 62 44 Z" fill="url(#bfShim)"/>
+
+                    <!-- Hindwing Base -->
+                    <path d="M60 48 C68 56, 82 78, 96 82 C106 85, 108 68, 102 58 C98 50, 88 48, 76 48 C68 48, 62 48, 60 48 Z" fill="url(#bfHW)" opacity="0.85"/>
+                    <path d="M60 48 C68 56, 82 78, 96 82 C106 85, 108 68, 102 58 C98 50, 88 48, 76 48 C68 48, 62 48, 60 48 Z" fill="url(#bfShim)"/>
+
+                    <!-- Radiating Wing Veins (Forewing) -->
+                    <path d="M62 44 C74 32, 88 18, 101 12" stroke="rgba(245, 243, 255, 0.45)" stroke-width="0.6" stroke-linecap="round"/>
+                    <path d="M78 28 C88 20, 98 16, 105 17" stroke="rgba(221, 214, 254, 0.3)" stroke-width="0.45" stroke-linecap="round"/>
+                    <path d="M82 34 C94 28, 104 26, 111 28" stroke="rgba(221, 214, 254, 0.3)" stroke-width="0.45" stroke-linecap="round"/>
+                    <path d="M80 38 C90 38, 100 38, 107 40" stroke="rgba(221, 214, 254, 0.28)" stroke-width="0.45" stroke-linecap="round"/>
+                    <path d="M76 44 C86 46, 96 48, 102 50" stroke="rgba(221, 214, 254, 0.25)" stroke-width="0.45" stroke-linecap="round"/>
+
+                    <!-- Radiating Wing Veins (Hindwing) -->
+                    <path d="M62 50 C72 62, 84 74, 96 80" stroke="rgba(221, 214, 254, 0.35)" stroke-width="0.55" stroke-linecap="round"/>
+                    <path d="M68 54 C78 62, 92 68, 102 68" stroke="rgba(221, 214, 254, 0.25)" stroke-width="0.45" stroke-linecap="round"/>
+                    <path d="M72 50 C84 54, 94 56, 102 58" stroke="rgba(221, 214, 254, 0.22)" stroke-width="0.45" stroke-linecap="round"/>
+
+                    <!-- Starry Marginal Nodes / Dust -->
+                    <circle cx="103" cy="12" r="1.1" fill="#ffffff" opacity="0.95"/>
+                    <circle cx="109" cy="18" r="0.9" fill="#ede9fe" opacity="0.85"/>
+                    <circle cx="112" cy="26" r="0.8" fill="#ffffff" opacity="0.8"/>
+                    <circle cx="110" cy="33" r="0.9" fill="#ede9fe" opacity="0.85"/>
+                    <circle cx="106" cy="42" r="0.8" fill="#c4b5fd" opacity="0.8"/>
+                    <circle cx="102" cy="49" r="0.9" fill="#ffffff" opacity="0.85"/>
+                    <circle cx="101" cy="62" r="0.8" fill="#c4b5fd" opacity="0.75"/>
+                    <circle cx="99" cy="74" r="0.9" fill="#ede9fe" opacity="0.85"/>
+                    <circle cx="94" cy="80" r="0.7" fill="#ffffff" opacity="0.75"/>
+                </g>
+
+                <!-- Center Slender Body & Antennae -->
+                <ellipse cx="60" cy="60" rx="1.6" ry="9" fill="#2e1065"/>
+                <ellipse cx="60" cy="60" rx="1.1" ry="7.5" fill="#4c1d95"/>
+                <ellipse cx="60" cy="46" rx="2.2" ry="5.5" fill="#3b0764"/>
+                <ellipse cx="60" cy="46" rx="1.5" ry="4" fill="#581c87"/>
+                <ellipse cx="60" cy="37" rx="1.8" ry="2.2" fill="#4c1d95"/>
+                <circle cx="60" cy="37" r="1.1" fill="#7c3aed"/>
+                <path d="M59 35 C56 24, 46 16, 40 14" stroke="#a78bfa" stroke-width="0.65" stroke-linecap="round" fill="none"/>
+                <path d="M61 35 C64 24, 74 16, 80 14" stroke="#a78bfa" stroke-width="0.65" stroke-linecap="round" fill="none"/>
+                <circle cx="40" cy="14" r="1.1" fill="#ede9fe"/>
+                <circle cx="80" cy="14" r="1.1" fill="#ede9fe"/>
+            </svg>
+        </div>
     </div>
 
     <!-- ==================== SHOOTING STARS ==================== -->
