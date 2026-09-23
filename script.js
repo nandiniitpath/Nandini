@@ -38,6 +38,36 @@
     }
   });
 
+  // Global visibility state for pausing non-essential animations when tab is hidden
+  let isPageVisible = !document.hidden;
+  const visibilityListeners = [];
+  function onVisibilityChange(fn) {
+    visibilityListeners.push(fn);
+  }
+  document.addEventListener('visibilitychange', () => {
+    isPageVisible = !document.hidden;
+    visibilityListeners.forEach(fn => fn(isPageVisible));
+  }, { passive: true });
+
+  // Central requestAnimationFrame Scroll Scheduler
+  const scrollCallbacks = [];
+  let scrollScheduled = false;
+  function addScrollListener(fn) {
+    scrollCallbacks.push(fn);
+  }
+  window.addEventListener('scroll', () => {
+    if (!scrollScheduled) {
+      scrollScheduled = true;
+      requestAnimationFrame(() => {
+        const sy = window.scrollY;
+        for (let i = 0; i < scrollCallbacks.length; i++) {
+          scrollCallbacks[i](sy);
+        }
+        scrollScheduled = false;
+      });
+    }
+  }, { passive: true });
+
   /* ================================================================
      1.  LOADING SCREEN
      ================================================================ */
@@ -48,7 +78,7 @@
     document.body.classList.add('no-scroll');
     const msgs = ['LOADING MODULES...','LOADING PROFILE...','LOADING EXPERIENCE...',
                   'LOADING SKILLS...','LOADING PROJECTS...','VERIFYING CREDENTIALS...','SYSTEM READY'];
-    let start = null, done = false;
+    let start = null, done = false, rafId = null;
     const duration = 2400;
 
     function tick(ts) {
@@ -58,12 +88,18 @@
       counter.textContent = String(pct).padStart(pct < 100 ? 2 : 3, '0');
       status.textContent = msgs[Math.min(Math.floor((pct / 100) * msgs.length), msgs.length - 1)];
       if (bar) bar.style.width = pct + '%';
-      pct < 100 ? requestAnimationFrame(tick) : finish();
+      if (pct < 100) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        finish();
+      }
     }
     function finish() {
       if (done) return; done = true;
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
       counter.textContent = '100'; status.textContent = msgs[msgs.length - 1];
       if (bar) bar.style.width = '100%';
+      screen.removeEventListener('click', finish);
       setTimeout(() => {
         screen.classList.add('loaded');
         document.body.classList.remove('no-scroll');
@@ -73,32 +109,46 @@
         setTimeout(() => { screen.style.display = 'none'; }, 900);
       }, 350);
     }
-    requestAnimationFrame(tick);
-    screen.addEventListener('click', finish);
+    rafId = requestAnimationFrame(tick);
+    screen.addEventListener('click', finish, { once: true });
   }
 
   /* ================================================================
-     2.  SCROLL PROGRESS
+     2.  SCROLL PROGRESS (Unified RAF Scheduler)
      ================================================================ */
   function initScrollProgress() {
     const bar = qs('#scrollProgress');
     if (!bar) return;
-    const update = () => {
-      const t = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.width = t > 0 ? `${(window.scrollY / t) * 100}%` : '0%';
-    };
-    window.addEventListener('scroll', update, { passive: true });
-    update();
+    let cachedMax = 1;
+    function updateMax() {
+      cachedMax = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    }
+    updateMax();
+    window.addEventListener('resize', updateMax, { passive: true });
+
+    addScrollListener((sy) => {
+      bar.style.width = `${Math.min(100, Math.max(0, (sy / cachedMax) * 100))}%`;
+    });
+    bar.style.width = `${Math.min(100, Math.max(0, (window.scrollY / cachedMax) * 100))}%`;
   }
 
   /* ================================================================
-     3.  NAVBAR
+     3.  NAVBAR (Unified RAF Scheduler)
      ================================================================ */
   function initNavbar() {
     const navbar = qs('#navbar'), links = qsa('.nav-link'), sections = qsa('section[id]');
     if (!navbar) return;
-    const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
-    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    let isScrolled = false;
+    const checkScroll = (sy) => {
+      const shouldBeScrolled = sy > 60;
+      if (shouldBeScrolled !== isScrolled) {
+        isScrolled = shouldBeScrolled;
+        navbar.classList.toggle('scrolled', isScrolled);
+      }
+    };
+    addScrollListener(checkScroll);
+    checkScroll(window.scrollY);
+
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -192,57 +242,103 @@
   function initHeroParallax() {
     const hero = qs('#hero'), portrait = qs('.hero-portrait-container'), glow = qs('.portrait-glow');
     if (!hero || !portrait || isTouch()) return;
-    let tx = 0, ty = 0, cx = 0, cy = 0, gx = 0, gy = 0, raf;
+    let tx = 0, ty = 0, cx = 0, cy = 0, gx = 0, gy = 0, raf = null;
+    let heroRect = null;
+
+    function updateRect() {
+      heroRect = hero.getBoundingClientRect();
+    }
+    updateRect();
+    window.addEventListener('resize', updateRect, { passive: true });
+
     function animate() {
       cx = lerp(cx, tx, 0.06); cy = lerp(cy, ty, 0.06);
-      portrait.style.transform = `translate(${cx}px, ${cy}px)`;
-      if (glow) { gx = lerp(gx, -tx * 1.4, 0.04); gy = lerp(gy, -ty * 1.4, 0.04); glow.style.transform = `translate(${gx}px, ${gy}px)`; }
-      raf = requestAnimationFrame(animate);
+      portrait.style.transform = `translate3d(${cx.toFixed(2)}px, ${cy.toFixed(2)}px, 0)`;
+      if (glow) {
+        gx = lerp(gx, -tx * 1.4, 0.04);
+        gy = lerp(gy, -ty * 1.4, 0.04);
+        glow.style.transform = `translate3d(${gx.toFixed(2)}px, ${gy.toFixed(2)}px, 0)`;
+      }
+      // Stop loop when converged and idle
+      if (Math.abs(cx - tx) > 0.05 || Math.abs(cy - ty) > 0.05) {
+        raf = requestAnimationFrame(animate);
+      } else {
+        raf = null;
+      }
     }
     hero.addEventListener('mousemove', e => {
       if (isMobile()) return;
-      const r = hero.getBoundingClientRect();
-      tx = ((e.clientX - r.left) / r.width - 0.5) * 16;
-      ty = ((e.clientY - r.top) / r.height - 0.5) * 10;
+      if (!heroRect) updateRect();
+      tx = ((e.clientX - heroRect.left) / heroRect.width - 0.5) * 16;
+      ty = ((e.clientY - heroRect.top) / heroRect.height - 0.5) * 10;
+      if (!raf) raf = requestAnimationFrame(animate);
+    }, { passive: true });
+    hero.addEventListener('mouseleave', () => {
+      tx = 0; ty = 0;
       if (!raf) raf = requestAnimationFrame(animate);
     });
-    hero.addEventListener('mouseleave', () => { tx = 0; ty = 0; });
   }
 
   /* ================================================================
-     9.  PROJECT CARD EFFECTS
+     9.  PROJECT CARD EFFECTS (RAF throttled)
      ================================================================ */
   function initProjectCardEffects() {
     if (isTouch()) return;
     qsa('.project-card').forEach(card => {
+      let rafId = null;
+      let targetE = null;
       card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        card.style.setProperty('--mouse-x', `${e.clientX - r.left}px`);
-        card.style.setProperty('--mouse-y', `${e.clientY - r.top}px`);
-        const rx = ((e.clientY - r.top) / r.height - 0.5) * -3;
-        const ry = ((e.clientX - r.left) / r.width - 0.5) * 3;
-        card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+        targetE = e;
+        if (!rafId) {
+          rafId = requestAnimationFrame(() => {
+            if (!targetE) return;
+            const r = card.getBoundingClientRect();
+            card.style.setProperty('--mouse-x', `${targetE.clientX - r.left}px`);
+            card.style.setProperty('--mouse-y', `${targetE.clientY - r.top}px`);
+            const rx = ((targetE.clientY - r.top) / r.height - 0.5) * -3;
+            const ry = ((targetE.clientX - r.left) / r.width - 0.5) * 3;
+            card.style.transform = `perspective(800px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateY(-6px)`;
+            rafId = null;
+          });
+        }
+      }, { passive: true });
+      card.addEventListener('mouseleave', () => {
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        targetE = null;
+        card.style.transform = '';
       });
-      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
     });
   }
 
   /* ================================================================
-     10. CERT & WORKSPACE CARD EFFECTS
+     10. CERT & WORKSPACE CARD EFFECTS (RAF throttled)
      ================================================================ */
   function initCertCardEffects() {
     if (isTouch()) return;
     qsa('.cert-card, .workspace-card, .toolkit-panel').forEach(card => {
+      let rafId = null;
+      let targetE = null;
       card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        card.style.setProperty('--mouse-x', `${e.clientX - r.left}px`);
-        card.style.setProperty('--mouse-y', `${e.clientY - r.top}px`);
+        targetE = e;
+        if (!rafId) {
+          rafId = requestAnimationFrame(() => {
+            if (!targetE) return;
+            const r = card.getBoundingClientRect();
+            card.style.setProperty('--mouse-x', `${targetE.clientX - r.left}px`);
+            card.style.setProperty('--mouse-y', `${targetE.clientY - r.top}px`);
+            rafId = null;
+          });
+        }
+      }, { passive: true });
+      card.addEventListener('mouseleave', () => {
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        targetE = null;
       });
     });
   }
 
   /* ================================================================
-     11. TIMELINE ILLUMINATION
+     11. TIMELINE ILLUMINATION (IntersectionObserver + Unified RAF)
      ================================================================ */
   function initTimelineIllumination() {
     const timeline = qs('.timeline'), line = qs('.timeline-line'), items = qsa('.timeline-item');
@@ -250,14 +346,31 @@
     const fill = document.createElement('div');
     fill.style.cssText = 'width:100%;height:0%;background:linear-gradient(to bottom,#8B5CF6,#4A8EFF);border-radius:2px;transition:height .15s linear;box-shadow:0 0 10px rgba(139,92,246,0.3);';
     line.innerHTML = ''; line.appendChild(fill);
+
+    let isTimelineVisible = false;
+    const tIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        isTimelineVisible = e.isIntersecting;
+        if (e.isIntersecting) update();
+      });
+    }, { rootMargin: '100px 0px' });
+    tIO.observe(timeline);
+
     function update() {
+      if (!isTimelineVisible) return;
       const rect = timeline.getBoundingClientRect(), vh = window.innerHeight;
       if (rect.top < vh && rect.bottom > 0) {
         fill.style.height = `${Math.min(1, Math.max(0, (vh * 0.6 - rect.top) / rect.height)) * 100}%`;
       }
-      items.forEach(item => { if (item.getBoundingClientRect().top < vh * 0.7) item.classList.add('active'); });
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        if (!item.classList.contains('active') && item.getBoundingClientRect().top < vh * 0.7) {
+          item.classList.add('active');
+        }
+      }
     }
-    window.addEventListener('scroll', update, { passive: true }); update();
+    addScrollListener(update);
+    update();
   }
 
   /* ================================================================
@@ -330,16 +443,19 @@
 
       let canvasOpacity = 0;
       let sectionVisible = false;
+      let brandRaf = null;
 
       function drawBrandStars(time) {
-        ctx.clearRect(0, 0, cw, ch);
-        if (canvasOpacity < 0.01 && !sectionVisible) {
-          requestAnimationFrame(drawBrandStars);
+        if (!isPageVisible || (!sectionVisible && canvasOpacity <= 0.01)) {
+          brandRaf = null;
+          ctx.clearRect(0, 0, cw, ch);
           return;
         }
+
+        ctx.clearRect(0, 0, cw, ch);
         // Ease canvas opacity
         const targetOp = sectionVisible ? 1 : 0;
-        canvasOpacity += (targetOp - canvasOpacity) * 0.03;
+        canvasOpacity += (targetOp - canvasOpacity) * 0.04;
 
         brandStars.forEach(s => {
           const a = (s.baseAlpha + Math.sin(time * s.twinkleSpeed + s.twinklePhase) * s.baseAlpha * 0.5) * canvasOpacity;
@@ -356,9 +472,18 @@
             ctx.fill();
           }
         });
-        requestAnimationFrame(drawBrandStars);
+        brandRaf = requestAnimationFrame(drawBrandStars);
       }
-      if (!reducedMotion()) requestAnimationFrame(drawBrandStars);
+
+      function ensureBrandLoop() {
+        if (!reducedMotion() && !brandRaf && (sectionVisible || canvasOpacity > 0.01) && isPageVisible) {
+          brandRaf = requestAnimationFrame(drawBrandStars);
+        }
+      }
+
+      onVisibilityChange((visible) => {
+        if (visible) ensureBrandLoop();
+      });
 
       // Visibility observer for star fade + glow activation
       const starIO = new IntersectionObserver((entries) => {
@@ -366,8 +491,10 @@
           sectionVisible = e.isIntersecting;
           if (e.isIntersecting) {
             section.classList.add('brand-visible');
+            ensureBrandLoop();
           } else {
             section.classList.remove('brand-visible');
+            if (canvasOpacity > 0.01) ensureBrandLoop();
           }
         });
       }, { threshold: 0.15 });
@@ -609,16 +736,29 @@
   }
 
   /* ================================================================
-     15. MAGNETIC BUTTONS
+     15. MAGNETIC BUTTONS (RAF throttled)
      ================================================================ */
   function initMagneticButtons() {
     if (isTouch()) return;
     qsa('.magnetic').forEach(btn => {
+      let rafId = null;
+      let targetE = null;
       btn.addEventListener('mousemove', e => {
-        const r = btn.getBoundingClientRect();
-        btn.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.2}px, ${(e.clientY - r.top - r.height / 2) * 0.2}px)`;
+        targetE = e;
+        if (!rafId) {
+          rafId = requestAnimationFrame(() => {
+            if (!targetE) return;
+            const r = btn.getBoundingClientRect();
+            btn.style.transform = `translate3d(${((targetE.clientX - r.left - r.width / 2) * 0.2).toFixed(1)}px, ${((targetE.clientY - r.top - r.height / 2) * 0.2).toFixed(1)}px, 0)`;
+            rafId = null;
+          });
+        }
+      }, { passive: true });
+      btn.addEventListener('mouseleave', () => {
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        targetE = null;
+        btn.style.transform = '';
       });
-      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
     });
   }
 
@@ -643,18 +783,29 @@
     }, { threshold: 0.05 });
     imgs.forEach(img => io.observe(img));
 
-    // Subtle parallax shift on project card image hover
+    // Subtle parallax shift on project card image hover (RAF throttled)
     if (!isTouch()) {
       qsa('.project-image').forEach(container => {
         const img = container.querySelector('.project-img');
         if (!img) return;
+        let rafId = null;
+        let targetE = null;
         container.addEventListener('mousemove', e => {
-          const r = container.getBoundingClientRect();
-          const px = ((e.clientX - r.left) / r.width - 0.5) * 8;
-          const py = ((e.clientY - r.top) / r.height - 0.5) * 6;
-          img.style.transform = `scale(1.06) translate(${px}px, ${py}px)`;
-        });
+          targetE = e;
+          if (!rafId) {
+            rafId = requestAnimationFrame(() => {
+              if (!targetE) return;
+              const r = container.getBoundingClientRect();
+              const px = (((targetE.clientX - r.left) / r.width - 0.5) * 8).toFixed(1);
+              const py = (((targetE.clientY - r.top) / r.height - 0.5) * 6).toFixed(1);
+              img.style.transform = `scale(1.06) translate3d(${px}px, ${py}px, 0)`;
+              rafId = null;
+            });
+          }
+        }, { passive: true });
         container.addEventListener('mouseleave', () => {
+          if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+          targetE = null;
           img.style.transform = '';
         });
       });
@@ -662,23 +813,51 @@
   }
 
   /* ================================================================
-     16. CUSTOM CURSOR
+     16. CUSTOM CURSOR (Sleeping RAF Loop)
      ================================================================ */
   function initCustomCursor() {
     const dot = qs('#customCursor'), ring = qs('#customCursorRing');
     if (!dot || !ring) return;
     const textEl = document.createElement('div'); textEl.className = 'cursor-text'; document.body.appendChild(textEl);
-    let mx = 0, my = 0, dx = 0, dy = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    let mx = -100, my = -100, dx = -100, dy = -100, rx = -100, ry = -100;
+    let cursorRaf = null;
+
     function animate() {
+      if (!isPageVisible) {
+        cursorRaf = null;
+        return;
+      }
       dx = lerp(dx, mx, 0.35); dy = lerp(dy, my, 0.35);
-      dot.style.left = `${dx}px`; dot.style.top = `${dy}px`;
+      dot.style.left = `${dx.toFixed(1)}px`; dot.style.top = `${dy.toFixed(1)}px`;
       rx = lerp(rx, mx, 0.12); ry = lerp(ry, my, 0.12);
-      ring.style.left = `${rx}px`; ring.style.top = `${ry}px`;
-      textEl.style.left = `${rx}px`; textEl.style.top = `${ry}px`;
-      requestAnimationFrame(animate);
+      ring.style.left = `${rx.toFixed(1)}px`; ring.style.top = `${ry.toFixed(1)}px`;
+      textEl.style.left = `${rx.toFixed(1)}px`; textEl.style.top = `${ry.toFixed(1)}px`;
+
+      // Sleep loop when cursor has settled within 0.1px of mouse
+      const distD = Math.abs(dx - mx) + Math.abs(dy - my);
+      const distR = Math.abs(rx - mx) + Math.abs(ry - my);
+      if (distD > 0.15 || distR > 0.15) {
+        cursorRaf = requestAnimationFrame(animate);
+      } else {
+        cursorRaf = null;
+      }
     }
-    requestAnimationFrame(animate);
+
+    function wakeCursor() {
+      if (!cursorRaf && isPageVisible) {
+        cursorRaf = requestAnimationFrame(animate);
+      }
+    }
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX;
+      my = e.clientY;
+      wakeCursor();
+    }, { passive: true });
+
+    onVisibilityChange((visible) => {
+      if (visible) wakeCursor();
+    });
     qsa('a, button, input, textarea, .skill-pill').forEach(el => {
       el.addEventListener('mouseenter', () => ring.classList.add('hover'));
       el.addEventListener('mouseleave', () => ring.classList.remove('hover'));

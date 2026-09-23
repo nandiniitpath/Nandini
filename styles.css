@@ -51,7 +51,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:700;letter-spacing
 /* ── Canvas / Ambient ───────────────────────────────────────────── */
 .particle-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;width:100%;height:100%}
 .ambient-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.ambient-orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.35}
+.ambient-orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.35;transform:translateZ(0);will-change:transform}
 .ambient-orb-1{width:650px;height:650px;top:-10%;right:-5%;background:radial-gradient(circle,rgba(74,142,255,0.1) 0%,transparent 70%);animation:orbFloat1 22s ease-in-out infinite}
 .ambient-orb-2{width:550px;height:550px;bottom:8%;left:-10%;background:radial-gradient(circle,rgba(139,92,246,0.1) 0%,transparent 70%);animation:orbFloat2 28s ease-in-out infinite}
 .ambient-orb-3{width:420px;height:420px;top:40%;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(124,58,237,0.06) 0%,transparent 70%);animation:orbFloat3 20s ease-in-out infinite}
@@ -64,7 +64,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:700;letter-spacing
 /* ── Butterfly Layer & Canvas ───────────────────────────────────── */
 .butterfly-layer{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
 .butterfly-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.butterfly{position:absolute;pointer-events:none;width:82px;height:68px;top:20%;right:15%;opacity:0;transition:opacity 1.2s ease;will-change:transform,filter}
+.butterfly{position:absolute;pointer-events:none;width:82px;height:68px;top:0;left:0;opacity:0;transition:opacity 1.2s ease;will-change:transform}
 .butterfly.visible{opacity:1}
 .butterfly-svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 12px rgba(167,139,250,0.55)) drop-shadow(0 0 24px rgba(139,92,246,0.28))}
 .wing-l{transform-origin:60px 46px;animation:flapL 3.2s cubic-bezier(.42,0,.25,1) infinite}
