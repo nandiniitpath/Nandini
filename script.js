@@ -100,7 +100,19 @@
     const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
     window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
     const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { const id = e.target.id; links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === `#${id}`)); } });
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.id;
+          links.forEach(l => {
+            const href = l.getAttribute('href');
+            if (id === 'skills' || id === 'toolkit') {
+              l.classList.toggle('active', href === '#skills' || href === '#expertise');
+            } else {
+              l.classList.toggle('active', href === `#${id}`);
+            }
+          });
+        }
+      });
     }, { rootMargin: '-40% 0px -55% 0px' });
     sections.forEach(s => io.observe(s));
   }
@@ -157,7 +169,8 @@
      ================================================================ */
   function initTextReveal() {
     if (reducedMotion()) return;
-    qsa('.section-title').forEach(title => {
+    qsa('.section-title:not(.workspace-title):not(.toolkit-title)').forEach(title => {
+      if (title.classList.contains('workspace-title') || title.classList.contains('toolkit-title')) return;
       const text = title.textContent; title.innerHTML = '';
       text.split('').forEach((ch, i) => {
         const s = document.createElement('span');
@@ -215,11 +228,11 @@
   }
 
   /* ================================================================
-     10. CERT CARD EFFECTS
+     10. CERT & WORKSPACE CARD EFFECTS
      ================================================================ */
   function initCertCardEffects() {
     if (isTouch()) return;
-    qsa('.cert-card').forEach(card => {
+    qsa('.cert-card, .workspace-card, .toolkit-panel').forEach(card => {
       card.addEventListener('mousemove', e => {
         const r = card.getBoundingClientRect();
         card.style.setProperty('--mouse-x', `${e.clientX - r.left}px`);
