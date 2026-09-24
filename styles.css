@@ -1337,6 +1337,129 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);font-weight:700;letter-spacing
   transition: color var(--t-fast);
 }
 
+/* Selected Projects Section */
+.selected-projects-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.selected-projects-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.2em;
+  color: var(--accent-violet);
+  text-transform: uppercase;
+}
+.selected-projects-pills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.sel-proj-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all var(--t-fast);
+}
+.sel-proj-chip:hover {
+  color: #ffffff;
+  border-color: rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.08);
+  transform: translateY(-1px);
+}
+.sel-proj-chip-num {
+  color: var(--accent-violet);
+  font-weight: 700;
+  font-size: 0.65rem;
+}
+
+/* Featured WorkSpace.OS Card */
+.recruiter-ws-card {
+  background: rgba(15, 20, 38, 0.65);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-decoration: none;
+  transition: all var(--t-fast);
+  cursor: pointer;
+}
+.recruiter-ws-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(168, 85, 247, 0.55);
+  background: rgba(20, 26, 52, 0.85);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 16px rgba(139, 92, 246, 0.25);
+}
+.recruiter-ws-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.recruiter-ws-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.recruiter-ws-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-violet);
+}
+.recruiter-ws-title {
+  font-family: var(--font-heading);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  margin: 0;
+  text-transform: uppercase;
+}
+.recruiter-ws-badge {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #C4B5FD;
+  background: rgba(139, 92, 246, 0.18);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: 100px;
+  padding: 1px 7px;
+}
+.recruiter-ws-desc {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin: 0;
+}
+.recruiter-ws-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #C4B5FD;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  transition: color var(--t-fast);
+}
+.recruiter-ws-card:hover .recruiter-ws-action {
+  color: #ffffff;
+}
+
 .quick-links-wrap {
   display: flex;
   flex-direction: column;
