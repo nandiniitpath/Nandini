@@ -5,8 +5,8 @@
 (function () {
   'use strict';
 
-  const qs  = (s, c = document) => c.querySelector(s);
-  const qsa = (s, c = document) => [...c.querySelectorAll(s)];
+  const qs  = (s, c = document) => c ? c.querySelector(s) : null;
+  const qsa = (s, c = document) => c ? [...c.querySelectorAll(s)] : [];
   const lerp = (a, b, t) => a + (b - a) * t;
   const isMobile = () => window.innerWidth < 768;
   const isTouch  = () => matchMedia('(pointer: coarse)').matches;
@@ -554,12 +554,11 @@
   function initRecruiterMode() {
     const modal = qs('#recruiterModal');
     const openBtn = qs('#openRecruiterMode');
+    if (!modal || !openBtn) return;
     const closeBtn = qs('#closeRecruiterBtn');
     const overlay = qs('#recruiterOverlay');
     const stage = qs('#constellationStage', modal);
     const svg = qs('#constellationSvg', modal);
-
-    if (!modal || !openBtn) return;
 
     function updateConstellationLines() {
       if (!stage || !svg || window.innerWidth <= 600) return;
