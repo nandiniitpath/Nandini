@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORKSPACE.OS — A Personal Digital Workspace | Nandini</title>
+    <meta name="description" content="A custom web-based workspace designed to bring frequently used tools, resources and productivity utilities together in one focused interface. Built by Nandini.">
+    <meta name="theme-color" content="#060810">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="WORKSPACE.OS — A Personal Digital Workspace | Nandini">
+    <meta property="og:description" content="A custom web-based workspace designed to bring frequently used tools, resources and productivity utilities together in one focused interface.">
+    <meta property="og:image" content="../assets/portfolio-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WORKSPACE.OS — A Personal Digital Workspace | Nandini">
+    <meta name="twitter:description" content="A custom web-based workspace designed to bring frequently used tools, resources and productivity utilities together in one focused interface.">
+    <meta name="twitter:image" content="../assets/portfolio-preview.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../project.css">
+</head>
+<body>
+    <!-- ==================== PARTICLE CANVAS ==================== -->
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+
+    <!-- ==================== AMBIENT BACKGROUND ==================== -->
+    <div class="ambient-bg">
+        <div class="ambient-orb ambient-orb-1"></div>
+        <div class="ambient-orb ambient-orb-2"></div>
+        <div class="ambient-orb ambient-orb-3"></div>
+    </div>
+
+    <!-- ==================== GRAIN OVERLAY ==================== -->
+    <div class="grain-overlay"></div>
+
+    <!-- ==================== SCROLL PROGRESS ==================== -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ==================== CUSTOM CURSOR ==================== -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="custom-cursor-ring" id="customCursorRing"></div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <a href="../index.html" class="nav-logo">NANDINI.</a>
+        <div class="nav-links" id="navLinks">
+            <a href="../index.html#hero" class="nav-link">Home</a>
+            <a href="../index.html#about" class="nav-link">About</a>
+            <a href="../index.html#expertise" class="nav-link">Expertise</a>
+            <a href="../index.html#skills" class="nav-link">Skills</a>
+            <a href="../index.html#projects" class="nav-link active">Projects</a>
+            <a href="../index.html#certifications" class="nav-link">Certifications</a>
+            <a href="../index.html#contact" class="nav-link">Contact</a>
+        </div>
+        <a href="../index.html#projects" class="nav-cta" data-cursor="VIEW →">View My Work</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ==================== MOBILE MENU OVERLAY ==================== -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-links">
+            <a href="../index.html#hero" class="mobile-link">Home</a>
+            <a href="../index.html#about" class="mobile-link">About</a>
+            <a href="../index.html#expertise" class="mobile-link">Expertise</a>
+            <a href="../index.html#skills" class="mobile-link">Skills</a>
+            <a href="../index.html#projects" class="mobile-link">Projects</a>
+            <a href="../index.html#certifications" class="mobile-link">Certifications</a>
+            <a href="../index.html#contact" class="mobile-link">Contact</a>
+        </div>
+    </div>
+
+    <!-- ==================== MAIN CASE STUDY CONTENT ==================== -->
+    <main class="ws-case-study">
+
+        <!-- ==================== HERO SECTION ==================== -->
+        <section class="ws-hero-grid">
+            <!-- Left Hero Content -->
+            <div class="ws-hero-left reveal">
+                <a href="../index.html#projects" class="ws-back-link">
+                    <span>←</span> Back to Projects
+                </a>
+                <div class="ws-hero-number">05</div>
+                <h1 class="ws-hero-title">WORKSPACE.OS</h1>
+                <div class="ws-hero-subtitle">A Personal Digital Workspace</div>
+                <p class="ws-hero-description">
+                    A custom web-based workspace designed to bring frequently used tools, resources and productivity utilities together in one focused interface.
+                </p>
+                <div class="ws-hero-btn-row">
+                    <a href="https://nandiniitpath.github.io/WorkSpace.OS/" target="_blank" rel="noopener noreferrer" class="ws-btn-primary" data-cursor="OPEN ↗">
+                        OPEN WORKSPACE.OS ↗
+                    </a>
+                    <a href="https://github.com/nandiniitpath" target="_blank" rel="noopener noreferrer" class="ws-btn-secondary" data-cursor="CODE ↗">
+                        VIEW CODE ↗
+                    </a>
+                </div>
+                <div class="ws-hero-tags-row">
+                    <span class="ws-pill-tag">Web Development</span>
+                    <span class="ws-pill-tag">Productivity</span>
+                    <span class="ws-pill-tag">UI/UX Design</span>
+                    <span class="ws-pill-tag">Personal Project</span>
+                </div>
+            </div>
+
+            <!-- Right Hero Presentation: Laptop Mockup -->
+            <div class="ws-hero-right reveal delay-1">
+                <div class="ws-laptop-wrapper">
+                    <!-- Purple Atmospheric Glow -->
+                    <div class="ws-laptop-glow"></div>
+
+                    <!-- Laptop Hardware Device -->
+                    <div class="ws-laptop-device">
+                        <!-- Laptop Lid -->
+                        <div class="ws-laptop-lid">
+                            <div class="ws-laptop-camera"></div>
+
+                            <!-- Screen Container with Authentic WorkSpace.OS Screenshot -->
+                            <div class="ws-laptop-screen">
+                                <img src="../assets/projects/workspace-os/workspace_screen.svg" alt="WorkSpace.OS Interface" class="ws-screen-img" id="wsLaptopImg">
+                            </div>
+                        </div>
+
+                        <!-- Laptop Chin & Notch -->
+                        <div class="ws-laptop-base">
+                            <div class="ws-laptop-notch"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 1: TWO-COLUMN CARDS ==================== -->
+        <section class="ws-two-col-grid reveal">
+            <!-- Left Card: THE IDEA -->
+            <div class="ws-card">
+                <div class="ws-card-header">
+                    <div class="ws-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="9" y1="18" x2="15" y2="18"></line>
+                            <line x1="10" y1="22" x2="14" y2="22"></line>
+                            <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>
+                        </svg>
+                    </div>
+                    <h2 class="ws-card-title">THE IDEA</h2>
+                </div>
+                <p class="ws-card-text">
+                    I wanted a single, clean workspace where I can access the tools I use every day without switching between multiple websites. WorkSpace.OS brings these tools and resources together in a minimal and focused interface.
+                </p>
+            </div>
+
+            <!-- Right Card: WHAT I BUILT -->
+            <div class="ws-card">
+                <div class="ws-card-header">
+                    <div class="ws-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="ws-card-title">WHAT I BUILT</h2>
+                </div>
+                <p class="ws-card-text">
+                    A web-based workspace with a clean interface, organized toolkit, quick access to important tools and a minimal design that makes it easy to navigate. The layout is built to be simple, aesthetic and focused on productivity.
+                </p>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 2: TOOLKIT SECTION ==================== -->
+        <section class="ws-card ws-card-toolkit reveal">
+            <!-- Header Row -->
+            <div class="ws-toolkit-top">
+                <div class="ws-toolkit-top-left">
+                    <div class="ws-card-icon" style="margin-top: 2px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"/>
+                        </svg>
+                    </div>
+                    <div class="ws-toolkit-titles">
+                        <h2 class="ws-card-title">TOOLKIT</h2>
+                        <p class="ws-toolkit-sub">A collection of tools and resources I use regularly, all in one place.</p>
+                    </div>
+                </div>
+                <div class="ws-and-more-badge">And more...</div>
+            </div>
+
+            <!-- 5-Column Grid (10 Tools from Reference) -->
+            <div class="ws-toolkit-5col-grid">
+                <!-- 01 Google -->
+                <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="ws-tool-item" data-cursor="VISIT ↗">
+                    <div class="ws-tool-icon">
+                        <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.5 30.2 0 24 0 14.6 0 6.6 5.4 2.7 13.3l7.9 6.1C12.5 13.4 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.9 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.9c-.6 3-2.3 5.5-4.8 7.2l7.6 5.9c4.4-4.1 7.2-10.1 7.2-17.6z"/><path fill="#FBBC05" d="M10.6 28.6c-.5-1.5-.8-3-.8-4.6s.3-3.1.8-4.6l-7.9-6.1C1 16.3 0 20 0 24s1 7.7 2.7 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.2 1.5-4.9 2.4-8.3 2.4-6.2 0-11.5-3.9-13.4-9.9l-7.9 6.1C6.6 42.6 14.6 48 24 48z"/></svg>
+                    </div>
+                    <div class="ws-tool-name">Google</div>
+                    <div class="ws-tool-sub">Search &amp; explore</div>
+                </a>
+
+                <!-- 02 YouTube -->
+                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="ws-tool-item" data-cursor="VISIT ↗">
+                    <div class="ws-tool-icon">
+                        <svg viewBox="0 0 48 48"><path fill="#FF0000" d="M46.1 13.8c-.5-2-2.1-3.6-4.1-4.1C38.4 8.7 24 8.7 24 8.7s-14.4 0-18 1c-2 .5-3.6 2.1-4.1 4.1C.9 17.4.9 24 .9 24s0 6.6 1 10.2c.5 2 2.1 3.6 4.1 4.1 3.6 1 18 1 18 1s14.4 0 18-1c2-.5 3.6-2.1 4.1-4.1 1-3.6 1-10.2 1-10.2s0-6.6-1-10.2z"/><polygon fill="#FFF" points="19.2,17.4 31.8,24 19.2,30.6"/></svg>
+                    </div>
+                    <div class="ws-tool-name">YouTube</div>
+                    <div class="ws-tool-sub">Videos &amp; learning</div>
+                </a>
+
+                <!-- 03 ChatGPT -->
+                <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="ws-tool-item" data-cursor="VISIT ↗">
+                    <div class="ws-tool-icon">
+                        <svg viewBox="0 0 24 24" fill="#10a37f"><path fill-rule="evenodd" d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"/></svg>
+                    </div>
+                    <div class="ws-tool-name">ChatGPT</div>
+                    <div class="ws-tool-sub">AI assistance</div>
+                </a>
+
+                <!-- 04 Notion -->
+                <a href="https://notion.so" target="_blank" rel="noopener noreferrer" class="ws-tool-item" data-cursor="VISIT ↗">
+                    <div class="ws-tool-icon">
+                        <svg viewBox="0 0 100 100"><path fill="#fff" d="M6.017 4.313l55.333 -4.087c6.797 -0.583 8.543 -0.19 12.817 2.917l17.663 12.443c2.913 2.14 3.883 2.723 3.883 5.053v68.243c0 4.277 -1.553 6.807 -6.99 7.193L24.467 99.967c-4.08 0.193 -6.023 -0.39 -8.16 -3.113L3.3 79.94c-2.333 -3.113 -3.3 -5.443 -3.3 -8.167V11.113c0 -3.497 1.553 -6.413 6.017 -6.8z"/><path fill="#000" d="M19.803 88.3V30.367c0 -2.53 0.777 -3.697 3.103 -3.893L86 22.78c2.14 -0.193 3.107 1.167 3.107 3.693v57.547c0 2.53 -0.39 4.67 -3.883 4.863l-60.377 3.5c-3.493 0.193 -5.043 -0.97 -5.043 -4.083zm59.6 -54.827c0.387 1.75 0 3.5 -1.75 3.7l-2.91 0.577v42.773c-2.527 1.36 -4.853 2.137 -6.797 2.137 -3.107 0 -3.883 -0.973 -6.21 -3.887l-19.03 -29.94v28.967l6.02 1.363s0 3.5 -4.857 3.5l-13.39 0.777c-0.39 -0.78 0 -2.723 1.357 -3.11l3.497 -0.97v-38.3L30.48 40.667c-0.39 -1.75 0.58 -4.277 3.3 -4.473l14.367 -0.967 19.8 30.327v-26.83l-5.047 -0.58c-0.39 -2.143 1.163 -3.7 3.103 -3.89l13.4 -0.78z"/></svg>
+                    </div>
+                    <div class="ws-tool-name">Notion</div>
+                    <div class="ws-tool-sub">Notes &amp; organization</div>
+                </a>
+
+                <!-- 05 GitHub -->
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="ws-tool-item" data-cursor="VISIT ↗">
+                    <div class="ws-tool-icon">
+                        <svg viewBox="0 0 32 32" fill="#fff"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 2C8.27 2 2 8.27 2 16c0 6.19 4.01 11.43 9.58 13.28.7.13.96-.3.96-.67 0-.33-.01-1.2-.02-2.36-3.9.85-4.72-1.88-4.72-1.88-.64-1.62-1.56-2.05-1.56-2.05-1.27-.87.1-.85.1-.85 1.41.1 2.15 1.45 2.15 1.45 1.25 2.14 3.28 1.52 4.08 1.16.13-.91.49-1.52.89-1.87-3.11-.35-6.38-1.56-6.38-6.93 0-1.53.55-2.78 1.44-3.76-.14-.35-.63-1.78.14-3.71 0 0 1.18-.38 3.85 1.44 1.12-.31 2.32-.47 3.52-.48 1.2.01 2.4.17 3.52.48 2.67-1.82 3.85-1.44 3.85-1.44.77 1.93.28 3.36.14 3.71.9.98 1.44 2.23 1.44 3.76 0 5.38-3.28 6.57-6.4 6.92.5.43.95 1.29.95 2.6 0 1.88-.02 3.39-.02 3.85 0 .37.25.81.96.67C25.99 27.43 30 22.18 30 16c0-7.73-6.27-14-14-14z"/></svg>
+                    </div>
+                    <div class="ws-tool-name">GitHub</div>
+                    <div class="ws-tool-sub">Code &amp; projects</div>
+                </a>
+
+                <!-- 06 Drive -->
+                <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="ws-tool-item" data-cursor="VISIT ↗">
+                    <div class="ws-tool-icon">
+                        <svg viewBox="0 0 87.3 78"><path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/><path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44c-.8 1.4-1.2 2.95-1.2 4.5h27.5z" fill="#00ac47"/><path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/><path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/><path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/><path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/></svg>
+                    </div>
+                    <div class="ws-tool-name">Drive</div>
+                    <div class="ws-tool-sub">Cloud storage</div>
+                </a>
+
+                <!-- 07 Gmail -->
+                <a href="https://mail.google.com" target="_blank" rel="noopener noreferrer" class="ws-tool-item" data-cursor="VISIT ↗">
+                    <div class="ws-tool-icon">
+                        <svg viewBox="52 42 88 66"><path fill="#4285f4" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6"/><path fill="#34a853" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15"/><path fill="#fbbc04" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2"/><path fill="#ea4335" d="M72 74V48l24 18 24-18v26L96 92"/><path fill="#c5221f" d="M52 51v8l20 15V48l-5.6-4.2c-5.94-4.45-14.4-.22-14.4 7.2"/></svg>
+                    </div>
+                    <div class="ws-tool-name">Gmail</div>
+                    <div class="ws-tool-sub">Email</div>
+                </a>
+
+                <!-- 08 LinkedIn -->
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="ws-tool-item" data-cursor="VISIT ↗">
+                    <div class="ws-tool-icon">
+                        <svg viewBox="0 0 48 48"><rect width="48" height="48" rx="8" fill="#0A66C2"/><circle cx="13" cy="13" r="4" fill="#FFF"/><rect x="9" y="20" width="8" height="19" fill="#FFF"/><path fill="#FFF" d="M22 20h7.5v2.8c1.1-1.8 3.5-3.3 6.8-3.3 6.2 0 7.7 4.1 7.7 9.5V39H36V30c0-2.3-.5-4-3-4s-3.5 1.8-3.5 4v9h-7.5z"/></svg>
+                    </div>
+                    <div class="ws-tool-name">LinkedIn</div>
+                    <div class="ws-tool-sub">Networking</div>
+                </a>
+
+                <!-- 09 Canva -->
+                <a href="https://canva.com" target="_blank" rel="noopener noreferrer" class="ws-tool-item" data-cursor="VISIT ↗">
+                    <div class="ws-tool-icon">
+                        <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#00C4CC"/><path fill="#fff" d="M21.5 28.5c-1.6 0-2.8-.8-3.4-2.1l-.2.1c-.2 1.3-.9 2-2.1 2-1.3 0-2.1-.9-2.1-2.4 0-3.1 3.2-6.6 6.3-6.6 1.8 0 3.1 1.2 3.1 3 0 2.2-1.2 6-1.6 6zm-1.8-3.6c.4-1.6.8-3.2.8-4.3 0-.8-.4-1.3-1.1-1.3-1.4 0-3.2 2.5-3.2 4.7 0 .7.3 1.1.8 1.1.7 0 1.7-.8 2.7-.2z"/></svg>
+                    </div>
+                    <div class="ws-tool-name">Canva</div>
+                    <div class="ws-tool-sub">Design &amp; creativity</div>
+                </a>
+
+                <!-- 10 Figma -->
+                <a href="https://figma.com" target="_blank" rel="noopener noreferrer" class="ws-tool-item" data-cursor="VISIT ↗">
+                    <div class="ws-tool-icon">
+                        <svg viewBox="0 0 38 57"><path fill="#1abcfe" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"/><path fill="#0acf83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z"/><path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z"/><path fill="#f24e1e" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"/><path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"/></svg>
+                    </div>
+                    <div class="ws-tool-name">Figma</div>
+                    <div class="ws-tool-sub">UI/UX design</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 3: THREE-COLUMN INFORMATION ==================== -->
+        <section class="ws-three-col-grid reveal">
+            <!-- Left Card: DESIGN & INTERACTION -->
+            <div class="ws-card">
+                <div class="ws-card-header">
+                    <div class="ws-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                    </div>
+                    <h3 class="ws-card-title">DESIGN &amp; INTERACTION</h3>
+                </div>
+                <p class="ws-card-text">
+                    A minimal, aesthetic and easy-to-use interface with a consistent dark theme, smooth animations and a clean layout. The design focuses on clarity and quick access to tools, with subtle visual elements that match the portfolio's style.
+                </p>
+            </div>
+
+            <!-- Center Card: TECH STACK -->
+            <div class="ws-card">
+                <div class="ws-card-header">
+                    <div class="ws-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="ws-card-title">TECH STACK</h3>
+                </div>
+                <div class="ws-tech-list">
+                    <div class="ws-tech-item">
+                        <div class="ws-tech-icon">
+                            <svg viewBox="0 0 512 512" width="22" height="22"><path fill="#E34F26" d="M71 460L30 0h452l-41 460-185 52z"/><path fill="#EF652A" d="M256 472l149-41 35-391H256v432z"/><path fill="#EBEBEB" d="M256 208h-74l-5-58h79V92H115l15 174h126v-58zm0 147l-63-17-4-45h-58l8 99 117 32v-69z"/><path fill="#FFF" d="M256 208v58h70l-7 74-63 17v69l117-32 17-186H256zm0-116v58h137l5-58H256z"/></svg>
+                        </div>
+                        <span class="ws-tech-name">HTML</span>
+                    </div>
+                    <div class="ws-tech-item">
+                        <div class="ws-tech-icon">
+                            <svg viewBox="0 0 512 512" width="22" height="22"><path fill="#1572B6" d="M71 460L30 0h452l-41 460-185 52z"/><path fill="#33A9DC" d="M256 472l149-41 35-391H256v432z"/><path fill="#EBEBEB" d="M256 208v-58H120l5 58h131zm0 147l-63-17-4-45h-58l8 99 117 32v-69zM126 92l-5-52h265l-5 52H256z"/><path fill="#FFF" d="M256 208h74l-7 74-67 18v69l117-32 17-186 3-33 5-58H256v58h80l-5 50H256v58z"/></svg>
+                        </div>
+                        <span class="ws-tech-name">CSS</span>
+                    </div>
+                    <div class="ws-tech-item">
+                        <div class="ws-tech-icon">
+                            <svg viewBox="0 0 630 630" width="22" height="22"><rect width="630" height="630" rx="80" fill="#F7DF1E"/><path d="M165.3 490.4c14.2 24.1 35.5 38.6 70.8 38.6 37.6 0 61.9-19 61.9-63.5V263h-60.8v200.7c0 19-8.5 27.6-24.1 27.6-11.8 0-21.7-6.7-27.8-17.8l-20 16.9zm171.1-17.7c17.5 29.5 45.4 46.8 86.8 46.8 48.7 0 80.3-25.1 80.3-64.8 0-35.4-21.7-52.6-58.1-68.5l-19.8-8.5c-20.9-8.9-30.8-15.6-30.8-27.4 0-11.4 9.1-20.9 26.1-20.9 17.5 0 28.5 7.7 36.6 23.3l49.8-31.8c-14.4-27.6-39.7-41.2-76.4-41.2-46.6 0-77.9 26.7-77.9 64.4 0 35.2 21.9 53 53.6 66.8l20.4 8.9c22.7 9.9 33.6 17.2 33.6 30.6 0 14.4-12.8 23.7-32.8 23.7-24.5 0-38.6-13.4-48-32.8l-43.5 31.6z"/></svg>
+                        </div>
+                        <span class="ws-tech-name">JavaScript</span>
+                    </div>
+                    <div class="ws-tech-item">
+                        <div class="ws-tech-icon">
+                            <svg viewBox="0 0 32 32" width="22" height="22" fill="#ffffff"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 2C8.27 2 2 8.27 2 16c0 6.19 4.01 11.43 9.58 13.28.7.13.96-.3.96-.67 0-.33-.01-1.2-.02-2.36-3.9.85-4.72-1.88-4.72-1.88-.64-1.62-1.56-2.05-1.56-2.05-1.27-.87.1-.85.1-.85 1.41.1 2.15 1.45 2.15 1.45 1.25 2.14 3.28 1.52 4.08 1.16.13-.91.49-1.52.89-1.87-3.11-.35-6.38-1.56-6.38-6.93 0-1.53.55-2.78 1.44-3.76-.14-.35-.63-1.78.14-3.71 0 0 1.18-.38 3.85 1.44 1.12-.31 2.32-.47 3.52-.48 1.2.01 2.4.17 3.52.48 2.67-1.82 3.85-1.44 3.85-1.44.77 1.93.28 3.36.14 3.71.9.98 1.44 2.23 1.44 3.76 0 5.38-3.28 6.57-6.4 6.92.5.43.95 1.29.95 2.6 0 1.88-.02 3.39-.02 3.85 0 .37.25.81.96.67C25.99 27.43 30 22.18 30 16c0-7.73-6.27-14-14-14z"/></svg>
+                        </div>
+                        <span class="ws-tech-name">GitHub Pages</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Card: MY ROLE -->
+            <div class="ws-card">
+                <div class="ws-card-header">
+                    <div class="ws-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <h3 class="ws-card-title">MY ROLE</h3>
+                </div>
+                <ul class="ws-role-list">
+                    <li class="ws-role-item"><span class="ws-role-bullet">•</span> Designed and built the interface</li>
+                    <li class="ws-role-item"><span class="ws-role-bullet">•</span> Organized and integrated the toolkit</li>
+                    <li class="ws-role-item"><span class="ws-role-bullet">•</span> Implemented the layout and styling</li>
+                    <li class="ws-role-item"><span class="ws-role-bullet">•</span> Added interactive elements</li>
+                    <li class="ws-role-item"><span class="ws-role-bullet">•</span> Ensured responsive design</li>
+                    <li class="ws-role-item"><span class="ws-role-bullet">•</span> Deployed using GitHub Pages</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 4: BUILD PROCESS ==================== -->
+        <section class="ws-card ws-card-process reveal">
+            <!-- Header -->
+            <div class="ws-card-header">
+                <div class="ws-card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <h3 class="ws-card-title">BUILD PROCESS</h3>
+            </div>
+
+            <!-- Horizontal Flow Sequence of 6 Steps -->
+            <div class="ws-process-row">
+                <!-- 01 Idea -->
+                <div class="ws-process-node">
+                    <span class="ws-proc-num">01</span>
+                    <div class="ws-proc-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="9" y1="18" x2="15" y2="18"></line>
+                            <line x1="10" y1="22" x2="14" y2="22"></line>
+                            <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>
+                        </svg>
+                    </div>
+                    <div class="ws-proc-title">Idea</div>
+                    <div class="ws-proc-desc">Combine essential tools in one workspace</div>
+                </div>
+
+                <div class="ws-proc-arrow">→</div>
+
+                <!-- 02 Interface -->
+                <div class="ws-process-node">
+                    <span class="ws-proc-num">02</span>
+                    <div class="ws-proc-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="9" y1="21" x2="9" y2="9"></line>
+                        </svg>
+                    </div>
+                    <div class="ws-proc-title">Interface</div>
+                    <div class="ws-proc-desc">Designed a clean and minimal layout</div>
+                </div>
+
+                <div class="ws-proc-arrow">→</div>
+
+                <!-- 03 Toolkit -->
+                <div class="ws-process-node">
+                    <span class="ws-proc-num">03</span>
+                    <div class="ws-proc-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </div>
+                    <div class="ws-proc-title">Toolkit</div>
+                    <div class="ws-proc-desc">Added frequently used tools and links</div>
+                </div>
+
+                <div class="ws-proc-arrow">→</div>
+
+                <!-- 04 Interactions -->
+                <div class="ws-process-node">
+                    <span class="ws-proc-num">04</span>
+                    <div class="ws-proc-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                        </svg>
+                    </div>
+                    <div class="ws-proc-title">Interactions</div>
+                    <div class="ws-proc-desc">Implemented animations and UI</div>
+                </div>
+
+                <div class="ws-proc-arrow">→</div>
+
+                <!-- 05 Responsive Design -->
+                <div class="ws-process-node">
+                    <span class="ws-proc-num">05</span>
+                    <div class="ws-proc-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                    </div>
+                    <div class="ws-proc-title">Responsive Design</div>
+                    <div class="ws-proc-desc">Optimized for different screens</div>
+                </div>
+
+                <div class="ws-proc-arrow">→</div>
+
+                <!-- 06 Deployment -->
+                <div class="ws-process-node">
+                    <span class="ws-proc-num">06</span>
+                    <div class="ws-proc-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+                        </svg>
+                    </div>
+                    <div class="ws-proc-title">Deployment</div>
+                    <div class="ws-proc-desc">Published using GitHub Pages</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION 5: FINAL LIVE PROJECT ==================== -->
+        <section class="ws-live-cta-card reveal">
+            <div class="ws-live-cta-eyebrow-row">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#C4B5FD">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+                <span class="ws-live-cta-eyebrow">LIVE PROJECT</span>
+            </div>
+            <h2 class="ws-live-cta-title">EXPLORE THE LIVE WORKSPACE</h2>
+            <p class="ws-live-cta-desc">
+                Visit WorkSpace.OS and explore the full interface with all tools and features.
+            </p>
+            <a href="https://nandiniitpath.github.io/WorkSpace.OS/" target="_blank" rel="noopener noreferrer" class="ws-btn-primary" data-cursor="LAUNCH ↗">
+                OPEN WORKSPACE.OS ↗
+            </a>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-logo">NANDINI.</span>
+                <span class="footer-tagline">Writer • Data • AI • Cybersecurity</span>
+            </div>
+            <div class="footer-right">
+                <div class="footer-links">
+                    <a href="https://linkedin.com/in/nandini-itpath" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+                    <a href="https://github.com/nandiniitpath" target="_blank" rel="noopener noreferrer" class="footer-link" aria-label="GitHub">GitHub</a>
+                    <a href="mailto:nandini.itpath@gmail.com" class="footer-link">Email</a>
+                    <a href="../index.html#projects" class="footer-link">Projects</a>
+                </div>
+                <span class="footer-year">© 2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <div class="toast" id="toast">
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <!-- Global portfolio interactive script (stars, cursor, butterfly, reveals) -->
+    <script src="../script.js"></script>
+    <script>
+        (function() {
+            var img = document.getElementById('wsLaptopImg');
+            if (!img) return;
+            var test = new Image();
+            test.onload = function() {
+                img.src = this.src;
+            };
+            test.src = '../../../.gemini/antigravity/brain/ce11892d-797b-444f-9ff8-daab8045954f/workspace_screen_1790272681044.jpg';
+        })();
+    </script>
+</body>
+</html>
