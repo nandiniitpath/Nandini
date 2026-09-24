@@ -917,4 +917,300 @@
   }
 }
 
+/* ══════════════════════════════════════════════════════════════════
+   DATA MANAGEMENT & EXCEL CASE STUDY STYLES
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Dataset Field Grid (19 Fields) ───────────────────────────────── */
+.dataset-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.dataset-field-tag {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--text-bright);
+  transition: border-color var(--t-fast), transform var(--t-fast);
+}
+
+.dataset-field-tag:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  transform: translateY(-2px);
+}
+
+.dataset-field-num {
+  font-size: var(--fs-micro);
+  color: var(--accent-violet);
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+}
+
+/* ── Workflow Sequence ───────────────────────────────────────────── */
+.workflow-sequence {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0;
+  max-width: 720px;
+}
+
+.workflow-node {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform var(--t-fast), border-color var(--t-fast);
+}
+
+.workflow-node:hover {
+  border-color: rgba(139, 92, 246, 0.35);
+  transform: translateX(4px);
+}
+
+.workflow-node-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.workflow-step-num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.15em;
+  color: var(--accent-violet);
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
+.workflow-step-name {
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.workflow-arrow-down {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 28px;
+  color: var(--accent-violet);
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* ── Technical Formula Box ───────────────────────────────────────── */
+.formula-box {
+  background: rgba(8, 12, 20, 0.95);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-left: 3px solid var(--accent-violet);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-x: auto;
+}
+
+.formula-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.2em;
+  color: var(--accent-lavender);
+  text-transform: uppercase;
+}
+
+.formula-code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: #a7f3d0;
+  letter-spacing: 0.04em;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* ── KPI Editorial Grid & Cards ──────────────────────────────────── */
+.kpi-editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin: 24px 0;
+}
+
+.kpi-editorial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform var(--t-base), border-color var(--t-base), box-shadow var(--t-base);
+}
+
+.kpi-editorial-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(139, 92, 246, 0.35);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+}
+
+.kpi-metric-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.2em;
+  color: var(--accent-violet);
+  text-transform: uppercase;
+}
+
+.kpi-metric-val {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.kpi-calc-desc {
+  font-size: var(--fs-small);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Data Summary Tables ─────────────────────────────────────────── */
+.data-table-wrap {
+  width: 100%;
+  max-width: 680px;
+  margin: 18px 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.data-summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-small);
+  text-align: left;
+}
+
+.data-summary-table th {
+  background: rgba(139, 92, 246, 0.08);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-lavender);
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.data-summary-table td {
+  padding: 10px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  color: var(--text-secondary);
+}
+
+.data-summary-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-bright);
+}
+
+.data-summary-table .col-numeric {
+  text-align: right;
+  font-family: var(--font-mono);
+}
+
+.data-summary-table tr.total-row td {
+  border-top: 1px solid rgba(139, 92, 246, 0.3);
+  background: rgba(139, 92, 246, 0.06);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* ── Chart Visual Showcase ───────────────────────────────────────── */
+.chart-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+  transition: transform var(--t-base), border-color var(--t-base), box-shadow var(--t-base);
+}
+
+.chart-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(139, 92, 246, 0.35);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+}
+
+.chart-card-img-wrap {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.chart-card-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.chart-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.chart-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+}
+
+.chart-card-desc {
+  font-size: var(--fs-small);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .kpi-editorial-grid {
+    grid-template-columns: 1fr;
+  }
+  .dataset-fields-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}
+
+
 

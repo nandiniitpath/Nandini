@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Sales Transactions — Excel Case Study | Nandini</title>
+    <meta name="description" content="Data cleaning, Excel analysis and dashboard project based on a 200-record India sales transaction workbook by Nandini.">
+    <meta name="theme-color" content="#060810">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../project.css">
+</head>
+<body>
+    <!-- ==================== PARTICLE CANVAS ==================== -->
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+
+    <!-- ==================== AMBIENT BACKGROUND ==================== -->
+    <div class="ambient-bg">
+        <div class="ambient-orb ambient-orb-1"></div>
+        <div class="ambient-orb ambient-orb-2"></div>
+        <div class="ambient-orb ambient-orb-3"></div>
+    </div>
+
+    <!-- ==================== GRAIN OVERLAY ==================== -->
+    <div class="grain-overlay"></div>
+
+    <!-- ==================== SCROLL PROGRESS ==================== -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ==================== CUSTOM CURSOR ==================== -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="custom-cursor-ring" id="customCursorRing"></div>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+        <a href="../index.html" class="nav-logo">NANDINI.</a>
+        <div class="nav-links" id="navLinks">
+            <a href="../index.html#hero" class="nav-link">Home</a>
+            <a href="../index.html#about" class="nav-link">About</a>
+            <a href="../index.html#expertise" class="nav-link">Expertise</a>
+            <a href="../index.html#skills" class="nav-link">Skills</a>
+            <a href="../index.html#projects" class="nav-link active">Projects</a>
+            <a href="../index.html#certifications" class="nav-link">Certifications</a>
+            <a href="../index.html#contact" class="nav-link">Contact</a>
+        </div>
+        <a href="../index.html#projects" class="nav-cta">View My Work</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- ==================== MOBILE MENU OVERLAY ==================== -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-links">
+            <a href="../index.html#hero" class="mobile-link">Home</a>
+            <a href="../index.html#about" class="mobile-link">About</a>
+            <a href="../index.html#expertise" class="mobile-link">Expertise</a>
+            <a href="../index.html#skills" class="mobile-link">Skills</a>
+            <a href="../index.html#projects" class="mobile-link">Projects</a>
+            <a href="../index.html#certifications" class="mobile-link">Certifications</a>
+            <a href="../index.html#contact" class="mobile-link">Contact</a>
+        </div>
+    </div>
+
+    <main class="project-page-wrap">
+        <!-- ==================== TOP NAVIGATION ==================== -->
+        <div class="project-top-nav">
+            <a href="../index.html#projects" class="back-link">
+                <span class="back-link-arrow">←</span> BACK TO PROJECTS
+            </a>
+        </div>
+
+        <!-- ==================== HERO SECTION ==================== -->
+        <section class="project-hero">
+            <div class="project-hero-meta-top reveal">
+                <span class="project-hero-badge">01</span>
+                <span class="project-hero-label">DATA MANAGEMENT &amp; EXCEL</span>
+            </div>
+            <h1 class="project-hero-title reveal delay-1">
+                INDIA SALES TRANSACTIONS
+            </h1>
+            <p class="story-subtitle reveal delay-2" style="margin-bottom: 16px;">
+                Data Cleaning, Excel Analysis &amp; Dashboard
+            </p>
+            <p class="project-hero-desc reveal delay-2">
+                A hands-on Excel case study turning 200 raw sales transaction records into a structured, analysis-ready workbook featuring formula calculations, state and category breakdowns, payment mode metrics, and an integrated dashboard view.
+            </p>
+            <div class="project-hero-tags reveal delay-3">
+                <span class="project-hero-tag">Microsoft Excel</span>
+                <span class="project-hero-tag">Data Cleaning</span>
+                <span class="project-hero-tag">Excel Tables</span>
+                <span class="project-hero-tag">Formulas</span>
+                <span class="project-hero-tag">PivotTables</span>
+                <span class="project-hero-tag">Dashboard</span>
+            </div>
+
+            <!-- Metadata Row -->
+            <div class="project-meta-row reveal delay-4">
+                <div class="project-meta-item">
+                    <span class="project-meta-label">DISCIPLINE</span>
+                    <span class="project-meta-val">Data Management &amp; Analysis</span>
+                </div>
+                <div class="project-meta-item">
+                    <span class="project-meta-label">TOOL</span>
+                    <span class="project-meta-val">Microsoft Excel</span>
+                </div>
+                <div class="project-meta-item">
+                    <span class="project-meta-label">DATASET SCOPE</span>
+                    <span class="project-meta-val">200 Transactions • 19 Attributes</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PROJECT OVERVIEW ==================== -->
+        <section class="editorial-section reveal" id="project-overview">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// OVERVIEW</span>
+                    <h2 class="editorial-heading">PROJECT<br>OVERVIEW</h2>
+                </div>
+                <div class="editorial-right">
+                    <div class="highlight-editorial-card" style="margin-top: 0;">
+                        <p class="highlight-editorial-quote">
+                            "I worked with a 200-record sales transaction dataset and used Microsoft Excel to organize the data, prepare a cleaned analysis-ready version, calculate key business metrics, analyze sales across states, categories and payment methods, and present the results through a dashboard."
+                        </p>
+                    </div>
+                    <p class="editorial-text">
+                        The project follows a direct, structured progression from raw transactional data to actionable summary insights. Each phase of the workflow ensures transparency, data integrity, and clear analytical documentation.
+                    </p>
+                    <div class="tech-editorial-wrap" style="margin-top: 8px;">
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>RAW DATA</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>CLEAN DATA</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>EXCEL TABLE</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>FORMULA ANALYSIS</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>PIVOTTABLE</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>KPIs</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>CHARTS</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>DASHBOARD</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 1. THE DATASET ==================== -->
+        <section class="editorial-section reveal" id="the-dataset">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 01 — SCOPE</span>
+                    <h2 class="editorial-heading">THE<br>DATASET</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        The workbook contains <strong>200 sales transactions</strong> spanning retail activities across multiple Indian cities and states. Each record contains <strong>19 columns</strong> covering the complete lifecycle of a retail order:
+                    </p>
+                    <ul class="editorial-list" style="margin-top: 4px;">
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>200 sales transactions</span>
+                        </li>
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>19 columns</span>
+                        </li>
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Indian cities and states</span>
+                        </li>
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Customer information</span>
+                        </li>
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Product information &amp; product categories</span>
+                        </li>
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Quantity, unit price, gross amount</span>
+                        </li>
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Discount percentage &amp; discount amount</span>
+                        </li>
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>GST percentage &amp; GST amount</span>
+                        </li>
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Total amount</span>
+                        </li>
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Payment mode &amp; order status</span>
+                        </li>
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Sales channel &amp; sales representative</span>
+                        </li>
+                    </ul>
+
+                    <div>
+                        <span class="editorial-eyebrow" style="font-size: var(--fs-micro); display: block; margin-top: 20px;">19 DATASET FIELDS (COLUMNS A–S)</span>
+                        <div class="dataset-fields-grid">
+                            <div class="dataset-field-tag"><span class="dataset-field-num">01</span>Order ID</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">02</span>Order Date</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">03</span>Customer Name</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">04</span>City</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">05</span>State</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">06</span>Product Name</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">07</span>Category</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">08</span>Quantity</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">09</span>Unit Price (INR)</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">10</span>Gross Amount (INR)</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">11</span>Discount %</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">12</span>Discount Amount (INR)</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">13</span>GST %</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">14</span>GST Amount (INR)</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">15</span>Total Amount (INR)</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">16</span>Payment Mode</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">17</span>Order Status</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">18</span>Sales Channel</div>
+                            <div class="dataset-field-tag"><span class="dataset-field-num">19</span>Sales Rep</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 2. RAW DATA ==================== -->
+        <section class="editorial-section reveal" id="raw-data">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-num">01</span>
+                    <span class="editorial-eyebrow">// 02 — SOURCE</span>
+                    <h2 class="editorial-heading">01 — RAW<br>DATA</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        "The Raw Data sheet contains the original 200 sales records. I used this sheet as the starting point before preparing a separate version for analysis."
+                    </p>
+                    <p class="editorial-text">
+                        The <strong>Raw Data</strong> worksheet preserves the baseline transactional records directly as imported. An Excel auto-filter is applied across the dataset header row (A1:S201), allowing quick row-level inspection while preserving the original source intact.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 3. DATA CLEANING & PREPARATION ==================== -->
+        <section class="editorial-section reveal" id="clean-data">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-num">02</span>
+                    <span class="editorial-eyebrow">// 03 — REFINEMENT</span>
+                    <h2 class="editorial-heading">02 — CLEAN<br>DATA</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        To maintain data integrity and avoid altering the baseline source, I isolated all data-cleaning activities onto a dedicated worksheet:
+                    </p>
+                    <div class="editorial-list">
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">01</span>
+                            <span><strong>Created a separate Clean Data worksheet</strong> to clearly isolate analytical transformations from source records.</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">02</span>
+                            <span><strong>Prepared the dataset for analysis</strong> by ensuring uniform data types across all columns.</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">03</span>
+                            <span><strong>Standardized the data structure</strong> so calculation ranges align reliably across 200 rows.</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">04</span>
+                            <span><strong>Corrected an inconsistent Order Date value</strong> in the raw data (cell B3) where a date was stored as text ("05-01-2026") so that it was converted to an actual serial Excel date for accurate sorting and date handling.</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">05</span>
+                            <span><strong>Converted the cleaned dataset into an Excel Table named "Table1"</strong> (covering range A1:S201).</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">06</span>
+                            <span><strong>Used the cleaned dataset as the single source of truth</strong> for all downstream dashboard calculations and summaries.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 4. EXCEL TABLE ==================== -->
+        <section class="editorial-section reveal" id="structuring-data">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 04 — STRUCTURE</span>
+                    <h2 class="editorial-heading">STRUCTURING<br>THE DATA</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        "After preparing the cleaned dataset, I converted it into an Excel Table (Table1). This provides a structured range that can be filtered and referenced consistently by the analysis."
+                    </p>
+                    <p class="editorial-text">
+                        Establishing <strong>Table1</strong> provides banded row formatting, built-in filter headers, and dynamic table boundaries across rows 1 to 201. This made the dataset easier to work with, inspect, and reference reliably for all subsequent formula calculations and summaries.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 5. KEY METRICS ==================== -->
+        <section class="editorial-section reveal" id="key-metrics">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 05 — METRICS</span>
+                    <h2 class="editorial-heading">KEY PERFORMANCE<br>INDICATORS</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        The top of the dashboard calculates four essential top-line business indicators reflecting volume, total turnover, transaction size, and order fulfillment. Each KPI is computed dynamically using native Excel formulas referencing the <strong>Clean Data</strong> sheet:
+                    </p>
+
+                    <div class="kpi-editorial-grid">
+                        <!-- KPI 1 -->
+                        <div class="kpi-editorial-card">
+                            <span class="kpi-metric-label">TOTAL REVENUE</span>
+                            <div class="kpi-metric-val">₹1,501,664</div>
+                            <p class="kpi-calc-desc">Calculated as the <strong>SUM</strong> of Total Amount from the Clean Data sheet.</p>
+                            <div class="formula-box">
+                                <span class="formula-label">EXCEL FORMULA (CELL A26)</span>
+                                <code class="formula-code">=SUM('Clean Data'!O2:O201)</code>
+                            </div>
+                        </div>
+
+                        <!-- KPI 2 -->
+                        <div class="kpi-editorial-card">
+                            <span class="kpi-metric-label">TOTAL ORDERS</span>
+                            <div class="kpi-metric-val">200</div>
+                            <p class="kpi-calc-desc">Calculated as the <strong>COUNTA</strong> of non-empty Order IDs.</p>
+                            <div class="formula-box">
+                                <span class="formula-label">EXCEL FORMULA (CELL C26)</span>
+                                <code class="formula-code">=COUNTA('Clean Data'!A2:A201)</code>
+                            </div>
+                        </div>
+
+                        <!-- KPI 3 -->
+                        <div class="kpi-editorial-card">
+                            <span class="kpi-metric-label">AVERAGE ORDER VALUE</span>
+                            <div class="kpi-metric-val">₹7,508.32</div>
+                            <p class="kpi-calc-desc">Calculated as the <strong>AVERAGE</strong> of Total Amount across all transactions.</p>
+                            <div class="formula-box">
+                                <span class="formula-label">EXCEL FORMULA (CELL E26)</span>
+                                <code class="formula-code">=AVERAGE('Clean Data'!O2:O201)</code>
+                            </div>
+                        </div>
+
+                        <!-- KPI 4 -->
+                        <div class="kpi-editorial-card">
+                            <span class="kpi-metric-label">DELIVERED RATE</span>
+                            <div class="kpi-metric-val">44%</div>
+                            <p class="kpi-calc-desc">Calculated as the <strong>COUNTIF</strong> for "Delivered" orders divided by total orders.</p>
+                            <div class="formula-box">
+                                <span class="formula-label">EXCEL FORMULA (CELL G26)</span>
+                                <code class="formula-code">=COUNTIF('Clean Data'!Q2:Q201,"Delivered")/COUNTA('Clean Data'!A2:A201)</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 6. STATE-LEVEL SALES ANALYSIS ==================== -->
+        <section class="editorial-section reveal" id="state-analysis">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 06 — GEOGRAPHY</span>
+                    <h2 class="editorial-heading">STATE-WISE SALES<br>ANALYSIS</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        "I created a state-level sales summary to compare Total Amount across the different states represented in the dataset."
+                    </p>
+                    <p class="editorial-text">
+                        Built via an Excel PivotTable placed directly on the Dashboard sheet (cells A3:B20), this analysis aggregates sales transactions geographically. It aggregates revenue across 16 states and union territories, summing to a total of <strong>₹1,501,664</strong>:
+                    </p>
+
+                    <div class="data-table-wrap">
+                        <table class="data-summary-table">
+                            <thead>
+                                <tr>
+                                    <th>State</th>
+                                    <th class="col-numeric">Sum of Total Amount (INR)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Assam</td><td class="col-numeric">₹132,792</td></tr>
+                                <tr><td>Bihar</td><td class="col-numeric">₹44,565</td></tr>
+                                <tr><td>Chandigarh</td><td class="col-numeric">₹17,821</td></tr>
+                                <tr><td>Delhi</td><td class="col-numeric">₹12,138</td></tr>
+                                <tr><td>Gujarat</td><td class="col-numeric">₹156,146</td></tr>
+                                <tr><td>Jharkhand</td><td class="col-numeric">₹23,904</td></tr>
+                                <tr><td>Karnataka</td><td class="col-numeric">₹82,252</td></tr>
+                                <tr><td>Kerala</td><td class="col-numeric">₹60,404</td></tr>
+                                <tr><td>Madhya Pradesh</td><td class="col-numeric">₹61,269</td></tr>
+                                <tr><td>Maharashtra</td><td class="col-numeric">₹253,053</td></tr>
+                                <tr><td>Punjab</td><td class="col-numeric">₹198,204</td></tr>
+                                <tr><td>Rajasthan</td><td class="col-numeric">₹61,597</td></tr>
+                                <tr><td>Tamil Nadu</td><td class="col-numeric">₹128,087</td></tr>
+                                <tr><td>Telangana</td><td class="col-numeric">₹34,369</td></tr>
+                                <tr><td>Uttar Pradesh</td><td class="col-numeric">₹225,014</td></tr>
+                                <tr><td>West Bengal</td><td class="col-numeric">₹10,049</td></tr>
+                                <tr class="total-row"><td>Total Result</td><td class="col-numeric">₹1,501,664</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="editorial-text">
+                        This breakdown provides a clear geographic view of sales distribution, highlighting key regional revenue drivers such as Maharashtra, Uttar Pradesh, and Punjab.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 7. CATEGORY ANALYSIS ==================== -->
+        <section class="editorial-section reveal" id="category-analysis">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 07 — MERCHANDISE</span>
+                    <h2 class="editorial-heading">SALES BY<br>CATEGORY</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        "I used SUMIFS to calculate total sales for each product category and used these calculations as the basis for the category visualization."
+                    </p>
+                    <p class="editorial-text">
+                        SUMIFS adds Total Amount only for records belonging to the selected category. The formula pattern dynamically evaluates category labels:
+                    </p>
+                    <div class="formula-box">
+                        <span class="formula-label">FORMULA PATTERN (ROWS 32–44)</span>
+                        <code class="formula-code">=SUMIFS('Clean Data'!$O$2:$O$201, 'Clean Data'!$G$2:$G$201, A32)</code>
+                    </div>
+
+                    <div class="data-table-wrap">
+                        <table class="data-summary-table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th class="col-numeric">Total Sales (INR)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Accessories</td><td class="col-numeric">₹2,901</td></tr>
+                                <tr><td>Apparel</td><td class="col-numeric">₹51,824</td></tr>
+                                <tr><td>Bags</td><td class="col-numeric">₹71,478</td></tr>
+                                <tr><td>Electronics</td><td class="col-numeric">₹234,337</td></tr>
+                                <tr><td>Footwear</td><td class="col-numeric">₹57,097</td></tr>
+                                <tr><td>Furniture</td><td class="col-numeric">₹451,306</td></tr>
+                                <tr><td>Home &amp; Kitchen</td><td class="col-numeric">₹83,973</td></tr>
+                                <tr><td>Home Appliances</td><td class="col-numeric">₹368,374</td></tr>
+                                <tr><td>Home Decor</td><td class="col-numeric">₹31,662</td></tr>
+                                <tr><td>Office Supplies</td><td class="col-numeric">₹42,892</td></tr>
+                                <tr><td>Personal Care</td><td class="col-numeric">₹16,096</td></tr>
+                                <tr><td>Sports &amp; Fitness</td><td class="col-numeric">₹84,866</td></tr>
+                                <tr><td>Stationery</td><td class="col-numeric">₹4,858</td></tr>
+                                <tr class="total-row"><td>Total Sales</td><td class="col-numeric">₹1,501,664</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 8. PAYMENT MODE ANALYSIS ==================== -->
+        <section class="editorial-section reveal" id="payment-analysis">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 08 — TRANSACTIONS</span>
+                    <h2 class="editorial-heading">ORDERS BY<br>PAYMENT MODE</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        "I used COUNTIF to calculate how many orders were associated with each payment method."
+                    </p>
+                    <p class="editorial-text">
+                        The formula counts the number of records matching each payment method across column P of the Clean Data sheet:
+                    </p>
+                    <div class="formula-box">
+                        <span class="formula-label">FORMULA PATTERN (ROWS 49–54)</span>
+                        <code class="formula-code">=COUNTIF('Clean Data'!$P$2:$P$201, A49)</code>
+                    </div>
+
+                    <div class="data-table-wrap">
+                        <table class="data-summary-table">
+                            <thead>
+                                <tr>
+                                    <th>Payment Mode</th>
+                                    <th class="col-numeric">Order Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Cash on Delivery</td><td class="col-numeric">27</td></tr>
+                                <tr><td>Credit Card</td><td class="col-numeric">28</td></tr>
+                                <tr><td>Debit Card</td><td class="col-numeric">35</td></tr>
+                                <tr><td>EMI</td><td class="col-numeric">40</td></tr>
+                                <tr><td>Net Banking</td><td class="col-numeric">41</td></tr>
+                                <tr><td>UPI</td><td class="col-numeric">29</td></tr>
+                                <tr class="total-row"><td>Total Orders</td><td class="col-numeric">200</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 9. DASHBOARD ==================== -->
+        <section class="editorial-section reveal" id="dashboard">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-num">03</span>
+                    <span class="editorial-eyebrow">// 09 — SYNTHESIS</span>
+                    <h2 class="editorial-heading">03 — DASHBOARD</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        "The Dashboard brings the calculated metrics and analysis together into a single view."
+                    </p>
+                    <p class="editorial-text">
+                        The sheet brings together the complete analytical workflow in one cohesive interface:
+                    </p>
+                    <ul class="editorial-list">
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span><strong>Key Performance Indicators:</strong> 4 high-level summary cards (Revenue, Orders, AOV, Delivered Rate).</span>
+                        </li>
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span><strong>State-wise sales analysis:</strong> PivotTable summary comparing regional revenues.</span>
+                        </li>
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span><strong>Revenue by category:</strong> Formula-driven breakdown of product categories.</span>
+                        </li>
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span><strong>Orders by payment mode:</strong> Transaction frequency count across payment methods.</span>
+                        </li>
+                        <li class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span><strong>Three charts:</strong> Embedded Excel charts converting each summary table into visual form.</span>
+                        </li>
+                    </ul>
+
+                    <!-- Authentic Dashboard Preview Screenshot -->
+                    <div class="chart-card" style="margin-top: 24px;">
+                        <div class="chart-card-img-wrap">
+                            <img src="../assets/projects/india-sales/dashboard_preview.png" alt="Full view of the Excel Dashboard sheet showing KPIs, state table, category table, payment table, and 3 charts" class="chart-card-img" decoding="async">
+                        </div>
+                        <div class="chart-card-meta">
+                            <h4 class="chart-card-title">EXCEL DASHBOARD WORKSHEET</h4>
+                            <p class="chart-card-desc">Direct screenshot render of the complete Dashboard worksheet from the authentic workbook.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 10. CHARTS & VISUALIZATION ==================== -->
+        <section class="editorial-section reveal" id="charts-visualization">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 10 — VISUALIZATION</span>
+                    <h2 class="editorial-heading">CHARTS &amp;<br>VISUALIZATION</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        The dashboard features three embedded Microsoft Excel charts designed to communicate the underlying distributions clearly:
+                    </p>
+
+                    <!-- Chart 1: State-Wise Sales -->
+                    <div class="chart-card">
+                        <div class="chart-card-img-wrap">
+                            <img src="../assets/projects/india-sales/chart_state_sales.png" alt="State-wise sales column chart showing revenue distribution across Indian states" class="chart-card-img" decoding="async">
+                        </div>
+                        <div class="chart-card-meta">
+                            <h4 class="chart-card-title">1. STATE-WISE SALES</h4>
+                            <p class="chart-card-desc">Visualizes the distribution of total sales across states.</p>
+                        </div>
+                    </div>
+
+                    <!-- Chart 2: Revenue by Category -->
+                    <div class="chart-card">
+                        <div class="chart-card-img-wrap">
+                            <img src="../assets/projects/india-sales/chart_revenue_category.png" alt="Revenue by Category horizontal bar chart showing sales across product categories" class="chart-card-img" decoding="async">
+                        </div>
+                        <div class="chart-card-meta">
+                            <h4 class="chart-card-title">2. REVENUE BY CATEGORY</h4>
+                            <p class="chart-card-desc">Shows how total revenue is distributed across product categories.</p>
+                        </div>
+                    </div>
+
+                    <!-- Chart 3: Orders by Payment Mode -->
+                    <div class="chart-card">
+                        <div class="chart-card-img-wrap">
+                            <img src="../assets/projects/india-sales/chart_orders_payment.png" alt="Orders by Payment Mode pie chart showing share of payment methods" class="chart-card-img" decoding="async">
+                        </div>
+                        <div class="chart-card-meta">
+                            <h4 class="chart-card-title">3. ORDERS BY PAYMENT MODE</h4>
+                            <p class="chart-card-desc">Shows the number of orders associated with each payment method.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 11. WHAT I USED IN EXCEL ==================== -->
+        <section class="editorial-section reveal" id="excel-skills">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 11 — CAPABILITIES</span>
+                    <h2 class="editorial-heading">EXCEL SKILLS<br>USED</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        The techniques and features actively utilized and evidenced in this workbook include:
+                    </p>
+                    <div class="tech-editorial-wrap">
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Microsoft Excel</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Data Cleaning</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Data Organization</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Excel Tables</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>SUM</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>COUNTA</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>AVERAGE</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>COUNTIF</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>SUMIFS</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>PivotTable Analysis</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>KPI Calculations</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Dashboard Design</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Data Visualization</span>
+                        <span class="tech-editorial-chip"><span class="tech-editorial-dot"></span>Sales Analysis</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 12. PROJECT WORKFLOW ==================== -->
+        <section class="editorial-section reveal" id="project-workflow">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 12 — PROCESS</span>
+                    <h2 class="editorial-heading">PROJECT<br>WORKFLOW</h2>
+                </div>
+                <div class="editorial-right">
+                    <p class="editorial-text">
+                        A structured progression from raw transactional records to synthesized visual reporting:
+                    </p>
+                    <div class="workflow-sequence">
+                        <div class="workflow-node">
+                            <div class="workflow-node-left">
+                                <span class="workflow-step-num">01</span>
+                                <span class="workflow-step-name">RAW DATA</span>
+                            </div>
+                        </div>
+                        <div class="workflow-arrow-down">↓</div>
+
+                        <div class="workflow-node">
+                            <div class="workflow-node-left">
+                                <span class="workflow-step-num">02</span>
+                                <span class="workflow-step-name">DATA PREPARATION</span>
+                            </div>
+                        </div>
+                        <div class="workflow-arrow-down">↓</div>
+
+                        <div class="workflow-node">
+                            <div class="workflow-node-left">
+                                <span class="workflow-step-num">03</span>
+                                <span class="workflow-step-name">CLEAN DATA</span>
+                            </div>
+                        </div>
+                        <div class="workflow-arrow-down">↓</div>
+
+                        <div class="workflow-node">
+                            <div class="workflow-node-left">
+                                <span class="workflow-step-num">04</span>
+                                <span class="workflow-step-name">EXCEL TABLE</span>
+                            </div>
+                        </div>
+                        <div class="workflow-arrow-down">↓</div>
+
+                        <div class="workflow-node">
+                            <div class="workflow-node-left">
+                                <span class="workflow-step-num">05</span>
+                                <span class="workflow-step-name">FORMULA-BASED ANALYSIS</span>
+                            </div>
+                        </div>
+                        <div class="workflow-arrow-down">↓</div>
+
+                        <div class="workflow-node">
+                            <div class="workflow-node-left">
+                                <span class="workflow-step-num">06</span>
+                                <span class="workflow-step-name">STATE ANALYSIS</span>
+                            </div>
+                        </div>
+                        <div class="workflow-arrow-down">↓</div>
+
+                        <div class="workflow-node">
+                            <div class="workflow-node-left">
+                                <span class="workflow-step-num">07</span>
+                                <span class="workflow-step-name">CATEGORY &amp; PAYMENT ANALYSIS</span>
+                            </div>
+                        </div>
+                        <div class="workflow-arrow-down">↓</div>
+
+                        <div class="workflow-node">
+                            <div class="workflow-node-left">
+                                <span class="workflow-step-num">08</span>
+                                <span class="workflow-step-name">KPIs + CHARTS</span>
+                            </div>
+                        </div>
+                        <div class="workflow-arrow-down">↓</div>
+
+                        <div class="workflow-node">
+                            <div class="workflow-node-left">
+                                <span class="workflow-step-num">09</span>
+                                <span class="workflow-step-name">DASHBOARD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 13. WHAT THIS PROJECT DEMONSTRATES ==================== -->
+        <section class="editorial-section reveal" id="demonstrates">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 13 — KEY TAKEAWAYS</span>
+                    <h2 class="editorial-heading">WHAT THIS PROJECT<br>DEMONSTRATES</h2>
+                </div>
+                <div class="editorial-right">
+                    <div class="editorial-list">
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Structuring a transactional dataset for analysis</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Separating raw and cleaned data</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Using Excel formulas for business metrics</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Creating category and payment-mode summaries</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Performing state-level sales analysis</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Using PivotTable-based analysis</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Turning calculated results into visual dashboards</span>
+                        </div>
+                        <div class="editorial-list-item">
+                            <span class="editorial-item-num">•</span>
+                            <span>Presenting data in a more understandable format</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 14. PROJECT OUTCOME ==================== -->
+        <section class="editorial-section reveal" id="outcome">
+            <div class="editorial-split">
+                <div class="editorial-left">
+                    <span class="editorial-eyebrow">// 14 — CONCLUSION</span>
+                    <h2 class="editorial-heading">PROJECT<br>OUTCOME</h2>
+                </div>
+                <div class="editorial-right">
+                    <div class="highlight-editorial-card" style="margin-top: 0;">
+                        <p class="highlight-editorial-quote">
+                            "The final workbook transforms a raw sales transaction dataset into a structured Excel analysis workflow. It combines data preparation, formula-based calculations, state-level analysis, category analysis, payment-mode analysis and dashboard visualizations to make the underlying sales data easier to understand."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 15. ACTUAL EXCEL FILE ==================== -->
+        <section class="final-action-section reveal">
+            <div class="final-action-panel">
+                <div class="final-action-left">
+                    <span class="final-action-eyebrow">// AUTHENTIC ARTIFACT</span>
+                    <h2 class="final-action-title">EXPLORE THE EXCEL WORKBOOK</h2>
+                </div>
+                <div class="final-action-buttons">
+                    <a href="../assets/projects/india-sales/india_sales_transactions.xlsx" class="btn btn-primary magnetic" download="india_sales_transactions.xlsx">VIEW EXCEL WORKBOOK ↗</a>
+                    <a href="../index.html#projects" class="btn btn-secondary magnetic">ALL PROJECTS →</a>
+                </div>
+            </div>
+            <div class="final-bottom-nav">
+                <a href="../index.html#projects" class="back-link">
+                    <span class="back-link-arrow">←</span> BACK TO PROJECTS
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-logo">NANDINI.</span>
+                <span class="footer-tagline">Writer • Data • AI • Cybersecurity</span>
+            </div>
+            <div class="footer-right">
+                <div class="footer-links">
+                    <a href="https://linkedin.com/in/nandini-itpath" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+                    <a href="https://github.com/nandiniitpath" target="_blank" rel="noopener noreferrer" class="footer-link" aria-label="GitHub">GitHub</a>
+                    <a href="mailto:nandini.itpath@gmail.com" class="footer-link">Email</a>
+                    <a href="../index.html#projects" class="footer-link">Projects</a>
+                </div>
+                <span class="footer-year">© 2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <div class="toast" id="toast">
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
